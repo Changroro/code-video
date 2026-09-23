@@ -1,0 +1,17 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>promo video</title>
+<style>
+  /* one @font-face per family used in main.js; files come from scripts/fetch_fonts.sh */
+  @font-face { font-family: PRE; src: url(assets/fonts/Pretendard-ExtraBold.otf); }
+  @font-face { font-family: HAND; src: url(assets/fonts/Gaegu-Bold.ttf); }
+  @font-face { font-family: PIX; src: url(assets/fonts/PressStart2P-Regular.ttf); }
+  html, body { margin: 0; background: #000; }
+  canvas { display: block; width: 100vw; height: auto; }
+</style>
+<canvas id="c"></canvas>
+<script>window.VIDEO = { w: 1920, h: 1080, fps: 30, dur: 30 };</script>
+<script src="node_modules/roughjs/bundled/rough.js"></script>
+<script src="kit.js"></script>
+<!-- ready-made mini set, only when the topic calls for it: <script src="minis-ai.js"></script> -->
+<script src="main.js"></script>

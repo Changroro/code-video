@@ -1,0 +1,4 @@
+node_modules/
+stills/
+*.mp4
+.DS_Store

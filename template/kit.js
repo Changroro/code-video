@@ -1,0 +1,282 @@
+'use strict';
+// Hand-drawn canvas animation kit (rough.js line boil + 8-bit sprites).
+// Scenes are pure functions of time: renderFrame(f) must draw the same pixels for the same f.
+const VIDEO = Object.assign({ w: 1920, h: 1080, fps: 30, dur: 30 }, window.VIDEO || {});
+const W = VIDEO.w, H = VIDEO.h, FPS = VIDEO.fps, DUR = VIDEO.dur;
+const cv = document.getElementById('c');
+cv.width = W; cv.height = H;
+const ctx = cv.getContext('2d');
+const rc = rough.canvas(cv);
+const THEME = { ink: '#2f2f2f', paper: '#f7f6f3', dark: '#191919', light: '#f3f3ef', grid: 'rgba(47,47,47,.10)', gridDark: 'rgba(243,243,239,.07)' };
+let T = 0;
+const IMG = {}, BG = {};
+
+// ---------------------------------------------------------------- math
+const TAU = Math.PI * 2;
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const E = {
+  out: t => 1 - (1 - t) ** 3,
+  in: t => t ** 3,
+  inOut: t => (t < .5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2),
+  back: t => { const c = 2.2; return 1 + (c + 1) * (t - 1) ** 3 + c * (t - 1) ** 2; },
+};
+function hash(a, b = 0) {
+  let h = Math.imul(a | 0, 374761393) ^ Math.imul(b | 0, 668265263);
+  h = Math.imul(h ^ (h >>> 13), 1274126177);
+  return (h ^ (h >>> 16)) >>> 0;
+}
+function rnd(s) {
+  let a = s >>> 0;
+  return () => {
+    a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+const mixHex = (a, b, t) => '#' + [1, 3, 5].map(i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - t) + parseInt(b.substr(i, 2), 16) * t).toString(16).padStart(2, '0')).join('');
+const typed = (s, p) => { const a = [...s]; return a.slice(0, Math.round(a.length * clamp(p))).join(''); };
+const bezAt = (a, c, b, t) => { const u = 1 - t; return [u * u * a[0] + 2 * u * t * c[0] + t * t * b[0], u * u * a[1] + 2 * u * t * c[1] + t * t * b[1]]; };
+const bez = (a, c, b, n = 28) => Array.from({ length: n + 1 }, (_, i) => bezAt(a, c, b, i / n));
+// keys: [[time, ...values], ...] -> eased values at t
+function camKeys(t, keys) {
+  if (t <= keys[0][0]) return keys[0].slice(1);
+  for (let i = 1; i < keys.length; i++) {
+    if (t < keys[i][0]) {
+      const [t0, ...a] = keys[i - 1], [t1, ...b] = keys[i];
+      const f = E.inOut((t - t0) / (t1 - t0));
+      return a.map((v, j) => lerp(v, b[j], f));
+    }
+  }
+  return keys[keys.length - 1].slice(1);
+}
+
+// ---------------------------------------------------------------- hand-drawn primitives
+// line boil: every rough shape re-rolls its wobble `rate` times per second
+function ro(id, o = {}, rate = 10) {
+  return { stroke: THEME.ink, strokeWidth: 3, roughness: 1.2, bowing: 1, ...o, seed: (hash(id, Math.floor(T * rate)) % 2147483000) + 1 };
+}
+function polyPart(pts, p) {
+  if (p >= 1) return pts;
+  const L = [0];
+  for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const target = L[L.length - 1] * p, out = [pts[0]];
+  for (let i = 1; i < pts.length; i++) {
+    if (L[i] <= target) { out.push(pts[i]); continue; }
+    const f = (target - L[i - 1]) / (L[i] - L[i - 1]);
+    out.push([lerp(pts[i - 1][0], pts[i][0], f), lerp(pts[i - 1][1], pts[i][1], f)]);
+    break;
+  }
+  return out;
+}
+function sketch(pts, p, id, o = {}, rate) {
+  if (p <= 0) return;
+  const q = polyPart(pts, p);
+  if (q.length > 1) rc.linearPath(q, ro(id, o, rate));
+}
+function arrow(pts, p, id, o = {}) {
+  sketch(pts, p, id, o);
+  if (p < 1) return;
+  const [x, y] = pts[pts.length - 1], [px, py] = pts[Math.max(0, pts.length - 4)];
+  const a = Math.atan2(y - py, x - px), L = 34;
+  rc.linearPath([[x + Math.cos(a + 2.6) * L, y + Math.sin(a + 2.6) * L], [x, y], [x + Math.cos(a - 2.6) * L, y + Math.sin(a - 2.6) * L]], ro(id + 1, o));
+}
+const circlePts = (cx, cy, rx, ry = rx, n = 48, a0 = -Math.PI / 2) =>
+  Array.from({ length: n + 1 }, (_, i) => [cx + Math.cos(a0 + i / n * TAU * 1.06) * rx, cy + Math.sin(a0 + i / n * TAU * 1.06) * ry]);
+function wave(x0, x1, y, t, ink, id, amp = 12, len = 90) {
+  const pts = [];
+  for (let x = x0; x <= x1; x += 15) pts.push([x, y + Math.sin((x / len) * TAU + t * 5) * amp]);
+  rc.curve(pts, ro(id, { stroke: ink, strokeWidth: 3.5 }));
+}
+function radioWaves(x, y, t, ink, id, n = 3, reach = 160) {
+  for (let k = 0; k < n; k++) {
+    const ph = (t * 1.6 + k / n) % 1, r = 40 + ph * reach;
+    ctx.save(); ctx.globalAlpha *= 1 - ph;
+    rc.arc(x, y, r * 2, r * 2, -Math.PI * .85, -Math.PI * .58, false, ro(id + k, { stroke: ink, strokeWidth: 4 }));
+    rc.arc(x, y, r * 2, r * 2, -Math.PI * .42, -Math.PI * .15, false, ro(id + 10 + k, { stroke: ink, strokeWidth: 4 }));
+    ctx.restore();
+  }
+}
+function highlight(x, y, w, h, p, id, color = 'rgba(255,214,64,.65)') {
+  if (p <= 0) return;
+  rc.rectangle(x, y, w * clamp(p), h, ro(id, { fill: color, fillStyle: 'zigzag', hachureGap: 7, fillWeight: 10, hachureAngle: -20, stroke: 'none', roughness: 2.2 }));
+}
+function shadow(x, y, w, dark = false) {
+  if (w <= 0) return;
+  ctx.save(); ctx.fillStyle = dark ? 'rgba(0,0,0,.35)' : 'rgba(0,0,0,.14)';
+  ctx.beginPath(); ctx.ellipse(x, y, w, w * .16, 0, 0, TAU); ctx.fill(); ctx.restore();
+}
+
+// ---------------------------------------------------------------- text
+function measure(s, font, size, weight = '') { ctx.save(); ctx.font = `${weight} ${size}px ${font}`; const w = ctx.measureText(s).width; ctx.restore(); return w; }
+function text(s, x, y, o = {}) {
+  if (!s) return;
+  const { font = 'sans-serif', weight = '', size = 64, color = THEME.ink, align = 'center', base = 'middle', rot = 0, alpha = 1, reveal = 1, outline = null, ow = 12, jit = true, maxW = 0 } = o;
+  if (alpha <= 0 || reveal <= 0) return;
+  ctx.save();
+  ctx.globalAlpha *= alpha;
+  ctx.translate(x, y);
+  const r = rnd(hash(Math.floor(T * 10), (x | 0) * 31 + (y | 0)));
+  ctx.rotate(rot + (jit ? (r() - .5) * .014 : 0));
+  ctx.font = `${weight} ${size}px ${font}`;
+  ctx.textAlign = align; ctx.textBaseline = base;
+  if (maxW) { const w = ctx.measureText(s).width; if (w > maxW) ctx.scale(maxW / w, maxW / w); }
+  if (reveal < 1) {
+    const w = ctx.measureText(s).width, x0 = align === 'center' ? -w / 2 : align === 'right' ? -w : 0;
+    ctx.beginPath(); ctx.rect(x0 - 10, -size * 1.5, (w + 20) * reveal, size * 3); ctx.clip();
+  }
+  if (outline) { ctx.lineJoin = 'round'; ctx.lineWidth = ow; ctx.strokeStyle = outline; ctx.strokeText(s, 0, 0); }
+  ctx.fillStyle = color; ctx.fillText(s, 0, 0);
+  ctx.restore();
+}
+
+// ---------------------------------------------------------------- camera & transitions
+function cam(z = 1, cx = W / 2, cy = H / 2, rot = 0, sx = 0, sy = 0) {
+  ctx.translate(W / 2 + sx, H / 2 + sy);
+  if (rot) ctx.rotate(rot);
+  ctx.scale(z, z);
+  ctx.translate(-cx, -cy);
+}
+function shake(amp, id = 1) {
+  if (amp <= .01) return [0, 0];
+  const r = rnd(hash(Math.floor(T * 30), id));
+  return [(r() - .5) * 2 * amp, (r() - .5) * 2 * amp];
+}
+function flash(a, color = '#fff') {
+  if (a <= 0) return;
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalAlpha = clamp(a); ctx.fillStyle = color; ctx.fillRect(0, 0, W, H);
+  ctx.restore();
+}
+function speedLines(amt, color = THEME.ink) {
+  if (amt <= .02) return;
+  const r = rnd(hash(Math.floor(T * 30), 77));
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.strokeStyle = color; ctx.lineCap = 'round'; ctx.globalAlpha = clamp(amt) * .55;
+  for (let i = 0; i < 46; i++) {
+    const y = r() * H, x = r() * W, l = 150 + r() * 700 * amt;
+    ctx.lineWidth = 2 + r() * 7;
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + l, y); ctx.stroke();
+  }
+  ctx.restore();
+}
+function zoomLines(amt, color = THEME.ink, cx = W / 2, cy = H / 2) {
+  if (amt <= .02) return;
+  const r = rnd(hash(Math.floor(T * 30), 78));
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.strokeStyle = color; ctx.lineCap = 'round'; ctx.globalAlpha = clamp(amt) * .6;
+  for (let i = 0; i < 60; i++) {
+    const a = r() * TAU, r0 = 260 + r() * 500 * (1 - amt * .5), r1 = r0 + 200 + r() * 700;
+    ctx.lineWidth = 2 + r() * 6;
+    ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0); ctx.lineTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1); ctx.stroke();
+  }
+  ctx.restore();
+}
+// slanted ink band; sweep x0/x1 across the screen for a wipe
+function inkBand(x0, x1, color = THEME.ink) {
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
+  rc.polygon([[x0, -80], [x1, -80], [x1 - 320, H + 80], [x0 - 320, H + 80]],
+    ro(3500, { fill: color, fillStyle: 'solid', stroke: color, strokeWidth: 8, roughness: 2.5 }));
+  ctx.restore();
+}
+
+// ---------------------------------------------------------------- backgrounds
+function makeBG(base, noise, fiber, vig) {
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d');
+  g.fillStyle = base; g.fillRect(0, 0, W, H);
+  const r = rnd(7), img = g.getImageData(0, 0, W, H), d = img.data;
+  for (let i = 0; i < d.length; i += 4) { const n = (r() - .5) * noise; d[i] += n; d[i + 1] += n; d[i + 2] += n; }
+  g.putImageData(img, 0, 0);
+  g.strokeStyle = fiber; g.globalAlpha = .08; g.lineWidth = 1;
+  for (let i = 0; i < 700; i++) {
+    const x = r() * W, y = r() * H, a = r() * TAU, l = 8 + r() * 36;
+    g.beginPath(); g.moveTo(x, y);
+    g.quadraticCurveTo(x + Math.cos(a + 1) * l / 2, y + Math.sin(a + 1) * l / 2, x + Math.cos(a) * l, y + Math.sin(a) * l);
+    g.stroke();
+  }
+  g.globalAlpha = 1;
+  const v = g.createRadialGradient(W / 2, H / 2, H * .3, W / 2, H / 2, Math.max(W, H) * .6);
+  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, vig);
+  g.fillStyle = v; g.fillRect(0, 0, W, H);
+  return c;
+}
+const paperBG = () => ctx.drawImage(BG.paper, 0, 0);
+const darkBG = () => ctx.drawImage(BG.dark, 0, 0);
+function grid(dark = false, step = 160) {
+  const o = id => ro(id, { stroke: dark ? THEME.gridDark : THEME.grid, strokeWidth: 1.3, roughness: .7, bowing: 2 }, 4);
+  for (let x = -4 * step; x <= W + 4 * step; x += step) rc.line(x, -3 * step, x + 6, H + 3 * step, o(600 + x));
+  for (let y = -3 * step; y <= H + 3 * step; y += step) rc.line(-4 * step, y, W + 4 * step, y + 6, o(900 + y));
+}
+
+// ---------------------------------------------------------------- 8-bit sprites
+// rows: strings, one char per pixel ('.' empty); pal: char -> colour or (x, y) => colour
+function drawPixels(rows, pal, x, y, s, o = {}) {
+  const { flip = false, sx = 1, sy = 1, rot = 0, outline = null, alpha = 1, swap = {} } = o;
+  const h = rows.length, w = rows[0].length;
+  ctx.save();
+  ctx.globalAlpha *= alpha;
+  ctx.translate(x, y); if (rot) ctx.rotate(rot); ctx.scale(s * sx * (flip ? -1 : 1), s * sy); ctx.translate(-w / 2, -h);
+  if (outline) {
+    ctx.fillStyle = outline;
+    rows.forEach((r, py) => [...r].forEach((c, px) => { if (c !== '.') ctx.fillRect(px - .35, py - .35, 1.7, 1.7); }));
+  }
+  rows.forEach((r, py) => [...r].forEach((c, px) => {
+    if (c === '.') return;
+    c = swap[c] ?? c;
+    const v = pal[c];
+    ctx.fillStyle = typeof v === 'function' ? v(px, py) : v;
+    ctx.fillRect(px, py, 1.04, 1.04);
+  }));
+  ctx.restore();
+}
+
+// cast of mini characters: MINIS[key] = { name, color, body, pal, rows }
+// E pixels hide on blink (drawn as `body`), C pixels blink by themselves (cursor, light)
+const MINIS = {};
+function drawMini(key, x, y, s, o = {}) {
+  const m = MINIS[key];
+  if (!m) throw new Error('unknown mini: ' + key);
+  const swap = {};
+  if (o.blink) swap.E = m.body;
+  if (Math.floor(T * 3) % 2) swap.C = m.body;
+  drawPixels(m.rows, m.pal, x, y, s, { ...o, swap });
+}
+
+// draw an image (e.g. a logo) as chunky pixels: px = screen pixels per block, 1 = normal
+const PIXEL_BUF = document.createElement('canvas');
+function pixelImage(img, cx, cy, w, h, px = 1) {
+  if (px <= 1) { ctx.drawImage(img, cx - w / 2, cy - h / 2, w, h); return; }
+  const bw = Math.max(1, Math.round(w / px)), bh = Math.max(1, Math.round(h / px));
+  PIXEL_BUF.width = bw; PIXEL_BUF.height = bh;
+  PIXEL_BUF.getContext('2d').drawImage(img, 0, 0, bw, bh);
+  ctx.save(); ctx.imageSmoothingEnabled = false; ctx.drawImage(PIXEL_BUF, cx - w / 2, cy - h / 2, w, h); ctx.restore();
+}
+
+// ---------------------------------------------------------------- timeline & boot
+let SCENES = [];
+function renderFrame(f) {
+  T = f / FPS;
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+  const [a, , fn] = SCENES.find(([, b]) => T < b) ?? SCENES[SCENES.length - 1];
+  ctx.save(); fn(T - a); ctx.restore();
+}
+// fonts: [[family, sampleText]]; images: {key: path}
+async function boot({ scenes, images = {}, fonts = [], noise = 6, setup = null }) {
+  SCENES = scenes;
+  for (const [k, src] of Object.entries(images)) { const im = new Image(); im.src = src; await im.decode(); IMG[k] = im; }
+  await Promise.all(fonts.map(([f, sample]) => document.fonts.load(`40px ${f}`, sample)));
+  BG.paper = makeBG(THEME.paper, noise, '#7a6a4a', 'rgba(60,45,20,.18)');
+  BG.dark = makeBG(THEME.dark, noise * .8, '#9aa3b5', 'rgba(0,0,0,.45)');
+  if (setup) await setup();
+  window.READY = true;
+  const q = new URLSearchParams(location.search);
+  if (q.has('t')) renderFrame(Math.round(+q.get('t') * FPS));
+  else if (q.has('play')) {
+    const t0 = performance.now();
+    const loop = () => { renderFrame(Math.floor((performance.now() - t0) / 1000 * FPS) % (FPS * DUR)); requestAnimationFrame(loop); };
+    loop();
+  }
+}

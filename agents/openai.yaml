@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hand-drawn Promo Video"
+  short_description: "Research a topic and render a hand-drawn 8-bit promo MP4"
+  default_prompt: "Use $handdrawn-promo-video to ask for the video settings, research the topic with sources, get the storyboard approved, then build, check, and render the MP4."
