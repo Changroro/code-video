@@ -1,7 +1,7 @@
 {
   "name": "handdrawn-promo-video",
   "version": "1.0.0",
-  "description": "주제(회사, 서비스, 사이트, 제품)를 조사해 손그림 캔버스 애니메이션과 8비트 미니미 캐릭터 스타일의 짧은 홍보 영상을 MP4로 만든다. 영상 설정 질문 → 출처 기반 조사 → 스토리보드 승인 → 제작·검수·렌더.",
+  "description": "Research a topic (company, service, website, product) and render a short hand-drawn canvas animation promo video with 8-bit mini characters as an MP4: settings questions → sourced research → storyboard approval → build, QA, and render.",
   "author": {
     "name": "ChangRoro",
     "url": "https://github.com/Changroro"
@@ -15,7 +15,6 @@
     "hand-drawn",
     "8-bit",
     "promo",
-    "canvas",
-    "korean"
+    "canvas"
   ]
 }

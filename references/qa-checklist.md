@@ -1,24 +1,24 @@
-# 검수 체크리스트
+# QA checklist
 
-## 스틸 검수 (렌더 전)
-각 장면의 중간과 전환 직전·직후 시각을 뽑아 `scripts/contact_sheet.py`로 6장씩 묶어 본다.
+## Still review (before rendering)
+Take stills at the middle of each scene and just before and after each transition, and review them six at a time with `scripts/contact_sheet.py`.
 
-- [ ] 글자가 박스나 사진 칸을 침범하지 않는다(`maxW` 또는 폰트 축소).
-- [ ] 카메라 줌 상태에서 라벨이나 경고 박스가 화면 밖으로 잘리지 않는다. 보이는 x 범위 = cx ± W/2/z로 계산한다.
-- [ ] 라벨끼리, 라벨과 캐릭터가 겹치지 않는다.
-- [ ] 캐릭터가 배경에서 보인다(어두운 캐릭터 + 어두운 배경이면 `outline`).
-- [ ] 텍스트가 복잡한 배경 위에서 읽힌다(`outline: THEME.paper`, 굵은 폰트).
-- [ ] 한글이 들어간 곳에 픽셀 폰트(영문 전용)를 쓰지 않았다.
-- [ ] 수치와 문구가 승인된 계획, 출처와 일치한다.
+- [ ] Text does not run into boxes or photo frames (use `maxW` or a smaller font).
+- [ ] Labels and alert boxes are not cut off while the camera is zoomed. The visible x range is cx ± W/2/z.
+- [ ] Labels do not overlap each other or the characters.
+- [ ] Characters stand out from the background (use `outline` for a dark character on a dark background).
+- [ ] Text is readable over busy backgrounds (`outline: THEME.paper`, heavy weights).
+- [ ] Every glyph renders in the intended font. The pixel font (Latin-only) is not used for other scripts.
+- [ ] Copy and numbers match the approved plan and their sources.
 
-## 흔한 버그
-- `flash(1 - prog(t, a, b))`는 t < a일 때 화면 전체가 덮인다. `if (t > a)`로 감싼다.
-- 요소가 떠난 뒤 다음 요소가 오기 전의 빈 프레임. 등장을 0.1~0.2초 겹친다.
-- `rc.circle`의 세 번째 인자는 반지름이 아니라 지름이다.
-- 스프라이트 크기는 s × 행·열 수다. 너무 크면 말풍선이나 제목과 겹친다.
-- 반복 흐름(`(t * v + j * gap) % len`)은 이음매가 튀지 않게 구간 끝에서 alpha나 scale을 줄인다.
+## Common bugs
+- `flash(1 - prog(t, a, b))` covers the whole screen while t < a. Wrap it in `if (t > a)`.
+- Empty frames after one element leaves and before the next arrives. Overlap entrances by 0.1 to 0.2 s.
+- The third argument of `rc.circle` is the diameter, not the radius.
+- Sprite size is s × the row and column counts. Too large and it collides with bubbles or titles.
+- For looping flows (`(t * v + j * gap) % len`), fade alpha or scale near the ends of the range so the seam does not jump.
 
-## 영상 검수 (렌더 후)
-- `ffprobe`로 길이, 해상도, fps, 용량을 확인한다. 기본 목표는 30초당 10MB 이하(CRF 25). 넘으면 `noise`를 낮추고 CRF를 올린다.
-- 전환 시각의 프레임을 `ffmpeg -ss <t> -i out.mp4 -frames:v 1`로 뽑아 타일로 확인한다. 이 ffmpeg에는 drawtext 필터가 없을 수 있으니 라벨은 Pillow로 붙인다.
-- 원본 해상도로 글자 부분을 크롭해 압축 뭉개짐이 없는지 본다.
+## Video review (after rendering)
+- Check length, resolution, fps, and file size with `ffprobe`. The default target is at most 10 MB per 30 s (CRF 25). If it is larger, lower `noise` and raise CRF.
+- Extract frames at the transition times with `ffmpeg -ss <t> -i out.mp4 -frames:v 1` and review them as a tile. This ffmpeg may lack the drawtext filter, so add labels with Pillow.
+- Crop text areas at full resolution and check for compression artifacts.
