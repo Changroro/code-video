@@ -15,16 +15,26 @@ Inspired by [@nahiddotai](https://www.threads.com/@nahiddotai)'s ["Introducing O
 
 ## Install
 
-Claude Code:
+Pick one.
+
+**skills CLI** (Claude Code, Codex and other agents):
 
 ```bash
-git clone https://github.com/Changroro/handdrawn-promo-video ~/.claude/skills/handdrawn-promo-video
+npx skills add Changroro/handdrawn-promo-video -g
 ```
 
-Codex:
+**Claude Code plugin** from the [changroro marketplace](https://github.com/Changroro/plugins):
+
+```
+/plugin marketplace add Changroro/plugins
+/plugin install handdrawn-promo-video@changroro
+```
+
+**Manual**: clone into your agent's skills directory.
 
 ```bash
-git clone https://github.com/Changroro/handdrawn-promo-video ~/.codex/skills/handdrawn-promo-video
+git clone https://github.com/Changroro/handdrawn-promo-video ~/.claude/skills/handdrawn-promo-video   # Claude Code
+git clone https://github.com/Changroro/handdrawn-promo-video ~/.codex/skills/handdrawn-promo-video    # Codex
 ```
 
 Requirements: Node.js 18+ with npm, ffmpeg built with libx264, Google Chrome, and [uv](https://docs.astral.sh/uv/) for the helper scripts.
@@ -41,6 +51,7 @@ Ask your agent for a video, for example:
 | Path | Purpose |
 |---|---|
 | `SKILL.md` | Workflow: settings → research → plan approval → build → QA → render |
+| `.claude-plugin/plugin.json` | Claude Code plugin manifest (the skill stays at the repo root) |
 | `template/kit.js` | Canvas kit: hand-drawn primitives, text, camera, transitions, sprites, minis |
 | `template/render.mjs` | Deterministic frame capture with parallel pages, piped to ffmpeg |
 | `template/minis-ai.js` | Ready-made mini characters for AI-related topics |
