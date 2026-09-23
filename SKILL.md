@@ -1,6 +1,6 @@
 ---
 name: handdrawn-promo-video
-description: Research a topic (a company, service, website, or product) and render a short promo video as an MP4 in a hand-drawn canvas animation style with 8-bit mini characters picked for the topic. Asks for the video settings (length, aspect ratio, characters) first, gets a storyboard built from sourced facts approved, then builds, checks, and renders it. Use for requests such as "make a promo video", "make an intro/launch video", "hand-drawn animation video", or "make a video about this company". Not for live-action editing, subtitling, or music videos.
+description: Research a topic (a company, service, website, or product) and render a short promo video as an MP4 in a hand-drawn canvas animation style with 8-bit mini characters picked for the topic. Asks for the video settings (length, aspect ratio, characters, on-screen language) first, gets a storyboard built from sourced facts approved, then builds, checks, and renders it. Use for requests such as "make a promo video", "make an intro/launch video", "hand-drawn animation video", or "make a video about this company". Not for live-action editing, subtitling, or music videos.
 ---
 
 # Hand-drawn Promo Video
@@ -23,6 +23,7 @@ Ask in one AskUserQuestion call. Skip anything the user already said, and put th
 - Length: 30 s / 15 s / 45 s / 60 s
 - Frame: 16:9 1920×1080 / 9:16 1080×1920 / 1:1 1080×1080 / 16:9 2560×1440
 - Characters: logo mascot + topic minis / user-specified minis / logo mascot only / none
+- On-screen language: the language of this conversation / English / both
 
 Minis are an 8-bit supporting cast that fits the topic. Use the user's cast if they name one. Otherwise pick a cast from the research and propose it in the plan (see "Minis" in [references/storyboard.md](references/storyboard.md)).
 

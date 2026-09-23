@@ -2,7 +2,7 @@
 
 An agent skill that turns a topic (a company, a product, a website) into a short promo video in a hand-drawn canvas animation style with 8-bit mini characters, rendered to MP4.
 
-- Asks for the settings first: length, aspect ratio, characters.
+- Asks for the settings first: length, aspect ratio, characters, on-screen language.
 - Researches the topic with sources and re-checks the headline numbers against the original text.
 - Gets the storyboard approved, then builds the scenes with a small canvas kit: rough.js line boil, camera moves, transitions, pixel sprites, logo pixelation.
 - Checks stills and transition frames, then renders with parallel headless Chrome into H.264 (about 8 MB per 30 s at 1080p).
@@ -68,6 +68,6 @@ The characters in `template/minis-ai.js` are unofficial fan art. Product names a
 
 ## 한국어 요약
 
-주제(회사, 제품, 사이트)를 조사해 손그림 캔버스 애니메이션과 8비트 미니미 캐릭터 스타일의 짧은 홍보 영상을 MP4로 만드는 에이전트 스킬입니다. 영상 길이, 비율, 캐릭터를 먼저 묻고, 출처가 있는 사실로 스토리보드를 승인받은 뒤 제작, 검수, 렌더까지 진행합니다.
+주제(회사, 제품, 사이트)를 조사해 손그림 캔버스 애니메이션과 8비트 미니미 캐릭터 스타일의 짧은 홍보 영상을 MP4로 만드는 에이전트 스킬입니다. 영상 길이, 비율, 캐릭터, 화면 언어를 먼저 묻고, 출처가 있는 사실로 스토리보드를 승인받은 뒤 제작, 검수, 렌더까지 진행합니다.
 
 @nahiddotai가 Threads에 공유한 Opus 5.5 런치 영상과 프롬프트에서 착안했습니다. 프롬프트 원문은 포함하지 않았습니다.
