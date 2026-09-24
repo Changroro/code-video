@@ -10,6 +10,8 @@ Take stills at the middle of each scene and just before and after each transitio
 - [ ] Text is readable over busy backgrounds (`outline: THEME.paper`, heavy weights).
 - [ ] Every glyph renders in the intended font. The pixel font (Latin-only) is not used for other scripts.
 - [ ] Copy and numbers match the approved plan and their sources.
+- [ ] Colours and fonts match the palette and fonts approved in the plan.
+- [ ] On-screen text is in the chosen language, including labels, HUD, and the end card.
 
 ## Common bugs
 - `flash(1 - prog(t, a, b))` covers the whole screen while t < a. Wrap it in `if (t > a)`.
@@ -22,3 +24,5 @@ Take stills at the middle of each scene and just before and after each transitio
 - Check length, resolution, fps, and file size with `ffprobe`. The default target is at most 10 MB per 30 s (CRF 25). If it is larger, lower `noise` and raise CRF.
 - Extract frames at the transition times with `ffmpeg -ss <t> -i out.mp4 -frames:v 1` and review them as a tile. This ffmpeg may lack the drawtext filter, so add labels with Pillow.
 - Crop text areas at full resolution and check for compression artifacts.
+- Sweep the whole video, not only the transitions: one frame every 2 s on a contact sheet. Look for long empty stretches and scenes that hold too long.
+- With sound: `ffprobe` shows one AAC stream as long as the video, and `ffmpeg -i out.mp4 -af ebur128 -f null -` reports about -14 LUFS integrated. Check that each cue in `audio.json` sits on its event by comparing cue times with the scene timeline.

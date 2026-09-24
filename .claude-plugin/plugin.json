@@ -1,7 +1,7 @@
 {
   "name": "handdrawn-promo-video",
-  "version": "1.0.0",
-  "description": "Research a topic (company, service, website, product) and render a short hand-drawn canvas animation promo video with 8-bit mini characters as an MP4: settings questions → sourced research → storyboard approval → build, QA, and render.",
+  "version": "1.1.0",
+  "description": "Research a topic (company, service, website, product) and render a short promo video as an MP4 in one of five code-drawn styles (hand-drawn with 8-bit minis, brand motion graphics, sand art, lyric music video, beat-synced footage): style and settings questions → sourced research → storyboard approval → build, QA, and render, with code-generated music where the style calls for it.",
   "author": {
     "name": "ChangRoro",
     "url": "https://github.com/Changroro"

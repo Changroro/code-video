@@ -1,5 +1,7 @@
 # Storyboard and visual grammar
 
+The Timing and Transitions sections apply to every style. The Style and Scene patterns sections describe the default hand-drawn style; the other styles have their own guides in `references/styles/`.
+
 ## Style
 - **Hand-drawn**: rough.js lines wobble 10 times per second (line boil). Alternate between the paper texture background (`paperBG`) and the dark background (`darkBG`) across scenes for contrast.
 - **Lead character**: an 8-bit pixel character. The contrast between the hand-drawn world and the pixel characters is the core of the style.
