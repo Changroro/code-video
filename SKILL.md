@@ -1,9 +1,9 @@
 ---
-name: handdrawn-promo-video
+name: code-video
 description: Research a topic (a company, service, website, or product) and render a short promo video as an MP4 drawn entirely in code. Two independent choices shape it - a look (hand-drawn with 8-bit minis, brand motion graphics, sand art, 16-bit arcade, CRT terminal, thermal receipt, transit map, or blueprint) and a story format (standard promo, versus, terminal session, receipt, route map, spec sheet, lyric music video, or beat-synced footage). Asks for both first, then the video settings (length, aspect ratio, characters, on-screen language), gets a storyboard built from sourced facts and a research-based brand theme approved, then builds, checks, and renders it with code-generated music. Use for requests such as "make a promo video", "make an intro/launch video", "explainer video", "make a video about this company", or a named look or format. Not for live-action editing, subtitling, or sung vocals.
 ---
 
-# Promo Video
+# Code Video
 
 `<skill>` is the folder that contains this SKILL.md. The engine lives in `<skill>/template/`:
 - `kit.js`: hand-drawn lines, text and kinetic type, camera, transitions, pixel sprites, minis, image pixelation, video clips, `useFonts`

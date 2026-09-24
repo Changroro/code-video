@@ -1,22 +1,22 @@
-# handdrawn-promo-video
+# code-video
 
 English | [한국어](README.ko.md)
 
-[![Intro video made with this skill](docs/intro-preview.gif)](https://github.com/Changroro/handdrawn-promo-video/releases/download/v1.0.0/SkillIntro.mp4)
+![One script, five looks: arcade, terminal, thermal receipt, transit map, blueprint](docs/hero.gif)
 
-*This skill's 45-second intro, made with this skill. Click for the full MP4 (no sound).*
+*One script, five looks. Every frame above is drawn in code.*
 
-An agent skill that turns a topic (a company, a product, a website) into a short promo video, drawn entirely in code and rendered to MP4.
+An agent skill that researches a topic and turns it into a short video drawn entirely in code. No video-generation model and no stock footage: the agent writes the scenes, renders them frame by frame, and hands you an MP4.
 
-- Asks for a look and a story format first, then length, aspect ratio, characters, and on-screen language.
-- Researches the topic with sources, re-checks the headline numbers against the original text, and takes the palette and fonts from the brand.
-- Gets the storyboard approved, then builds the scenes with a small canvas kit: rough.js line boil, kinetic type, camera moves, transitions, pixel sprites, sand, video clips.
-- Makes music and sound effects in code where the look or format calls for it.
-- Checks stills, transitions, and the whole timeline, then renders with parallel headless Chrome into H.264.
+## How it works
 
-## Looks and story formats
+1. **Everything is code.** Each frame is a function of time drawn on an HTML canvas, captured by headless Chrome, and encoded by ffmpeg. Music and sound effects are synthesized in code too, so the same input always renders the same video.
+2. **Research first.** The agent collects facts with sources, checks the headline numbers against the original sentences, and takes the palette and fonts from the brand. Every number on screen has a source.
+3. **You approve the plan.** It asks for a look, a story format, and the settings (length, aspect ratio, characters, on-screen language), then shows the storyboard, palette, and sound plan before building anything.
+4. **Look × format.** The look is how it is drawn; the story format is how it is told. Any look works with any format.
+5. **Checked before delivery.** Stills, transitions, a sweep of the whole timeline, and loudness (-14 LUFS) are checked before the final render.
 
-Two independent choices shape every video: the **look** (how it is drawn) and the **story format** (how it is told). Any look works with any format.
+## Looks
 
 | Look | Feel | Credit |
 |---|---|---|
@@ -29,24 +29,30 @@ Two independent choices shape every video: the **look** (how it is drawn) and th
 | Transit map | diagram, orderly | original |
 | Blueprint | technical, precise | original |
 
-| Story format | Structure | Credit |
-|---|---|---|
-| Standard promo (default) | hook → title → steps → big number → ending | original |
-| Versus | rounds between two options, then a tally | original |
-| Session | commands and outputs that show how it is used | original |
-| Receipt | itemised list, total, stamp | original |
-| Route map | lines, stations, interchanges | original |
-| Spec sheet | parts, each with one spec | original |
-| Lyric music video | an original song, one fact per line | [@goodside](https://x.com/goodside/status/2102852546620744010) |
-| Beat-synced footage | cuts on a song's beats over real clips | [@twoclipping](https://x.com/twoclipping/status/2102554209166000267) |
+The five original looks share one scene API, so one script renders in any of them. Here is the same "steps" scene in each:
 
-### Previews
-
-**Same script, five looks**: arcade, terminal, thermal receipt, transit map, blueprint (the "steps" scene of one shared script, made with this skill)
 ![The same scene in five looks](docs/looks.jpg)
 
-**Five story formats**: versus, session, receipt (9:16), route map, spec sheet (made with this skill, about this skill)
+## Story formats
+
+| Format | Structure | Fits | Credit |
+|---|---|---|---|
+| Standard promo (default) | hook → title → steps → big number → ending | any company, product, or service | original |
+| Versus | rounds between two options, then a tally | A vs B, old vs new, before vs after | original |
+| Session | commands and outputs that show how it is used | tools, APIs, workflows | original |
+| Receipt | itemised list, total, stamp | prices, plans, a year in review | original |
+| Route map | lines, stations, interchanges | business areas, lineups, histories | original |
+| Spec sheet | parts, each with one spec | components, architectures, anatomies | original |
+| Lyric music video | an original song, one fact per line | memorable explainers | [@goodside](https://x.com/goodside/status/2102852546620744010) |
+| Beat-synced footage | cuts on a song's beats over real clips | your own clips and a licensed song | [@twoclipping](https://x.com/twoclipping/status/2102554209166000267) |
+
+Versus, session, receipt (9:16), route map, and spec sheet, each made with this skill about this skill:
+
 ![Five story formats](docs/formats.jpg)
+
+## Credit
+
+Credited looks and formats adapt ideas their creators shared publicly after the Claude Opus 5.5 release; the links are in the tables above. This repository does not contain their prompts. The guides in `references/` are our own write-ups, and the skill wraps every look and format in the same research, approval, and QA steps. The looks and formats marked original were designed for this skill. The default look comes from [@nahiddotai](https://www.threads.com/@nahiddotai)'s ["Introducing Opus 5.5" launch video](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) and [the prompt they shared](https://www.threads.com/@nahiddotai/post/Ddm0OgZkuQx).
 
 Four highlight frames from each credited creator's original video:
 
@@ -65,10 +71,6 @@ Four highlight frames from each credited creator's original video:
 **Beat-synced footage**, from [@twoclipping](https://x.com/twoclipping/status/2102554209166000267)
 ![Beat-synced footage: frames from @twoclipping's original video](docs/styles/beat.jpg)
 
-## Credit
-
-Credited looks and formats adapt ideas their creators shared publicly after the Claude Opus 5.5 release; the links are in the tables above. This repository does not contain their prompts. The guides in `references/` are our own write-ups, and the skill wraps every look and format in the same research, approval, and QA steps. The looks and formats marked original were designed for this skill. The default look comes from [@nahiddotai](https://www.threads.com/@nahiddotai)'s ["Introducing Opus 5.5" launch video](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) and [the prompt they shared](https://www.threads.com/@nahiddotai/post/Ddm0OgZkuQx). The intro video shows a few frames of that launch video, with credit.
-
 ## Install
 
 Pick one.
@@ -76,32 +78,33 @@ Pick one.
 **skills CLI** (Claude Code, Codex and other agents):
 
 ```bash
-npx skills add Changroro/handdrawn-promo-video -g
+npx skills add Changroro/code-video -g
 ```
 
 **Claude Code plugin** from the [changroro marketplace](https://github.com/Changroro/plugins):
 
 ```
 /plugin marketplace add Changroro/plugins
-/plugin install handdrawn-promo-video@changroro
+/plugin install code-video@changroro
 ```
 
 **Manual**: clone into your agent's skills directory.
 
 ```bash
-git clone https://github.com/Changroro/handdrawn-promo-video ~/.claude/skills/handdrawn-promo-video   # Claude Code
-git clone https://github.com/Changroro/handdrawn-promo-video ~/.codex/skills/handdrawn-promo-video    # Codex
+git clone https://github.com/Changroro/code-video ~/.claude/skills/code-video   # Claude Code
+git clone https://github.com/Changroro/code-video ~/.codex/skills/code-video    # Codex
 ```
 
 Requirements: Node.js 18+ with npm, ffmpeg built with libx264, Google Chrome, and [uv](https://docs.astral.sh/uv/) for the helper scripts (numpy and scipy for sound, librosa for beat detection, installed on the fly).
 
 ## Use
 
-Ask your agent for a video, for example:
+Ask your agent for a video. Name a look or a format if you already know it, or let it suggest one from the topic.
 
 - "Make a 30-second promo video for https://example.com"
 - "Make a sand-art video of our company's history"
 - "Compare our two plans as an arcade versus video"
+- "Explain our CLI as a terminal session"
 
 ## Contents
 
@@ -110,12 +113,11 @@ Ask your agent for a video, for example:
 | `SKILL.md` | Workflow: look, format, and settings → research → plan approval → build → QA → render |
 | `.claude-plugin/plugin.json` | Claude Code plugin manifest (the skill stays at the repo root) |
 | `template/kit.js` | Canvas kit: hand-drawn primitives, text and kinetic type, camera, transitions, sprites, minis, video clips |
-| `template/sand.js` | Sand on a backlit light table, for the sand look |
 | `template/{arcade,terminal,thermal,transit,blueprint}.js` | Look modules with one shared scene API and a signature format scene each |
+| `template/sand.js` | Sand on a backlit light table, for the sand look |
 | `template/render.mjs` | Deterministic frame capture with parallel pages, piped to ffmpeg, with the audio track muxed in |
 | `template/minis-ai.js` | Ready-made mini characters for AI-related topics |
-| `references/` | Research protocol, storyboard patterns, kit API, QA checklist |
-| `references/looks.md`, `references/formats.md` | Look modules and story formats |
+| `references/` | Research protocol, storyboard patterns, looks, story formats, kit API, QA checklist |
 | `references/styles/` | Guides for the credited looks and formats |
 | `scripts/` | Font download, logo background cleanup, contact sheets, music and sound synthesis, beat detection |
 

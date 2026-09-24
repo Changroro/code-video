@@ -56,6 +56,7 @@ How each look draws them:
 - `LOOK.spec(t, d, parts, title, heading)` (blueprint): `parts = [{ name, spec, w }]`, drawn left to right with balloons and dimension lines.
 
 ## Pitfalls
+- Arcade, terminal, transit, and blueprint are laid out for 16:9. Thermal works in 16:9 and 9:16. For other frames, check stills early and adjust positions.
 - Arcade text is crisp only at multiples of 8 px (Press Start 2P) and 11 px (Galmuri11). Korean falls back to Galmuri automatically.
 - The terminal banner font covers Latin letters, digits, and `- . / × +`. Other scripts fall back to large glowing text.
 - The thermal slip grows up from the printer, so long receipts run off the top. In 9:16, keep a receipt under about 18 lines.
