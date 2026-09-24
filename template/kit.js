@@ -358,6 +358,10 @@ async function renderFrame(f) {
   }
   throw new Error(`clip frames still missing at t=${T}`);
 }
+// load font files without @font-face in index.html: [[family, 'assets/fonts/file.ttf'], ...]
+async function useFonts(defs) {
+  await Promise.all(defs.map(async ([family, url]) => { const f = new FontFace(family, `url(${url})`); await f.load(); document.fonts.add(f); }));
+}
 // fonts: [[family, sampleText]]; images: {key: path}; clips: {id: {n: frameCount, fps}}
 async function boot({ scenes, images = {}, fonts = [], clips = {}, noise = 6, setup = null }) {
   SCENES = scenes;

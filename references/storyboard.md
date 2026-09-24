@@ -1,6 +1,6 @@
 # Storyboard and visual grammar
 
-The Timing and Transitions sections apply to every style. The Style and Scene patterns sections describe the default hand-drawn style, adapted from [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)'s launch video ([preview frames](../docs/styles/handdrawn.jpg)); the other styles have their own guides in `references/styles/`.
+The Timing and Transitions sections apply to every look. The Style and Scene patterns sections describe the default hand-drawn look, adapted from [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)'s launch video ([preview frames](../docs/styles/handdrawn.jpg)); the other looks are in `references/styles/` and [looks.md](looks.md), and story formats in [formats.md](formats.md).
 
 ## Style
 - **Hand-drawn**: rough.js lines wobble 10 times per second (line boil). Alternate between the paper texture background (`paperBG`) and the dark background (`darkBG`) across scenes for contrast.

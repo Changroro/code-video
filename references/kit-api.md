@@ -1,6 +1,6 @@
 # kit.js API
 
-Global scripts. `index.html` loads rough.js → kit.js → (a mini set, `sand.js` for the sand style) → main.js in that order. `window.VIDEO = { w, h, fps, dur }` sets the canvas size and length.
+Global scripts. `index.html` loads rough.js → kit.js → (a mini set, `sand.js`, or one look module) → main.js in that order. The look modules and their shared scene API are in [looks.md](looks.md). `window.VIDEO = { w, h, fps, dur }` sets the canvas size and length.
 
 ## Globals
 - `W, H, FPS, DUR`, `ctx` (2D context), `rc` (rough canvas), `T` (current second), `IMG` (images from boot), `BG`.
@@ -27,6 +27,7 @@ Global scripts. `index.html` loads rough.js → kit.js → (a mini set, `sand.js
   - `maxW`: shrink when the text is wider.
   - `jit`: hand-drawn wobble (false for numbers and HUD).
 - `measure(s, font, size, weight)`.
+- `useFonts([[family, 'assets/fonts/file.ttf'], ...])`: load font files at boot without `@font-face` (look modules pass `LOOK.fonts`).
 - `kwords(s, x, y, p, { font, weight, size, color, colors, align })`: words pop in one after another over p = 0..1. `colors` maps a word index to a colour.
 - `typeOn(s, x, y, p, o)`: typewriter with a blinking cursor. Same options as `text`.
 - `karaoke(syl, x, y, t, { font, weight, size, off, on, outline, align })`: one lyric line. `syl` is `[[text, start], ...]` and `t` uses the same clock as the start times; sung syllables turn `on`.
