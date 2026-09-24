@@ -1,5 +1,11 @@
 # handdrawn-promo-video
 
+| This skill's intro (45 s) | Example: [AI Briefing](https://aibriefing.imbch.dev) (30 s, Korean) |
+|:-:|:-:|
+| [![Intro video made with this skill](docs/intro-preview.gif)](https://github.com/Changroro/handdrawn-promo-video/releases/download/v1.0.0/SkillIntro.mp4) | [![AI Briefing promo video made with this skill](docs/example-aibriefing.gif)](https://github.com/Changroro/handdrawn-promo-video/releases/download/v1.0.0/AIBriefing_example.mp4) |
+
+*Both made with this skill. Click a preview for the full MP4 (no sound).*
+
 An agent skill that turns a topic (a company, a product, a website) into a short promo video in a hand-drawn canvas animation style with 8-bit mini characters, rendered to MP4.
 
 - Asks for the settings first: length, aspect ratio, characters, on-screen language.
@@ -9,7 +15,7 @@ An agent skill that turns a topic (a company, a product, a website) into a short
 
 ## Credit
 
-Inspired by [@nahiddotai](https://www.threads.com/@nahiddotai)'s ["Introducing Opus 5.5" launch video](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) and [the prompt they shared](https://www.threads.com/@nahiddotai/post/Ddm0OgZkuQx). This repository does not contain that prompt. It turns the idea into a repeatable workflow with research, approval, and QA steps.
+Inspired by [@nahiddotai](https://www.threads.com/@nahiddotai)'s ["Introducing Opus 5.5" launch video](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) and [the prompt they shared](https://www.threads.com/@nahiddotai/post/Ddm0OgZkuQx). This repository does not contain that prompt. It turns the idea into a repeatable workflow with research, approval, and QA steps. The intro video shows a few frames of the original launch video, with credit.
 
 ## Install
 
