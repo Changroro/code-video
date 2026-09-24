@@ -1,4 +1,4 @@
-// node render.mjs video [out.mp4]      -> full MP4 (H.264, 1080p30)
+// node render.mjs video [out.mp4]      -> full MP4 (H.264 at window.VIDEO size and fps; muxes audio.wav when present)
 // node render.mjs stills 1.2 3.4 ...   -> stills/t<sec>.png for review
 import { chromium } from 'playwright-core';
 import http from 'node:http';
@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const [mode = 'video', ...rest] = process.argv.slice(2);
-const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.ttf': 'font/ttf' };
+const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.ttf': 'font/ttf', '.otf': 'font/otf', '.woff2': 'font/woff2' };
 
 const server = http.createServer((req, res) => {
   const f = path.join(root, decodeURIComponent(new URL(req.url, 'http://x').pathname));
@@ -27,16 +27,20 @@ async function openPage() {
   await page.waitForFunction('window.READY === true', null, { timeout: 30000 });
   return page;
 }
-const grab = (page, f) => page.evaluate(f => { renderFrame(f); return document.getElementById('c').toDataURL('image/png').slice(22); }, f).then(b => Buffer.from(b, 'base64'));
+const grab = (page, f) => page.evaluate(async f => { await renderFrame(f); return document.getElementById('c').toDataURL('image/png').slice(22); }, f).then(b => Buffer.from(b, 'base64'));
 const page = await openPage();
+const fps = await page.evaluate('FPS');
+const run = (cmd, args) => new Promise((ok, fail) => spawn(cmd, args, { cwd: root, stdio: 'inherit' }).on('close', c => (c ? fail(new Error(`${cmd} exit ${c}`)) : ok())));
 
 if (mode === 'stills') {
   fs.mkdirSync(path.join(root, 'stills'), { recursive: true });
-  for (const s of rest) fs.writeFileSync(path.join(root, 'stills', `t${s}.png`), await grab(page, Math.round(+s * 30)));
+  for (const s of rest) fs.writeFileSync(path.join(root, 'stills', `t${s}.png`), await grab(page, Math.round(+s * fps)));
 } else {
   const out = rest[0] ?? 'video.mp4';
-  const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', '30', '-c:v', 'png', '-i', '-',
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', process.env.CRF ?? '20', '-tune', 'animation', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out],
+  const audio = fs.existsSync(path.join(root, 'audio.wav'));
+  const silent = audio ? `.silent-${out}` : out;
+  const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'png', '-i', '-',
+    '-c:v', 'libx264', '-preset', 'slow', '-crf', process.env.CRF ?? '20', '-tune', 'animation', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', silent],
     { cwd: root, stdio: ['pipe', 'inherit', 'inherit'] });
   const done = new Promise((ok, fail) => ff.on('close', c => (c ? fail(new Error(`ffmpeg exit ${c}`)) : ok())));
   // frames are deterministic, so N pages render in parallel and are written back in order
@@ -58,6 +62,12 @@ if (mode === 'stills') {
   }));
   ff.stdin.end();
   await done;
+  if (audio) {
+    // -14 LUFS is the usual loudness target for social video
+    await run('ffmpeg', ['-y', '-loglevel', 'error', '-i', silent, '-i', 'audio.wav', '-map', '0:v', '-map', '1:a', '-c:v', 'copy',
+      '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-shortest', '-movflags', '+faststart', out]);
+    fs.unlinkSync(path.join(root, silent));
+  }
 }
 await browser.close();
 server.close();

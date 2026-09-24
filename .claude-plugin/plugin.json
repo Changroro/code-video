@@ -1,20 +1,23 @@
 {
-  "name": "handdrawn-promo-video",
-  "version": "1.0.0",
-  "description": "Research a topic (company, service, website, product) and render a short hand-drawn canvas animation promo video with 8-bit mini characters as an MP4: settings questions → sourced research → storyboard approval → build, QA, and render.",
+  "name": "code-video",
+  "version": "1.1.0",
+  "description": "Research a topic (company, service, website, product) and render a short promo video as an MP4, drawn entirely in code. Pick a look (hand-drawn with 8-bit minis, motion graphics, sand art, arcade, terminal, thermal receipt, transit map, blueprint) and a story format (standard, versus, session, receipt, route map, spec sheet, lyric music video, beat-synced footage), then research → storyboard approval → build, QA, and render, with code-generated music.",
   "author": {
     "name": "ChangRoro",
     "url": "https://github.com/Changroro"
   },
-  "homepage": "https://github.com/Changroro/handdrawn-promo-video",
-  "repository": "https://github.com/Changroro/handdrawn-promo-video",
+  "homepage": "https://github.com/Changroro/code-video",
+  "repository": "https://github.com/Changroro/code-video",
   "license": "MIT",
   "keywords": [
-    "video",
-    "animation",
-    "hand-drawn",
     "8-bit",
+    "animation",
+    "canvas",
+    "explainer",
+    "hand-drawn",
+    "motion-graphics",
+    "pixel-art",
     "promo",
-    "canvas"
+    "video"
   ]
 }

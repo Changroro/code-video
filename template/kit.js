@@ -5,8 +5,10 @@ const VIDEO = Object.assign({ w: 1920, h: 1080, fps: 30, dur: 30 }, window.VIDEO
 const W = VIDEO.w, H = VIDEO.h, FPS = VIDEO.fps, DUR = VIDEO.dur;
 const cv = document.getElementById('c');
 cv.width = W; cv.height = H;
-const ctx = cv.getContext('2d');
+let ctx = cv.getContext('2d');
 const rc = rough.canvas(cv);
+// draw with the kit's 2D helpers (text, drawPixels, ...) into another context, e.g. an offscreen layer
+function withCtx(g, fn) { const prev = ctx; ctx = g; try { fn(); } finally { ctx = prev; } }
 const THEME = { ink: '#2f2f2f', paper: '#f7f6f3', dark: '#191919', light: '#f3f3ef', grid: 'rgba(47,47,47,.10)', gridDark: 'rgba(243,243,239,.07)' };
 let T = 0;
 const IMG = {}, BG = {};
@@ -131,6 +133,38 @@ function text(s, x, y, o = {}) {
   ctx.fillStyle = color; ctx.fillText(s, 0, 0);
   ctx.restore();
 }
+// kinetic type: words pop in one after another over p = 0..1. colors: {wordIndex: colour}
+function kwords(s, x, y, p, o = {}) {
+  const { font = 'sans-serif', weight = '', size = 64, color = THEME.ink, colors = {}, align = 'center', gap = .28, alpha = 1 } = o;
+  const words = s.split(' '), ws = words.map(w => measure(w, font, size, weight)), sp = size * gap;
+  const total = ws.reduce((a, b) => a + b, 0) + sp * (words.length - 1);
+  let cx = align === 'center' ? x - total / 2 : align === 'right' ? x - total : x;
+  words.forEach((w, i) => {
+    const q = E.back(prog(p * (words.length + 2), i, i + 2.2));
+    if (q > 0) text(w, cx + ws[i] / 2, y + (1 - q) * size * .5, { font, weight, size: size * (.6 + .4 * clamp(q, 0, 1.2)), color: colors[i] ?? color, alpha: alpha * clamp(q * 2), jit: false });
+    cx += ws[i] + sp;
+  });
+}
+// typewriter with a blinking cursor
+function typeOn(s, x, y, p, o = {}) {
+  const shown = typed(s, p), { font = 'sans-serif', weight = '', size = 64, color = THEME.ink, align = 'left' } = o;
+  text(shown, x, y, { ...o, align, jit: false });
+  if (p < 1.15 && Math.floor(T * 2.5) % 2 === 0) {
+    const w = measure(shown, font, size, weight), x0 = align === 'center' ? x + w / 2 : align === 'right' ? x : x + w;
+    ctx.save(); ctx.fillStyle = color; ctx.fillRect(x0 + size * .08, y - size * .45, size * .07, size * .9); ctx.restore();
+  }
+}
+// karaoke line: syl = [[text, startSec], ...] (T is seconds since the scene started); sung part turns `on`
+function karaoke(syl, x, y, t, o = {}) {
+  const { font = 'sans-serif', weight = '800', size = 60, off = 'rgba(255,255,255,.55)', on = '#ffd84a', outline = 'rgba(0,0,0,.55)', align = 'center' } = o;
+  const ws = syl.map(([s]) => measure(s, font, size, weight)), total = ws.reduce((a, b) => a + b, 0);
+  let cx = align === 'center' ? x - total / 2 : align === 'right' ? x - total : x;
+  syl.forEach(([s, t0], i) => {
+    const sung = t >= t0, pop = sung ? Math.max(0, 1 - (t - t0) * 6) : 0;
+    text(s, cx + ws[i] / 2, y - pop * size * .12, { font, weight, size, color: sung ? on : off, outline, ow: size * .16, jit: false });
+    cx += ws[i];
+  });
+}
 
 // ---------------------------------------------------------------- camera & transitions
 function cam(z = 1, cx = W / 2, cy = H / 2, rot = 0, sx = 0, sy = 0) {
@@ -179,6 +213,61 @@ function inkBand(x0, x1, color = THEME.ink) {
   ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
   rc.polygon([[x0, -80], [x1, -80], [x1 - 320, H + 80], [x0 - 320, H + 80]],
     ro(3500, { fill: color, fillStyle: 'solid', stroke: color, strokeWidth: 8, roughness: 2.5 }));
+  ctx.restore();
+}
+
+// shape wipes for scene changes: p = 0..1 covers the screen with `color`
+function circleWipe(p, color = THEME.paper, cx = W / 2, cy = H / 2) {
+  if (p <= 0) return;
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = color;
+  ctx.beginPath(); ctx.arc(cx, cy, E.inOut(clamp(p)) * Math.hypot(W, H), 0, TAU); ctx.fill(); ctx.restore();
+}
+function wipe(p, color = THEME.paper, dir = 'right') {
+  if (p <= 0) return;
+  const q = E.inOut(clamp(p));
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = color;
+  if (dir === 'right') ctx.fillRect(0, 0, W * q, H);
+  else if (dir === 'left') ctx.fillRect(W * (1 - q), 0, W * q, H);
+  else if (dir === 'down') ctx.fillRect(0, 0, W, H * q);
+  else ctx.fillRect(0, H * (1 - q), W, H * q);
+  ctx.restore();
+}
+// map pin that drops in, then sends out a ripple ring
+function pin(x, y, p, color = THEME.ink, s = 1) {
+  if (p <= 0) return;
+  const d = E.back(prog(p, 0, .35)), rp = prog(p, .3, 1);
+  ctx.save(); ctx.translate(x, y - (1 - d) * 40 * s); ctx.globalAlpha *= clamp(d * 2);
+  ctx.fillStyle = color;
+  ctx.beginPath(); ctx.arc(0, -26 * s, 12 * s, Math.PI * .85, Math.PI * .15); ctx.lineTo(0, 0); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(0, -26 * s, 4.5 * s, 0, TAU); ctx.fill();
+  ctx.restore();
+  if (rp > 0 && rp < 1) {
+    ctx.save(); ctx.globalAlpha *= 1 - rp; ctx.strokeStyle = color; ctx.lineWidth = 3 * s;
+    ctx.beginPath(); ctx.ellipse(x, y, 10 * s + rp * 50 * s, (10 * s + rp * 50 * s) * .4, 0, 0, TAU); ctx.stroke(); ctx.restore();
+  }
+}
+
+// ---------------------------------------------------------------- video clips
+// footage as JPEG frame sequences in assets/clips/<id>/0001.jpg... (see references/styles/beat.md).
+// Frames load on demand: a draw that misses records a pending load and renderFrame redraws once it arrives.
+const CLIPS = {}, CLIP_CACHE = new Map();
+let PENDING = [];
+function clip(id, t, x, y, w, h, o = {}) {
+  const c = CLIPS[id];
+  if (!c) throw new Error('unknown clip: ' + id);
+  const i = clamp(Math.floor(t * c.fps), 0, c.n - 1), src = `assets/clips/${id}/${String(i + 1).padStart(4, '0')}.jpg`;
+  let im = CLIP_CACHE.get(src);
+  if (!im) {
+    im = new Image(); im.src = src; CLIP_CACHE.set(src, im);
+    PENDING.push(im.decode());
+    if (CLIP_CACHE.size > 400) CLIP_CACHE.delete(CLIP_CACHE.keys().next().value);
+    return;
+  }
+  if (!im.complete) { PENDING.push(im.decode()); return; }
+  // cover-fit crop into the box
+  const s = Math.max(w / im.naturalWidth, h / im.naturalHeight), sw = w / s, sh = h / s;
+  ctx.save(); ctx.globalAlpha *= o.alpha ?? 1;
+  ctx.drawImage(im, (im.naturalWidth - sw) / 2, (im.naturalHeight - sh) / 2, sw, sh, x, y, w, h);
   ctx.restore();
 }
 
@@ -257,15 +346,26 @@ function pixelImage(img, cx, cy, w, h, px = 1) {
 
 // ---------------------------------------------------------------- timeline & boot
 let SCENES = [];
-function renderFrame(f) {
+async function renderFrame(f) {
   T = f / FPS;
-  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
   const [a, , fn] = SCENES.find(([, b]) => T < b) ?? SCENES[SCENES.length - 1];
-  ctx.save(); fn(T - a); ctx.restore();
+  for (let pass = 0; pass < 3; pass++) {
+    PENDING = [];
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+    ctx.save(); fn(T - a); ctx.restore();
+    if (!PENDING.length) return;
+    await Promise.all(PENDING);
+  }
+  throw new Error(`clip frames still missing at t=${T}`);
 }
-// fonts: [[family, sampleText]]; images: {key: path}
-async function boot({ scenes, images = {}, fonts = [], noise = 6, setup = null }) {
+// load font files without @font-face in index.html: [[family, 'assets/fonts/file.ttf'], ...]
+async function useFonts(defs) {
+  await Promise.all(defs.map(async ([family, url]) => { const f = new FontFace(family, `url(${url})`); await f.load(); document.fonts.add(f); }));
+}
+// fonts: [[family, sampleText]]; images: {key: path}; clips: {id: {n: frameCount, fps}}
+async function boot({ scenes, images = {}, fonts = [], clips = {}, noise = 6, setup = null }) {
   SCENES = scenes;
+  for (const [k, c] of Object.entries(clips)) CLIPS[k] = { fps: 30, ...c };
   for (const [k, src] of Object.entries(images)) { const im = new Image(); im.src = src; await im.decode(); IMG[k] = im; }
   await Promise.all(fonts.map(([f, sample]) => document.fonts.load(`40px ${f}`, sample)));
   BG.paper = makeBG(THEME.paper, noise, '#7a6a4a', 'rgba(60,45,20,.18)');
