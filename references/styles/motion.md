@@ -2,7 +2,7 @@
 
 A clean explainer that looks like an official brand asset: kinetic type, diagrams and UI that build on screen, and a persuasion arc from problem to call to action. Silent.
 
-Credit: adapted from the website-to-explainer approach shared by [@digitalstrategyai](https://www.threads.com/@digitalstrategyai/post/DdpAYbcgAj0), which builds on [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)'s launch video. The original prompt is not included; this guide is our own write-up.
+Credit: adapted from the website-to-explainer approach shared by [@digitalstrategyai](https://www.threads.com/@digitalstrategyai/post/DdpAYbcgAj0), which builds on [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)'s launch video. The original prompt is not included; this guide is our own write-up. [Preview frames from the original video](../../docs/styles/motion.jpg).
 
 ## When to use
 Company, product, or service explainers where the viewer should recognise the brand at once. Works at 15 to 45 s.

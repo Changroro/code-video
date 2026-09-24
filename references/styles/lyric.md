@@ -2,7 +2,7 @@
 
 An educational music video: an original song whose lyrics teach the topic, shown karaoke style over simple animated scenes. The engine makes the instrumental; the lyrics are on screen, not sung.
 
-Credit: adapted from the educational music video idea shared by [@goodside](https://x.com/goodside/status/2102852546620744010). The original prompt is not included; this guide is our own write-up.
+Credit: adapted from the educational music video idea shared by [@goodside](https://x.com/goodside/status/2102852546620744010). The original prompt is not included; this guide is our own write-up. [Preview frames from the original video](../../docs/styles/lyric.jpg).
 
 ## When to use
 Explainers that should be memorable: what a company does, how a product works, a list of services. 60 to 150 s.

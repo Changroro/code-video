@@ -2,7 +2,7 @@
 
 Scenes poured in sand on a backlit light table and swept away by hand, with music and sound effects. Suits stories told through time.
 
-Credit: adapted from the sand animation shared by [@Michaelzsguo](https://x.com/Michaelzsguo/status/2102592355165782312). The original prompt is not included; this guide is our own write-up.
+Credit: adapted from the sand animation shared by [@Michaelzsguo](https://x.com/Michaelzsguo/status/2102592355165782312). The original prompt is not included; this guide is our own write-up. [Preview frames from the original video](../../docs/styles/sand.jpg).
 
 ## When to use
 History, founding stories, "N years of …" chronicles, milestones. 60 to 120 s gives each era room; at 30 s use four or five eras.

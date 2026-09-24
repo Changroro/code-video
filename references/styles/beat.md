@@ -2,7 +2,7 @@
 
 A punchy, minimal promo cut to a song: real footage, masked type, and UI moments, with every cut on a beat.
 
-Credit: adapted from the beat-synced promo template shared by [@twoclipping](https://x.com/twoclipping/status/2102554209166000267). The original prompt is not included; this guide is our own write-up.
+Credit: adapted from the beat-synced promo template shared by [@twoclipping](https://x.com/twoclipping/status/2102554209166000267). The original prompt is not included; this guide is our own write-up. [Preview frames from the original video](../../docs/styles/beat.jpg).
 
 ## When to use
 Only when the user has real footage: their own clips, product screen recordings, or event video. Without it, suggest another style. Stock footage makes the result generic and says nothing true about the subject.

@@ -22,6 +22,25 @@ An agent skill that turns a topic (a company, a product, a website) into a short
 | Lyric music video | memorable educational explainers | instrumental, lyrics on screen | [@goodside](https://x.com/goodside/status/2102852546620744010) |
 | Beat-synced footage promo | when you have your own clips and a licensed song | the song and effects | [@twoclipping](https://x.com/twoclipping/status/2102554209166000267) |
 
+### Style previews
+
+Four highlight frames from each creator's original video.
+
+**Hand-drawn + 8-bit minis**, from [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)
+![Hand-drawn + 8-bit minis: frames from @nahiddotai's original video](docs/styles/handdrawn.jpg)
+
+**Brand motion graphics**, from [@digitalstrategyai](https://www.threads.com/@digitalstrategyai/post/DdpAYbcgAj0)
+![Brand motion graphics: frames from @digitalstrategyai's original video](docs/styles/motion.jpg)
+
+**Sand art chronicle**, from [@Michaelzsguo](https://x.com/Michaelzsguo/status/2102592355165782312)
+![Sand art chronicle: frames from @Michaelzsguo's original video](docs/styles/sand.jpg)
+
+**Lyric music video**, from [@goodside](https://x.com/goodside/status/2102852546620744010)
+![Lyric music video: frames from @goodside's original video](docs/styles/lyric.jpg)
+
+**Beat-synced footage promo**, from [@twoclipping](https://x.com/twoclipping/status/2102554209166000267)
+![Beat-synced footage promo: frames from @twoclipping's original video](docs/styles/beat.jpg)
+
 ## Credit
 
 Each style adapts an idea that its creator shared publicly after the Claude Opus 5.5 release; the links are in the table above. This repository does not contain their prompts. The style guides in `references/styles/` are our own write-ups, and the skill wraps every style in the same research, approval, and QA steps. The default style comes from [@nahiddotai](https://www.threads.com/@nahiddotai)'s ["Introducing Opus 5.5" launch video](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) and [the prompt they shared](https://www.threads.com/@nahiddotai/post/Ddm0OgZkuQx). The intro video shows a few frames of that launch video, with credit.
