@@ -1,34 +1,45 @@
-# Style: lyric music video
+# Format: lyric music video
 
-An educational music video: an original song whose lyrics teach the topic, shown karaoke style over simple animated scenes. The engine makes the instrumental; the lyrics are on screen, not sung.
+An educational music video that reads like a technical explainer set to a song: a dark grid, a section label in the corner, one diagram per lyric line, and the sung line at the bottom. The engine makes the instrumental; the lyrics are on screen, not sung.
 
-Credit: adapted from the educational music video idea shared by [@goodside](https://x.com/goodside/status/2102852546620744010). The original prompt is not included; this guide is our own write-up. [Preview frames from the original video](../../docs/styles/lyric.jpg).
+Credit: adapted from the educational music video shared by [@goodside](https://x.com/goodside/status/2102852546620744010). The original prompt is not included; this guide is our own write-up.
 
-## When to use
-Explainers that should be memorable: what a company does, how a product works, a list of services. 60 to 150 s.
+## Reference
+Open `<skill>/docs/styles/lyric.jpg` (four frames from the original) before planning, and compare your stills with it during QA. The original is a 2 min 20 s song about Jev, TypeSafe AI's "System One" decision model: an intro title in a glowing ring, verses that explain how Jev differs from a chat model with node diagrams and JSON, a chorus built on "Jev, Jev, System One" that returns in a new colour each time, a pricing pre-chorus, a bridge on calibration, and an outro.
+
+This format has its own look (below). Use another look only when the user asks for one.
+
+## Signature (every item must be on screen)
+| # | Item | How (`lyric.js`) |
+|---|---|---|
+| 1 | A dark navy field with a faint grid and vignette in every scene | `lyFrame({...})` |
+| 2 | The song section in a small mono label top-left (`VERSE 1 · how Jev differs from a chat model`), the title top-right, a thin progress line along the top | `lyFrame({ section, detail, title, progress })` |
+| 3 | The sung line at the bottom under a hairline: sung words bright, the rest dim | `lyLine(lyWords(line, start, step), t)` |
+| 4 | One diagram per line, centred: node boxes joined by connectors with a travelling pulse, JSON/code cards, probability bars, a stopwatch or a big glowing value, a crossing-curves chart | `lyNode`, `lyLink`, `codeBox`, `probBars`, `bigValue` |
+| 5 | The chorus repeats the same diagram with a new accent each time it returns (cyan, pink, yellow, green) | `chorusColor(n)` |
+| 6 | Intro and outro: the name in a glowing ring, the subtitle in the accent, "an educational music video", the about line, the song title between ♪ marks | `lyTitle(...)` |
+
+## Look
+- **Palette**: bg `#0b0f1e`, ink `#e9edf6`, dim `#5e6886`, cards `#121832`, accents cyan `#35d0e6`, pink `#ff5cc8`, yellow `#ffc53a`, green `#4ade80`. If the brand has a strong colour, make it the first accent.
+- **Fonts**: `LSANS` IBM Plex Sans (semibold/bold) and `LMONO` IBM Plex Mono. Korean: Pretendard and NanumGothicCoding.
+- **Diagrams**: flat, precise, thin 2 px borders, 10 px radius; no hand-drawn wobble, no illustrations of scenery. Each diagram builds on the line's first beat and holds while the line is sung.
 
 ## Song
-- Sections: intro, one verse per subject (who they are, what they do, how it works), a chorus built on the slogan or core value, and an outro that repeats the hook.
-- Every line comes from the research. One line is one fact, and each fact gets a card on screen.
+- Sections: intro, verses (one subject each), a chorus on the product's name or promise, a pre-chorus for a number (price, speed), a bridge for a limitation or nuance, an outro that repeats the hook. Put the section name and a short detail in the label.
+- Every line comes from the research. One line is one fact, and each line gets its own diagram.
 - Keep lines short: at most about 12 syllables, or 14 characters in Korean. Write the lyrics in the on-screen language.
-- Fit the song to the chosen length before writing scenes. Bars times 4 times 60 / BPM is the song length.
+- Fit the song to the chosen length before writing scenes: bars × 4 × 60 / BPM is the song length. 60–150 s.
 
 ## Timing
 Put syllables on the beat grid in `main.js` and reuse the same numbers in `audio.json`:
 ```js
 const BPM = 100, B = 60 / BPM, bar = k => k * 4 * B;
-// line starting at bar 8, one syllable per eighth note
-const L1 = ['Ev', 'ery ', 'line ', 'is ', 'a ', 'fact'].map((s, i) => [s, bar(8) + i * B / 2]);
-karaoke(L1, W / 2, H - 140, T, { font: 'PRE', size: 64, on: '#2fa2dc' /* brand accent */ });
+lyLine(lyWords('Give it a state, get decisions back', bar(8), B / 2), T);
 ```
-`karaoke` takes the same clock as its start times, so pass the video time `T` when the times are absolute.
-
-## Look
-- The brand palette drives cards, lyric highlight, and icons. Backgrounds may move through the day (sunrise, day, night, sunset) per section, tinted toward the brand colours.
-- A lyric bar at the bottom, a fact card that pops in on the line's first beat (`kwords` for its title), icon tiles that reveal as the lyrics name them.
+`lyLine` and `karaoke` take the same clock as their start times, so pass the video time `T` when the times are absolute.
 
 ## Sound
-`scripts/audio.py` with sections matching the song: verse energy about 0.5, chorus 0.9, outro 0.5. Cue `pop` on card reveals and `chime` on the logo.
+`scripts/audio.py` with sections matching the song: verse energy about .5, chorus .9, bridge .35, outro .5. Cue `pop` when a diagram lands and `chime` on the title.
 
 ## Pitfalls
 - Do not claim the video has vocals.

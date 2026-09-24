@@ -1,5 +1,6 @@
 // node render.mjs video [out.mp4]      -> full MP4 (H.264 at window.VIDEO size and fps; muxes audio.wav when present)
 // node render.mjs stills 1.2 3.4 ...   -> stills/t<sec>.png for review
+// env: CRF (20), WORKERS (4), QUERY (appended to the page URL, e.g. QUERY=lang=ko), CAPTURE=png (lossless frames, ~2x slower)
 import { chromium } from 'playwright-core';
 import http from 'node:http';
 import fs from 'node:fs';
@@ -23,11 +24,12 @@ async function openPage() {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
   page.on('pageerror', e => { console.error('pageerror:', e); process.exit(1); });
   page.on('console', m => m.type() === 'error' && !m.text().includes('404') && console.error('console:', m.text()));
-  await page.goto(`http://127.0.0.1:${server.address().port}/index.html`);
+  await page.goto(`http://127.0.0.1:${server.address().port}/index.html${process.env.QUERY ? '?' + process.env.QUERY : ''}`);
   await page.waitForFunction('window.READY === true', null, { timeout: 30000 });
   return page;
 }
-const grab = (page, f) => page.evaluate(async f => { await renderFrame(f); return document.getElementById('c').toDataURL('image/png').slice(22); }, f).then(b => Buffer.from(b, 'base64'));
+// JPEG q.92 capture is 2-3x faster than PNG and measures ~44 dB PSNR against it after H.264; stills stay PNG
+const grab = (page, f, mime = 'image/png') => page.evaluate(async ([f, m]) => { await renderFrame(f); return document.getElementById('c').toDataURL(m, .92).split(',')[1]; }, [f, mime]).then(b => Buffer.from(b, 'base64'));
 const page = await openPage();
 const fps = await page.evaluate('FPS');
 const run = (cmd, args) => new Promise((ok, fail) => spawn(cmd, args, { cwd: root, stdio: 'inherit' }).on('close', c => (c ? fail(new Error(`${cmd} exit ${c}`)) : ok())));
@@ -39,7 +41,8 @@ if (mode === 'stills') {
   const out = rest[0] ?? 'video.mp4';
   const audio = fs.existsSync(path.join(root, 'audio.wav'));
   const silent = audio ? `.silent-${out}` : out;
-  const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'png', '-i', '-',
+  const png = process.env.CAPTURE === 'png';
+  const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', png ? 'png' : 'mjpeg', '-i', '-',
     '-c:v', 'libx264', '-preset', 'slow', '-crf', process.env.CRF ?? '20', '-tune', 'animation', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', silent],
     { cwd: root, stdio: ['pipe', 'inherit', 'inherit'] });
   const done = new Promise((ok, fail) => ff.on('close', c => (c ? fail(new Error(`ffmpeg exit ${c}`)) : ok())));
@@ -51,7 +54,7 @@ if (mode === 'stills') {
   await Promise.all(pages.map(async p => {
     while (next < total) {
       const f = next++;
-      ready.set(f, await grab(p, f));
+      ready.set(f, await grab(p, f, png ? 'image/png' : 'image/jpeg'));
       while (ready.has(written)) {
         const buf = ready.get(written); ready.delete(written);
         if (written % 90 === 0) console.log(`frame ${written}/${total}`);

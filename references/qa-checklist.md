@@ -8,10 +8,17 @@ Take stills at the middle of each scene and just before and after each transitio
 - [ ] Labels do not overlap each other or the characters.
 - [ ] Characters stand out from the background (use `outline` for a dark character on a dark background).
 - [ ] Text is readable over busy backgrounds (`outline: THEME.paper`, heavy weights).
-- [ ] Every glyph renders in the intended font. The pixel font (Latin-only) is not used for other scripts.
+- [ ] Every glyph renders in the intended font, including bold weights in the first frames. The pixel font (Latin-only) is not used for other scripts; pair it with a Hangul face through `unicode-range`.
 - [ ] Copy and numbers match the approved plan and their sources.
 - [ ] Colours and fonts match the palette and fonts approved in the plan.
 - [ ] On-screen text is in the chosen language, including labels, HUD, and the end card.
+
+## Fidelity (credited looks and formats)
+Build `scripts/reference_sheet.py <key> <video> <out.jpg>` and compare row by row with the original.
+- [ ] Every item in the guide's Signature table is visible in at least one frame. Name the frame for each.
+- [ ] Nothing from another look leaked in (no graph-paper grid in the hand-drawn look, no light scenes in motion graphics, no heavy sans captions on sand, no scenery behind lyric diagrams).
+- [ ] The palette and fonts match the guide's roles; the brand appears as the accent, not as a new background.
+- [ ] Held frames last at least .6 s and read at a glance: one idea per beat, as in the original.
 
 ## Common bugs
 - `flash(1 - prog(t, a, b))` covers the whole screen while t < a. Wrap it in `if (t > a)`.

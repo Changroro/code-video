@@ -1,6 +1,6 @@
 # kit.js API
 
-Global scripts. `index.html` loads rough.js → kit.js → (a mini set, `sand.js`, or one look module) → main.js in that order. The look modules and their shared scene API are in [looks.md](looks.md). `window.VIDEO = { w, h, fps, dur }` sets the canvas size and length.
+Global scripts. `index.html` loads rough.js → kit.js → (a mini set, one style module, or one look module) → main.js in that order. The look modules and their shared scene API are in [looks.md](looks.md). `window.VIDEO = { w, h, fps, dur, blur, shutter }` sets the canvas size, length, and optional motion blur.
 
 ## Globals
 - `W, H, FPS, DUR`, `ctx` (2D context), `rc` (rough canvas), `T` (current second), `IMG` (images from boot), `BG`.
@@ -48,15 +48,59 @@ Global scripts. `index.html` loads rough.js → kit.js → (a mini set, `sand.js
 - `MINIS`, `drawMini(key, x, y, s, { blink, outline, flip, sx, sy, rot, alpha })`: the mini cast. Register with `Object.assign(MINIS, { key: { name, color, body, pal, rows } })`. `E` pixels switch to the `body` color while blinking, and `C` pixels blink by themselves. `minis-ai.js` is a ready-made AI set.
 - `pixelImage(img, cx, cy, w, h, px)`: draw an image (such as a logo) as px-sized blocks. Raising px from 1 turns the logo into 8-bit step by step.
 
-## Video clips (beat style)
+## UI props and motion blur
+- `rr(x, y, w, h, r)`: begins a rounded-rectangle path (then `ctx.fill()` / `ctx.stroke()`).
+- `phone(x, y, h, draw, { body, rim, screen, shadow })`: a phone of height h centred at (x, y); `draw(sx, sy, sw, sh)` paints the screen, clipped. Returns the screen box.
+- `cursor(x, y, press, color, s)`: a pointer with its tip at (x, y); `press` 0..1 squeezes it for a click.
+- `window.VIDEO.blur = n`: each frame averages n subframes spread over `VIDEO.shutter` (default .5) of a frame, for real motion blur on whips and push cuts. It costs n times the render time; the beat format uses `{ fps: 60, blur: 3 }`.
+
+## Video clips (beat format)
 - Put footage in `assets/clips/<id>/0001.jpg ...` (see `references/styles/beat.md`) and register it with `boot({ clips: { id: { n: frameCount, fps: 30 } } })`.
 - `clip(id, t, x, y, w, h, { alpha })`: draws the clip's frame at t seconds, cover-fit into the box. Frames load on demand; `renderFrame` redraws once they arrive, and a missing file stops the render.
 
-## Sand (sand style, `sand.js`)
-Load `sand.js` after `kit.js` and pass `setup: sandSetup` to `boot`.
-- `SAND.lit`, `SAND.edge`: the glowing table from centre to rim. `SAND.ink`: the sand colour. Set them before `sandSetup` runs.
+## Style modules (credited looks and formats)
+Load one after `kit.js`. Each exposes a colour/font object you can set from the research before boot, and draws the original's signature pieces. The guides say which piece fulfils which signature item.
+
+### `handdrawn.js` (default look, [styles/handdrawn.md](styles/handdrawn.md))
+`HD = { ink, paper, dark, light, accent, muted, tag, serif, script, pix, mono, sans }`.
+- `hdPaper()`, `hdDark()`: plain paper and the dark card background. `horizon(y, id, { x0, x1, p, tufts })`, `tuft(x, y, id)`, `cloud(x, y, s, id)`.
+- `worldTag('WORLD 1-2')`, `worldCard(world, title, p, { bg, accent })`.
+- `introCard(t, { pre, name, accent, sub }, { size, y })`: the dark serif title card; the name types in and the accent part gets a hand underline.
+- `countUp(to, p, { from, decimals, prefix, suffix })` → string. `serifStat(value, label, note, x, y, p, o)`.
+- `hatchBars(items, { x, y, w, h, p, max, id })` with items `{ label, v, text, hi }`; returns the bar tops (to stand a mascot on).
+- `hiScore(title, sub, rows, p, { hi, mini, record })`, `priceTag(x, y, oldV, newV, p, id)`, `docGrid(n, cols, done, p, { x, y, miss })`, `strikeList(lines, x, y, p)`.
+- `paperTear(p, color, dir)`: torn-paper transition. `zzz(x, y, t)`, `burst(x, y, r, p, color, id)`.
+
+### `motion.js` (brand motion graphics, [styles/motion.md](styles/motion.md))
+`MO = { bg, ink, dim, accent, pain, cyan, font, mono }`.
+- `moBG()`: the flat dark field.
+- `icon(name, x, y, s, p, id, color, width)`: line icons from `MO_ICONS` (clock, book, eye, wallet, cash, camera, mic, check, faucet, bulb, chat, search, lock, chart, user, gear, star); add more as polylines in a 100-unit box.
+- `scribble(x, y, w, h, p, id)`, `swoosh(x, y, w, p, id)`: hand-drawn emphasis on type.
+- `meter(label, v, x, y, w, color)`: the frustration gauge.
+- `lineBars(title, items, { x, y, w, h, p })`: hatched pain bars and one accent bar.
+- `linePhone(x, y, h, p, id, draw)`, `askBubble(s, x, y, w, p, id)`, `replyBubble(s, x, y, w, p)`.
+- `pills(items, cx, y, maxW, p, active, size)`, `ctaButton(label, x, y, t, clickAt, { note, url })`, `wordmark(name, x, y, size, p)`.
+
+### `sand.js` (sand art, [styles/sand.md](styles/sand.md))
+Pass `setup: sandSetup` to `boot`. `SAND = { lit, edge, ink, serif, serifItalic, grainSize, tableGrain, edgeGrain }`; set colours before `sandSetup` runs.
 - `sandClear()` → an empty offscreen layer. Draw silhouettes and text into it (with `withCtx`); alpha is the sand density.
-- `sandFrame(reveal, sweep, dir)`: composites the layer onto the table. `reveal` 0..1 pours the sand in patchily; `sweep` 0..1 pushes it off along `dir = [dx, dy]` with a ridge at the front.
+- `sandFrame(reveal, sweep, dir, { scatter, wind, light })`: composites the layer onto the table. `reveal` 0..1 pours the sand in patchily; `sweep` 0..1 pushes it off along `dir = [dx, dy]`; `scatter` 0..1 breaks the picture into grains that blow away; `light` scales the table.
+- `sandRays(g, cx, cy, p, { n, haze, sun })`: a sunburst carved into a haze of sand. `sandCut(g, fn)`: carve light out (moon, stars, windows). `sandYear(g, year, sub, { corner, size })`: the serif year and italic caption.
+
+### `lyric.js` (lyric music video, [styles/lyric.md](styles/lyric.md))
+`LY = { bg, grid, ink, dim, faint, card, accents, sans, mono }`.
+- `lyFrame({ section, detail, title, progress, accent })`: the dark grid frame with the section label, title, progress line, and lyric hairline.
+- `lyLine(syl, t)`, `lyWords(line, start, step)` → syllables on a beat grid.
+- `lyNode(x, y, w, h, label, sub, p, { color, size, glow })`, `lyLink(pts, p, color)`, `probBars(x, y, w, rows, p, { color, title, sub })`, `codeBox(x, y, w, lines, p, { color, label })`, `bigValue(s, x, y, p, { color, size, label, boxed })`.
+- `lyTitle(name, sub, about, song, p, { color, kind })`, `chorusColor(n)`.
+
+### `beat.js` (beat-synced footage, [styles/beat.md](styles/beat.md))
+`BT = { light, glow, dark, floor, ink, inkLight, dim, accent, ok, font, mono }`.
+- `stageLight(t)`, `stageDark(glow)`.
+- `beatWords([[word, time], …], x, y, t, o)`: words land on their beats; `'■'` is the masked accent block, and its box is returned.
+- `appWindow(x, y, w, h, { title })` → content box, `field(x, y, w, s, p)`, `pillButton(label, x, y, { press })`.
+- `clipWall(ids, t, { cols, rows, scan, winners, tags, caption })`, `carousel(ids, t, spin, { R, cardH, n })`, `phoneClip(id, t, x, y, h, { caption })`, `campaignPanel(x, y, t, { toggles, clickAt, flipAt, result })`.
+- `scoreRows(rows, x, y, t, { label })`, `pushStat(value, label, t, { at })`, `ticker([[word, time], …], t, { sub })`.
 
 ## Boot
 ```js
@@ -73,7 +117,8 @@ boot({
 
 ## Render
 - `node render.mjs stills 1.2 3.4 ...` → `stills/t<seconds>.png`
-- `CRF=25 WORKERS=4 node render.mjs video out.mp4` → H.264, yuv420p, faststart, at the size and fps in `window.VIDEO`. About 2–3 minutes and about 8 MB for 30 s at 1080p.
+- `CRF=25 WORKERS=4 node render.mjs video out.mp4` → H.264, yuv420p, faststart, at the size and fps in `window.VIDEO`. Frames are captured as JPEG (2–3× faster than PNG, visually identical after H.264); `CAPTURE=png` forces lossless capture. About 1–2 minutes and about 8 MB for 30 s at 1080p; more workers than 4 usually slows Chrome down.
+- `QUERY=lang=ko node render.mjs …` appends `?lang=ko` to the page URL, for rendering two versions from one `main.js`.
 - If `audio.wav` exists in the work folder, the video gets an AAC track normalised to -14 LUFS.
 
 ## Sound
