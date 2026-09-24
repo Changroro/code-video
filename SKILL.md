@@ -48,6 +48,7 @@ If the user changes scenes or emphasis, restate the revised flow once, then proc
 ## 3. Build
 ```bash
 cp -R <skill>/template <work-folder>/<name>-video && cd <work-folder>/<name>-video
+chmod -R u+w .   # the installed skill may be read-only, and cp keeps its modes
 npm i
 bash <skill>/scripts/fetch_fonts.sh assets/fonts
 curl -fsSL -o assets/logo_src.png '<official logo URL>'
