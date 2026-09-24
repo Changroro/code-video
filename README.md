@@ -1,5 +1,7 @@
 # handdrawn-promo-video
 
+English | [한국어](README.ko.md)
+
 [![Intro video made with this skill](docs/intro-preview.gif)](https://github.com/Changroro/handdrawn-promo-video/releases/download/v1.0.0/SkillIntro.mp4)
 
 *This skill's 45-second intro, made with this skill. Click for the full MP4 (no sound).*
@@ -76,7 +78,7 @@ Requirements: Node.js 18+ with npm, ffmpeg built with libx264, Google Chrome, an
 Ask your agent for a video, for example:
 
 - "Make a 30-second promo video for https://example.com"
-- "우리 회사 소개 영상 만들어줘"
+- "Make a sand-art video of our company's history"
 
 ## Contents
 
@@ -99,19 +101,3 @@ The characters in `template/minis-ai.js` are unofficial fan art. Product names a
 ## License
 
 [MIT](LICENSE)
-
----
-
-## 한국어 요약
-
-주제(회사, 제품, 사이트)를 조사해 짧은 홍보 영상을 코드로 그려 MP4로 만드는 에이전트 스킬입니다. 스타일은 다섯 가지입니다.
-
-- 손그림과 8비트 미니미(기본)
-- 브랜드 모션그래픽
-- 모래 그림 연대기
-- 가사형 뮤직비디오
-- 비트 싱크 실사 홍보
-
-먼저 스타일을 묻고, 이어서 길이, 비율, 캐릭터, 화면 언어를 묻습니다. 색과 폰트는 브랜드 리서치에서 정합니다. 출처가 있는 사실로 스토리보드를 승인받은 뒤 제작, 검수, 렌더까지 진행하며, 스타일에 따라 음악과 효과음도 코드로 만듭니다.
-
-각 스타일은 Claude Opus 5.5 공개 뒤 공개적으로 공유된 작업에서 착안했습니다. 크레딧은 위 표에 있습니다. 원작자들의 프롬프트 원문은 포함하지 않았고, 스타일 가이드는 직접 새로 썼습니다.
