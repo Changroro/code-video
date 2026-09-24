@@ -1,9 +1,9 @@
 # Storyboard and visual grammar
 
-The Timing and Transitions sections apply to every look. The Style and Scene patterns sections describe the default hand-drawn look, adapted from [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)'s launch video ([preview frames](../docs/styles/handdrawn.jpg)); the other looks are in `references/styles/` and [looks.md](looks.md), and story formats in [formats.md](formats.md).
+The Timing and Transitions sections apply to every look. The default hand-drawn look's signature (plain paper, ink horizon, serif title card, WORLD tags, hatched bars, HI-SCORE) is in [styles/handdrawn.md](styles/handdrawn.md); build that first. The Style and Scene patterns below are extras for that look, used after the signature is in place. The other looks are in `references/styles/` and [looks.md](looks.md), and story formats in [formats.md](formats.md).
 
 ## Style
-- **Hand-drawn**: rough.js lines wobble 10 times per second (line boil). Alternate between the paper texture background (`paperBG`) and the dark background (`darkBG`) across scenes for contrast.
+- **Hand-drawn**: rough.js lines wobble 10 times per second (line boil). Alternate between plain paper (`hdPaper`) and dark cards (`hdDark`, `introCard`, `hiScore`) across scenes for contrast. Keep the paper plain: no `grid()` in this look.
 - **Lead character**: an 8-bit pixel character. The contrast between the hand-drawn world and the pixel characters is the core of the style.
   - Logo-based: draw a sprite from the logo's silhouette and colors. Pixelating the real logo step by step with `pixelImage` and then swapping in the sprite reads as "the logo turns into the character".
   - If the logo is built on a geometric grid (triangles, hexagons, and so on), sample each shape's color from the original and rebuild it as vectors. Then pieces of the real logo can scatter and reassemble.

@@ -10,7 +10,7 @@ A look is the drawing style only. The story comes from the research and the chos
 | `transit.js` | transit map and station signage: lines, stations, trains | `route` |
 | `blueprint.js` | cyanotype blueprint: dimension lines, balloons, title block | `spec` |
 
-All five are original to this skill. The hand-drawn, motion graphics, and sand looks are described in [storyboard.md](storyboard.md), [styles/motion.md](styles/motion.md), and [styles/sand.md](styles/sand.md).
+All five are original to this skill. The credited looks are not built on this scene API; they have their own style modules and guides: hand-drawn (`handdrawn.js`, [styles/handdrawn.md](styles/handdrawn.md)), motion graphics (`motion.js`, [styles/motion.md](styles/motion.md)), and sand (`sand.js`, [styles/sand.md](styles/sand.md)).
 
 ## Using a module
 ```html

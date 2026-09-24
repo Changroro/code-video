@@ -1,7 +1,7 @@
 {
   "name": "code-video",
-  "version": "1.1.0",
-  "description": "Research a topic (company, service, website, product) and render a short promo video as an MP4, drawn entirely in code. Pick a look (hand-drawn with 8-bit minis, motion graphics, sand art, arcade, terminal, thermal receipt, transit map, blueprint) and a story format (standard, versus, session, receipt, route map, spec sheet, lyric music video, beat-synced footage), then research → storyboard approval → build, QA, and render, with code-generated music.",
+  "version": "1.2.0",
+  "description": "Research a topic (company, service, website, product) and render a short promo video as an MP4, drawn entirely in code. Pick a look (hand-drawn with 8-bit minis, motion graphics, sand art, arcade, terminal, thermal receipt, transit map, blueprint, and more) and a story format (standard, versus, session, receipt, route map, spec sheet, lyric music video, beat-synced footage), then research → storyboard approval → build, QA against the credited original, and render, with code-generated music.",
   "author": {
     "name": "ChangRoro",
     "url": "https://github.com/Changroro"

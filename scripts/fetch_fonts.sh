@@ -20,3 +20,13 @@ get Galmuri11-Bold.ttf https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/Galmuri1
 get NanumGothicCoding-Regular.ttf "$GF/nanumgothiccoding/NanumGothicCoding-Regular.ttf"
 get NanumGothicCoding-Bold.ttf "$GF/nanumgothiccoding/NanumGothicCoding-Bold.ttf"
 get IBMPlexMono-Regular.ttf "$GF/ibmplexmono/IBMPlexMono-Regular.ttf"
+# used by the credited looks and formats (handdrawn.js, motion.js, lyric.js, sand.js)
+get SourceSerif4.ttf "$GF/sourceserif4/SourceSerif4%5Bopsz,wght%5D.ttf"
+get Caveat.ttf "$GF/caveat/Caveat%5Bwght%5D.ttf"
+get Cormorant.ttf "$GF/cormorant/Cormorant%5Bwght%5D.ttf"
+get Cormorant-Italic.ttf "$GF/cormorant/Cormorant-Italic%5Bwght%5D.ttf"
+get Poppins-SemiBold.ttf "$GF/poppins/Poppins-SemiBold.ttf"
+get Poppins-Bold.ttf "$GF/poppins/Poppins-Bold.ttf"
+get IBMPlexSans.ttf "$GF/ibmplexsans/IBMPlexSans%5Bwdth,wght%5D.ttf"
+get IBMPlexMono-Medium.ttf "$GF/ibmplexmono/IBMPlexMono-Medium.ttf"
+get NanumMyeongjo-Regular.ttf "$GF/nanummyeongjo/NanumMyeongjo-Regular.ttf"

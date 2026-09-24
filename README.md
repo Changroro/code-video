@@ -4,7 +4,7 @@ English | [한국어](README.ko.md)
 
 ![One script, five looks: arcade, terminal, thermal receipt, transit map, blueprint](docs/hero.gif)
 
-*One script, five looks. Every frame above is drawn in code.*
+*One script, five looks. Every frame above is drawn in code.* [Watch the 45-second intro](https://github.com/Changroro/code-video/releases/download/v1.2.0/CodeVideo_intro_en.mp4), made with this skill.
 
 An agent skill that researches a topic and turns it into a short video drawn entirely in code. No video-generation model and no stock footage: the agent writes the scenes, renders them frame by frame, and hands you an MP4.
 
@@ -14,7 +14,7 @@ An agent skill that researches a topic and turns it into a short video drawn ent
 2. **Research first.** The agent collects facts with sources, checks the headline numbers against the original sentences, and takes the palette and fonts from the brand. Every number on screen has a source.
 3. **You approve the plan.** It asks for a look, a story format, and the settings (length, aspect ratio, characters, on-screen language), then shows the storyboard, palette, and sound plan before building anything.
 4. **Look × format.** The look is how it is drawn; the story format is how it is told. Any look works with any format.
-5. **Checked before delivery.** Stills, transitions, a sweep of the whole timeline, and loudness (-14 LUFS) are checked before the final render.
+5. **Checked before delivery.** Stills, transitions, a sweep of the whole timeline, and loudness (-14 LUFS) are checked before delivery, and a credited look is laid side by side with its original's frames until every signature item is on screen.
 
 ## Looks
 
@@ -29,7 +29,7 @@ An agent skill that researches a topic and turns it into a short video drawn ent
 | Transit map | diagram, orderly | original |
 | Blueprint | technical, precise | original |
 
-The five original looks share one scene API, so one script renders in any of them. Here is the same "steps" scene in each:
+New looks are added over time, and pull requests for new ones are welcome (see [Contributing](#contributing)). The original looks share one scene API, so one script renders in any of them. Here is the same "steps" scene in several:
 
 ![The same scene in five looks](docs/looks.jpg)
 
@@ -54,22 +54,22 @@ Versus, session, receipt (9:16), route map, and spec sheet, each made with this 
 
 Credited looks and formats adapt ideas their creators shared publicly after the Claude Opus 5.5 release; the links are in the tables above. This repository does not contain their prompts. The guides in `references/` are our own write-ups, and the skill wraps every look and format in the same research, approval, and QA steps. The looks and formats marked original were designed for this skill. The default look comes from [@nahiddotai](https://www.threads.com/@nahiddotai)'s ["Introducing Opus 5.5" launch video](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) and [the prompt they shared](https://www.threads.com/@nahiddotai/post/Ddm0OgZkuQx).
 
-Four highlight frames from each credited creator's original video:
+Each credited look and format is checked against its original on the original's own topic. In every pair below, the top row is four frames from the creator's video, and the bottom row is code-video on the same topic: one run by a fresh agent that had only this skill, no retouching.
 
-**Hand-drawn + 8-bit minis**, from [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)
-![Hand-drawn + 8-bit minis: frames from @nahiddotai's original video](docs/styles/handdrawn.jpg)
+**Hand-drawn + 8-bit minis**, from [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) (topic: the Claude Opus 5.5 launch)
+![Hand-drawn: @nahiddotai's original above, code-video's reproduction below](docs/repro/handdrawn.jpg)
 
-**Brand motion graphics**, from [@digitalstrategyai](https://www.threads.com/@digitalstrategyai/post/DdpAYbcgAj0)
-![Brand motion graphics: frames from @digitalstrategyai's original video](docs/styles/motion.jpg)
+**Brand motion graphics**, from [@digitalstrategyai](https://www.threads.com/@digitalstrategyai/post/DdpAYbcgAj0) (topic: the aifixly website)
+![Motion graphics: @digitalstrategyai's original above, code-video's reproduction below](docs/repro/motion.jpg)
 
-**Sand art**, from [@Michaelzsguo](https://x.com/Michaelzsguo/status/2102592355165782312)
-![Sand art: frames from @Michaelzsguo's original video](docs/styles/sand.jpg)
+**Sand art**, from [@Michaelzsguo](https://x.com/Michaelzsguo/status/2102592355165782312) (topic: 250 years of U.S. history)
+![Sand art: @Michaelzsguo's original above, code-video's reproduction below](docs/repro/sand.jpg)
 
-**Lyric music video**, from [@goodside](https://x.com/goodside/status/2102852546620744010)
-![Lyric music video: frames from @goodside's original video](docs/styles/lyric.jpg)
+**Lyric music video**, from [@goodside](https://x.com/goodside/status/2102852546620744010) (topic: the AI model Jev)
+![Lyric music video: @goodside's original above, code-video's reproduction below](docs/repro/lyric.jpg)
 
-**Beat-synced footage**, from [@twoclipping](https://x.com/twoclipping/status/2102554209166000267)
-![Beat-synced footage: frames from @twoclipping's original video](docs/styles/beat.jpg)
+**Beat-synced footage**, from [@twoclipping](https://x.com/twoclipping/status/2102554209166000267) (topic: the hooklab ad tool; our own clips stand in for the original footage)
+![Beat-synced footage: @twoclipping's original above, code-video's reproduction below](docs/repro/beat.jpg)
 
 ## Install
 
@@ -113,17 +113,26 @@ Ask your agent for a video. Name a look or a format if you already know it, or l
 | `SKILL.md` | Workflow: look, format, and settings → research → plan approval → build → QA → render |
 | `.claude-plugin/plugin.json` | Claude Code plugin manifest (the skill stays at the repo root) |
 | `template/kit.js` | Canvas kit: hand-drawn primitives, text and kinetic type, camera, transitions, sprites, minis, video clips |
+| `template/{handdrawn,motion,sand,lyric,beat}.js` | Style modules that draw each credited original's signature pieces |
 | `template/{arcade,terminal,thermal,transit,blueprint}.js` | Look modules with one shared scene API and a signature format scene each |
-| `template/sand.js` | Sand on a backlit light table, for the sand look |
 | `template/render.mjs` | Deterministic frame capture with parallel pages, piped to ffmpeg, with the audio track muxed in |
 | `template/minis-ai.js` | Ready-made mini characters for AI-related topics |
 | `references/` | Research protocol, storyboard patterns, looks, story formats, kit API, QA checklist |
-| `references/styles/` | Guides for the credited looks and formats |
-| `scripts/` | Font download, logo background cleanup, contact sheets, music and sound synthesis, beat detection |
+| `references/styles/` | Guides for the credited looks and formats, each with the original's signature checklist |
+| `scripts/` | Font download, logo background cleanup, contact sheets, reference sheets against the original, music and sound synthesis, beat detection |
 
 Fonts are downloaded at build time from Google Fonts and jsDelivr (SIL Open Font License) and are not bundled.
 
 The characters in `template/minis-ai.js` are unofficial fan art. Product names and trademarks belong to their owners.
+
+## Contributing
+
+Pull requests are welcome, especially new looks and formats.
+
+- **A new look or format**: add a style module in `template/` (pure functions of time, no state between frames), a guide in `references/styles/` with a Signature table that maps every trait to a helper, and a row in the tables of `SKILL.md` and both READMEs.
+- **Adapting someone's public work**: credit the creator with a link, write the guide in your own words (do not paste their prompt), and add four frames from the original to `docs/styles/` so everyone can compare.
+- **Check it**: render stills with `node render.mjs stills ...` and, for a credited style, build `scripts/reference_sheet.py <key> <video> <out.jpg>` to put your frames under the original's.
+- Bug reports and fixes to the engine, fonts, or guides are just as welcome. Open an issue first for large changes.
 
 ## License
 

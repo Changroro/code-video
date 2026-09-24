@@ -344,10 +344,35 @@ function pixelImage(img, cx, cy, w, h, px = 1) {
   ctx.save(); ctx.imageSmoothingEnabled = false; ctx.drawImage(PIXEL_BUF, cx - w / 2, cy - h / 2, w, h); ctx.restore();
 }
 
+// ---------------------------------------------------------------- UI props
+function rr(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+// a phone of height h centred at (x, y); draw(sx, sy, sw, sh) paints the screen, clipped to it
+function phone(x, y, h, draw, o = {}) {
+  const w = h * .49, r = h * .075, b = h * .018, sx = x - w / 2 + b, sy = y - h / 2 + b, sw = w - 2 * b, sh = h - 2 * b;
+  ctx.save();
+  if (o.shadow !== false) { ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = h * .06; ctx.shadowOffsetY = h * .02; }
+  ctx.fillStyle = o.body ?? '#0e0e10'; rr(x - w / 2, y - h / 2, w, h, r); ctx.fill();
+  ctx.restore();
+  ctx.save(); ctx.strokeStyle = o.rim ?? 'rgba(255,255,255,.2)'; ctx.lineWidth = 2; rr(x - w / 2, y - h / 2, w, h, r); ctx.stroke(); ctx.restore();
+  ctx.save(); rr(sx, sy, sw, sh, r - b); ctx.clip(); ctx.fillStyle = o.screen ?? '#000'; ctx.fillRect(sx, sy, sw, sh);
+  draw?.(sx, sy, sw, sh);
+  ctx.restore();
+  ctx.save(); ctx.fillStyle = '#000'; rr(x - w * .13, sy + h * .012, w * .26, h * .028, h * .014); ctx.fill(); ctx.restore();
+  return [sx, sy, sw, sh];
+}
+// pointer arrow with its tip at (x, y); press 0..1 squeezes it for a click
+function cursor(x, y, press = 0, color = '#ffffff', s = 1) {
+  const k = s * (1 - clamp(press) * .18);
+  ctx.save(); ctx.translate(x, y); ctx.scale(k, k);
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, 27); ctx.lineTo(7, 21); ctx.lineTo(12, 32); ctx.lineTo(17, 30); ctx.lineTo(12, 19); ctx.lineTo(21, 19); ctx.closePath();
+  ctx.fillStyle = color; ctx.strokeStyle = color === '#ffffff' ? '#111' : '#fff'; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.fill(); ctx.stroke();
+  ctx.restore();
+}
+
 // ---------------------------------------------------------------- timeline & boot
 let SCENES = [];
-async function renderFrame(f) {
-  T = f / FPS;
+async function drawAt(t) {
+  T = clamp(t, 0, DUR - 1e-6);
   const [a, , fn] = SCENES.find(([, b]) => T < b) ?? SCENES[SCENES.length - 1];
   for (let pass = 0; pass < 3; pass++) {
     PENDING = [];
@@ -358,6 +383,19 @@ async function renderFrame(f) {
   }
   throw new Error(`clip frames still missing at t=${T}`);
 }
+// window.VIDEO.blur = n averages n subframes spread over VIDEO.shutter (default .5) of a frame: real motion blur, n times the render cost
+const ACC = document.createElement('canvas');
+async function renderFrame(f) {
+  const n = VIDEO.blur | 0;
+  if (n < 2) return drawAt(f / FPS);
+  if (ACC.width !== W) { ACC.width = W; ACC.height = H; }
+  const g = ACC.getContext('2d'), sh = VIDEO.shutter ?? .5;
+  for (let i = 0; i < n; i++) {
+    await drawAt((f + (i / (n - 1) - .5) * sh) / FPS);
+    g.globalAlpha = 1 / (i + 1); g.drawImage(cv, 0, 0);
+  }
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.drawImage(ACC, 0, 0);
+}
 // load font files without @font-face in index.html: [[family, 'assets/fonts/file.ttf'], ...]
 async function useFonts(defs) {
   await Promise.all(defs.map(async ([family, url]) => { const f = new FontFace(family, `url(${url})`); await f.load(); document.fonts.add(f); }));
@@ -367,6 +405,8 @@ async function boot({ scenes, images = {}, fonts = [], clips = {}, noise = 6, se
   SCENES = scenes;
   for (const [k, c] of Object.entries(clips)) CLIPS[k] = { fps: 30, ...c };
   for (const [k, src] of Object.entries(images)) { const im = new Image(); im.src = src; await im.decode(); IMG[k] = im; }
+  // load every declared face up front: a bold face loaded on first use would draw that frame in a fallback font
+  await Promise.all([...document.fonts].map(f => f.load()));
   await Promise.all(fonts.map(([f, sample]) => document.fonts.load(`40px ${f}`, sample)));
   BG.paper = makeBG(THEME.paper, noise, '#7a6a4a', 'rgba(60,45,20,.18)');
   BG.dark = makeBG(THEME.dark, noise * .8, '#9aa3b5', 'rgba(0,0,0,.45)');

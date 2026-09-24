@@ -10,8 +10,8 @@ A format is the structure of the story, independent of the look. Pick it from wh
 | Receipt | an itemised list with a total and a stamp | prices, what a plan includes, a year in review, an event recap | thermal (`receipt`) | original |
 | Route map | lines for categories, stations for items, interchanges for what they share | business areas, product lineups, a history, a user journey | transit (`route`) | original |
 | Spec sheet | an assembly of parts, each with one dimension or spec | a product's components, an architecture, the anatomy of a service | blueprint (`spec`) | original |
-| Lyric music video | an original song whose lines each carry one fact | memorable explainers | any, see [styles/lyric.md](styles/lyric.md) | [@goodside](https://x.com/goodside/status/2102852546620744010) |
-| Beat-synced footage | cuts on a song's beat grid over real clips | the user's own footage and a licensed song | any, see [styles/beat.md](styles/beat.md) | [@twoclipping](https://x.com/twoclipping/status/2102554209166000267) |
+| Lyric music video | an original song whose lines each carry one fact and one diagram | memorable explainers | its own dark explainer look (`lyric.js`), see [styles/lyric.md](styles/lyric.md) | [@goodside](https://x.com/goodside/status/2102852546620744010) |
+| Beat-synced footage | real clips cut on a song's beat grid: wall, carousel, phone and panel | the user's own footage and a licensed or synthesized song | its own light/dark stage look (`beat.js`), see [styles/beat.md](styles/beat.md) | [@twoclipping](https://x.com/twoclipping/status/2102554209166000267) |
 
 ## Mapping research to a format
 - **Versus**: each round's two values come from the same source with the same settings. Say which source in the ending. Report ties as ties, and let the tally follow the data rather than a preferred winner. Words work as values ("none" vs "built in") when a criterion has no number.
@@ -21,4 +21,4 @@ A format is the structure of the story, independent of the look. Pick it from wh
 - **Spec sheet**: each part's dimension is one sourced spec (size, count, limit, rate). Keep to 4–6 parts.
 
 ## Timing
-Build every format from the scene API plus its native scene: open with `hook` or `title` (3.5–4 s), run the format body, and close with `ending` (4.5–5 s). Keep the whole video 20–30 s unless the user chose a different length.
+Build every format from the scene API plus its native scene: open with `hook` or `title` (3.5–4 s), run the format body, and close with `ending` (4.5–5 s). Keep the whole video 20–30 s unless the user chose a different length. The lyric and beat formats follow the structure tables in their guides instead.
