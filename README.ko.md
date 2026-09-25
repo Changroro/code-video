@@ -54,22 +54,22 @@
 
 원작자 표시가 있는 화풍과 형식은 원작자가 Claude Opus 5.5 공개 뒤 공개적으로 공유한 작업에서 착안했습니다. 링크는 위 표에 있습니다. 이 저장소에는 원작자들의 프롬프트 원문이 들어 있지 않습니다. `references/`의 가이드는 직접 새로 썼고, 모든 화풍과 형식에 같은 리서치, 승인, 검수 단계를 적용합니다. 자체 제작 표시가 있는 화풍과 형식은 이 스킬을 위해 새로 만들었습니다. 기본 화풍은 [@nahiddotai](https://www.threads.com/@nahiddotai)의 ["Introducing Opus 5.5" 런치 영상](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)과 [공유된 프롬프트](https://www.threads.com/@nahiddotai/post/Ddm0OgZkuQx)에서 착안했습니다.
 
-원작자가 있는 화풍과 형식은 원작과 같은 주제로 만들어 원본과 비교했습니다. 각 쌍의 위 줄은 원작자 영상의 4컷, 아래 줄은 같은 주제로 만든 code-video 결과입니다. 이 스킬만 가진 새 에이전트가 한 번에 만든 결과이며, 따로 손대지 않았습니다.
+원작자들의 원본 영상에서 뽑은 하이라이트 4컷입니다.
 
-**손그림과 8비트 미니미**, [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) 원본 (주제: Claude Opus 5.5 출시)
-![손그림: 위는 @nahiddotai 원본, 아래는 code-video 재현](docs/repro/handdrawn.jpg)
+**손그림과 8비트 미니미**, [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) 원본
+![손그림과 8비트 미니미: @nahiddotai 원본 영상 장면](docs/styles/handdrawn.jpg)
 
-**브랜드 모션그래픽**, [@digitalstrategyai](https://www.threads.com/@digitalstrategyai/post/DdpAYbcgAj0) 원본 (주제: aifixly 웹사이트)
-![모션그래픽: 위는 @digitalstrategyai 원본, 아래는 code-video 재현](docs/repro/motion.jpg)
+**브랜드 모션그래픽**, [@digitalstrategyai](https://www.threads.com/@digitalstrategyai/post/DdpAYbcgAj0) 원본
+![브랜드 모션그래픽: @digitalstrategyai 원본 영상 장면](docs/styles/motion.jpg)
 
-**모래 그림**, [@Michaelzsguo](https://x.com/Michaelzsguo/status/2102592355165782312) 원본 (주제: 미국 250년 역사)
-![모래 그림: 위는 @Michaelzsguo 원본, 아래는 code-video 재현](docs/repro/sand.jpg)
+**모래 그림**, [@Michaelzsguo](https://x.com/Michaelzsguo/status/2102592355165782312) 원본
+![모래 그림: @Michaelzsguo 원본 영상 장면](docs/styles/sand.jpg)
 
-**가사형 뮤직비디오**, [@goodside](https://x.com/goodside/status/2102852546620744010) 원본 (주제: AI 모델 Jev)
-![가사형 뮤직비디오: 위는 @goodside 원본, 아래는 code-video 재현](docs/repro/lyric.jpg)
+**가사형 뮤직비디오**, [@goodside](https://x.com/goodside/status/2102852546620744010) 원본
+![가사형 뮤직비디오: @goodside 원본 영상 장면](docs/styles/lyric.jpg)
 
-**비트 싱크 실사**, [@twoclipping](https://x.com/twoclipping/status/2102554209166000267) 원본 (주제: 광고 도구 hooklab, 원본 촬영본 대신 우리 클립 사용)
-![비트 싱크: 위는 @twoclipping 원본, 아래는 code-video 재현](docs/repro/beat.jpg)
+**비트 싱크 실사**, [@twoclipping](https://x.com/twoclipping/status/2102554209166000267) 원본
+![비트 싱크 실사: @twoclipping 원본 영상 장면](docs/styles/beat.jpg)
 
 ## 설치
 
