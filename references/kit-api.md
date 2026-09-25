@@ -1,6 +1,6 @@
 # kit.js API
 
-Global scripts. `index.html` loads rough.js → kit.js → (a mini set, one style module, or one look module) → main.js in that order. The look modules and their shared scene API are in [looks.md](looks.md). `window.VIDEO = { w, h, fps, dur, blur, shutter }` sets the canvas size, length, and optional motion blur.
+Global scripts. `index.html` loads rough.js → kit.js → (a mini set and one style module) → main.js in that order. The scene-API styles are in [scene-api.md](scene-api.md). `window.VIDEO = { w, h, fps, dur, blur, shutter }` sets the canvas size, length, and optional motion blur.
 
 ## Globals
 - `W, H, FPS, DUR`, `ctx` (2D context), `rc` (rough canvas), `T` (current second), `IMG` (images from boot), `BG`.
@@ -27,7 +27,7 @@ Global scripts. `index.html` loads rough.js → kit.js → (a mini set, one styl
   - `maxW`: shrink when the text is wider.
   - `jit`: hand-drawn wobble (false for numbers and HUD).
 - `measure(s, font, size, weight)`.
-- `useFonts([[family, 'assets/fonts/file.ttf'], ...])`: load font files at boot without `@font-face` (look modules pass `LOOK.fonts`).
+- `useFonts([[family, 'assets/fonts/file.ttf'], ...])`: load font files at boot without `@font-face` (scene-API modules pass `LOOK.fonts`).
 - `kwords(s, x, y, p, { font, weight, size, color, colors, align })`: words pop in one after another over p = 0..1. `colors` maps a word index to a colour.
 - `typeOn(s, x, y, p, o)`: typewriter with a blinking cursor. Same options as `text`.
 - `karaoke(syl, x, y, t, { font, weight, size, off, on, outline, align })`: one lyric line. `syl` is `[[text, start], ...]` and `t` uses the same clock as the start times; sung syllables turn `on`.
@@ -52,16 +52,16 @@ Global scripts. `index.html` loads rough.js → kit.js → (a mini set, one styl
 - `rr(x, y, w, h, r)`: begins a rounded-rectangle path (then `ctx.fill()` / `ctx.stroke()`).
 - `phone(x, y, h, draw, { body, rim, screen, shadow })`: a phone of height h centred at (x, y); `draw(sx, sy, sw, sh)` paints the screen, clipped. Returns the screen box.
 - `cursor(x, y, press, color, s)`: a pointer with its tip at (x, y); `press` 0..1 squeezes it for a click.
-- `window.VIDEO.blur = n`: each frame averages n subframes spread over `VIDEO.shutter` (default .5) of a frame, for real motion blur on whips and push cuts. It costs n times the render time; the beat format uses `{ fps: 60, blur: 3 }`.
+- `window.VIDEO.blur = n`: each frame averages n subframes spread over `VIDEO.shutter` (default .5) of a frame, for real motion blur on whips and push cuts. It costs n times the render time; the beat-synced style uses `{ fps: 60, blur: 3 }`.
 
-## Video clips (beat format)
+## Video clips (beat-synced style)
 - Put footage in `assets/clips/<id>/0001.jpg ...` (see `references/styles/beat.md`) and register it with `boot({ clips: { id: { n: frameCount, fps: 30 } } })`.
 - `clip(id, t, x, y, w, h, { alpha })`: draws the clip's frame at t seconds, cover-fit into the box. Frames load on demand; `renderFrame` redraws once they arrive, and a missing file stops the render.
 
-## Style modules (credited looks and formats)
+## Style modules
 Load one after `kit.js`. Each exposes a colour/font object you can set from the research before boot, and draws the original's signature pieces. The guides say which piece fulfils which signature item.
 
-### `handdrawn.js` (default look, [styles/handdrawn.md](styles/handdrawn.md))
+### `handdrawn.js` (default style, [styles/handdrawn.md](styles/handdrawn.md))
 `HD = { ink, paper, dark, light, accent, muted, tag, serif, script, pix, mono, sans }`.
 - `hdPaper()`, `hdDark()`: plain paper and the dark card background. `horizon(y, id, { x0, x1, p, tufts })`, `tuft(x, y, id)`, `cloud(x, y, s, id)`.
 - `worldTag('WORLD 1-2')`, `worldCard(world, title, p, { bg, accent })`.
@@ -102,6 +102,67 @@ Pass `setup: sandSetup` to `boot`. `SAND = { lit, edge, ink, serif, serifItalic,
 - `clipWall(ids, t, { cols, rows, scan, winners, tags, caption })`, `carousel(ids, t, spin, { R, cardH, n })`, `phoneClip(id, t, x, y, h, { caption })`, `campaignPanel(x, y, t, { toggles, clickAt, flipAt, result })`.
 - `scoreRows(rows, x, y, t, { label })`, `pushStat(value, label, t, { at })`, `ticker([[word, time], …], t, { sub })`.
 
+### `comic.js` (hero comic, [styles/comic.md](styles/comic.md))
+`CM = { paper, ink, red, yellow, blue, cyan, white, font }`.
+- `comicPaper(color)`, `halftone(x, y, w, h, color, { dot, gap, angle, fade, dir })`.
+- `pageGrid(rows, { x, y, w, h, gutter, heights })` → panel rects; `panel(rect or quad, draw, { fill, border, p })`.
+- `actionLines(cx, cy, p)`, `burstShape(x, y, r, o)`, `comicText(s, x, y, size, o)`, `sfx(word, x, y, p, o)`.
+- `caption(s, x, y, { p })`, `balloon(s, x, y, tailX, tailY, p, { thought })`.
+- `titleSlab(title, t, pages, { flipEnd, sub })`, `pageTurn(p, drawNext)`, `inked(path, fill, o)`.
+
+### `toon.js` (toon, [styles/toon.md](styles/toon.md))
+`TN = { ink, sky, sky2, grass, grass2, sun, pink, orange, purple, white, font, line }`.
+- `toonBG('sky' | 'burst' | 'dots', t, { a, b })`, `toonShape(path, fill, { shade, off })`.
+- `bounce(t, t0, { h, period, decay })` → `[sx, sy, dy]`, `pop(t, a)`.
+- `toonText(s, x, y, t, { size, a, fill })`, `toonSign(s, x, y, t, a)`, `buddy(x, y, s, t, { color, mood, look, sq })`.
+- `sparkles(x, y, r, t)`, `smear(x0, x1, y, h, p)`, `iris(p, cx, cy)`.
+
+### `scrapbook.js` (scrapbook, [styles/scrapbook.md](styles/scrapbook.md))
+`SB = { desk, note, ink, line, margin, tape, tape2, red, blue, yellow, hand, marker, type }`.
+- `sbDesk()`, `notePage(x, y, w, h, rot)`, `tape(x, y, w, rot, color)`.
+- `polaroid(img or painter, x, y, w, rot, p, caption)`, `tornLabel(s, x, y, rot, { p })`.
+- `sticker(draw, x, y, r, p)`, `stickerText(s, x, y, r, p, fill)`, `rubberStamp(s, x, y, p)`.
+- `doodleArrow(pts, p, id)`, `doodleStar(x, y, r, p, id)`, `doodleCircle(x, y, rx, ry, p, id)`, `doodleUnderline(x, y, w, p, id)`, `paperSlide(p, drawNext)`.
+
+### `collage.js` (torn-paper collage, [styles/collage.md](styles/collage.md))
+`CL = { paper, ink, rim, shadow, strip, sky, sea, sand, sun, stone, slate, moss, rust, serif, hand }`. Tints are `#rrggbb`.
+- `clSheet()`: the cold-press paper ground.
+- `scrap(key, pts, color, t, at, { dur, rot, from, out, paint })`: one torn scrap with corners `pts`, landing at `at` and peeling off at `out`; `paint(p)` draws on it in its own frame. `scrapRect(key, x, y, w, h, color, t, at, o)`, `scrapCircle(key, cx, cy, r, color, t, at, o)`.
+- `clStrips(key, x, y, w, h, colors, t, at, { n, stagger, order, out })`, `clMosaic(key, poly, colors, t, at, { size, spread, order, out })`, `clImage(key, img, x, y, w, h, t, at, { cols, spread, wash, out })`.
+- `clWords(s, x, y, t, at, { size, stagger, align, out })`, `clPeel(p, drawNext)`.
+
+### `uimorph.js` (UI morph, [styles/uimorph.md](styles/uimorph.md))
+`UM = { bg, ink, card, dim, line, font, mono, bpm, t0, k, c }`; `beat(n)` is the time of beat n.
+- `spring(t, [[t, v], ...], { k, c })`: a value (number, array, or `#rrggbb`) that springs to each new target; `springStep(tau, k, c)`; `stretch(t, [[t, x0, x1], ...])` for edges that lead and trail.
+- `umShape(t, [[t, { x, y, w, h, r, fill }], ...])` → live box; `umClip(box, draw)`; `umFit(w, h, fill, max)` → camera zoom.
+- `umSwap(t, t0, t1, draw, { enter, exit, blur })`: content that swaps with a short blur.
+- `umCursor(t, path, { clicks, holds, s })` → `{ x, y, down }`; `umDrag(t, t0, t1, valueAt, from, to)`.
+- `umPlayPause(x, y, s, p)`, `umCheck`, `umSpinner`, `umIcon('search' | 'prev' | 'next' | 'volume' | 'chevron', x, y, s)`, `umChart(values, x, y, w, h, p, { hover, label })`, `umBG()`.
+
+### `particles.js` (particles, [styles/particles.md](styles/particles.md))
+`PT = { bg, colors, n, size, font }`.
+- `ptBG()`, `ptShape(key, g => draw)` → target points, `ptText(s, x, y, size)`.
+- `ptField(t, { shape, form, from, morph, burst: [x, y, p], trail, glow })`, `ptGlow()`, `ptCaption(s, y, p)`.
+
+### `splitflap.js` (split-flap board, [styles/splitflap.md](styles/splitflap.md))
+`SF = { bg, tile, ink, amber, green, red, font, chars, flip, stagger }`.
+- `sfBoard()`, `sfRow(s, x, y, t, t0, { cols, w, h, from })` → width.
+- `sfDepartures(t, rows, { title, start, rowGap })` with rows `{ time, dest, gate, status, statusColor, blink }`.
+- `sfCues(t0, s)` → `audio.json` cues for the flap clatter.
+
+### `neon.js` (neon sign, [styles/neon.md](styles/neon.md))
+`NE = { wall, pink, cyan, yellow, green, orange, violet, font }`.
+- `neWall(t, { floor })`, `neOn(t, t0, seed)` → 0..1.
+- `neText(s, x, y, size, color, on)`, `neTube(pts, color, on, width)`, `neFrame(x, y, w, h, color, on)`, `neReflect(floor)`.
+- `neCues(t0, seed)` → buzz cues for `audio.json`.
+
+### `brand.js` (brand design language, [styles/brand.md](styles/brand.md))
+`brandUse('apple' | 'samsung' | 'ferrari' | 'nike' | 'spotify' | tokens)` fills `BR = { bg, bgAlt, dark, ink, inkDark, muted, mutedDark, accent, accentInk, ctaLight, ctaInk, ctaDark, ctaInkDark, surface, divider, line, gradient, font, fontDisplay, weight, tracking, upper, radius, cta }` from `BRANDS` or your own tokens (the comment at the top of `brand.js` explains each). `boot({ setup: () => useFonts(brandFonts(name)) })` declares the preset's free substitute faces plus Pretendard for Hangul.
+- `brStage('light' | 'alt' | 'dark' | 'accent')`, `brFade(p, color)`, `brWipe(p, color)`.
+- `brText(s, x, y, o)`, `brMeasure(s, size, o)`, `brHeadline(lines, x, y, t, { a, stagger, dark })`, `brEyebrow(s, x, y, t, a)`, `brSlam(s, x, y, t, a, { size })`.
+- `brCTA(label, x, y, t, a, { dark, press })`, `brRule(x, y, w, p)`, `brBento(cells, t, { a })`, `brSpecs(items, x, y, w, t, { a, dark })`.
+- `brProduct(draw, x, y, w, h, t, { reflect, sweep, dark })`, `brLaptop(x, y, w, draw)`, `brStreaks(t, o)`, `brArt(x, y, s, hue, t, { label })`, `brCarousel(cards, t, { step })`.
+
 ## Boot
 ```js
 boot({
@@ -122,5 +183,5 @@ boot({
 - If `audio.wav` exists in the work folder, the video gets an AAC track normalised to -14 LUFS.
 
 ## Sound
-- `uv run --with numpy --with scipy python <skill>/scripts/audio.py audio.json audio.wav`: synthesized music (pad, bass, arpeggio, drums by section energy) and effects (`whoosh`, `pop`, `click`, `chime`, `ping`, `thud`, `sand`, `wave`, `type`) at cue times. The schema is in the script's docstring. With `"song"` set, a licensed track replaces the synthesized music.
+- `uv run --with numpy --with scipy python <skill>/scripts/audio.py audio.json audio.wav`: synthesized music (pad, bass, arpeggio, drums by section energy) and effects (`whoosh`, `pop`, `click`, `chime`, `ping`, `thud`, `sand`, `wave`, `type`, `tear`, `paper`) at cue times. The schema is in the script's docstring. With `"song"` set, a licensed track replaces the synthesized music.
 - `uv run --with librosa python <skill>/scripts/beats.py song.mp3 [offset] > beats.json`: BPM, beats, downbeats, and the drop, for cutting on the beat.

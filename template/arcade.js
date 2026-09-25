@@ -1,5 +1,5 @@
 'use strict';
-// Look: 16-bit arcade. Load after kit.js. Every look module exposes the same scene API (see references/looks.md):
+// Look: 16-bit arcade. Load after kit.js. Every scene-API module exposes the same scene API (see references/scene-api.md):
 // LOOK.hook(t, d, lines) · title(t, d, name, tagline) · steps(t, d, items) · stat(t, d, value, label, note) · ending(t, d, {cmd, url, note})
 // t = seconds since the scene started, d = scene length. Set brand colours with Object.assign(LOOK.colors, {...}).
 const LOOK = (() => {
@@ -112,45 +112,6 @@ const LOOK = (() => {
       if (e.note) KO(e.note, W / 2, 740, { size: 33, color: C.soft, alpha: prog(t, 2.4, 2.8), maxW: 1700 });
       if (t > 2.8 && blink()) PX('THANK YOU FOR PLAYING', W / 2, 880, { size: 32, color: C.gold });
       crt();
-    },
-    // signature format: one round of a versus match.
-    // sides = [{name, color}, {name, color}]; r = {title, sub, a, b, win: 0 | 1 | 'draw'}; a/b are numbers or short strings
-    versus(t, d, sides, r, n = 1) {
-      city();
-      const num = typeof r.a === 'number' && typeof r.b === 'number', top = num ? Math.max(r.a, r.b) * 1.15 || 1 : 1;
-      const fill = E.out(prog(t, 1.4, 2.4));
-      const clash = prog(t, 1.0, 1.35), back = prog(t, 1.35, 1.8);
-      const [sx, sy] = shake(t > 1.35 && t < 1.7 ? 20 : 0, 7);
-      ctx.save(); ctx.translate(Math.round(sx / P) * P, Math.round(sy / P) * P);
-      sides.forEach((s, i) => {
-        const h = hero(), pal = { ...h.pal, O: s.color, S: mixHex(s.color, '#000000', .25) };
-        const x = i ? lerp(1400, 1060, E.in(clash)) + back * 120 : lerp(520, 860, E.in(clash)) - back * 120;
-        const won = r.win === i && t > 2.4, jump = won ? Math.abs(Math.sin((t - 2.4) * 7)) * 80 : 0;
-        const hit = t > 1.35 && t < 1.5 && r.win !== i;
-        drawPixels(h.rows, hit ? Object.fromEntries(Object.keys(pal).map(k => [k, '#fff'])) : pal, x, 990 - jump - (Math.floor(T * 6) % 2) * P, 20, { outline: C.ink, flip: !!i });
-      });
-      if (clash > 0 && back < 1) for (let k = 0; k < 8; k++) { const an = k * Math.PI / 4, rr = 20 + back * 90; R(960 + Math.cos(an) * rr, 850 + Math.sin(an) * rr, 14, 14, k % 2 ? C.gold : '#fff'); }
-      ctx.restore();
-      // bars: numbers fill in proportion, words fill completely
-      sides.forEach((s, i) => {
-        const v = num ? (i ? r.b : r.a) / top : 1, x = i ? W - 780 : 80, w = 700, fw = w * clamp(v) * fill;
-        R(x - 8, 52, w + 16, 64, C.ink); R(x, 60, w, 48, '#3a2a55'); R(i ? x + w - fw : x, 60, fw, 48, s.color);
-        any(s.name, i ? W - 80 : 80, 150, { size: 32, align: i ? 'right' : 'left', maxW: 600 });
-        const val = i ? r.b : r.a;
-        any(num ? String(Number.isInteger(r.a) && Number.isInteger(r.b) ? Math.round(val * fill) : Math.round(val * fill * 10) / 10) : String(val), i ? W - 780 : 780, 150, { size: 32, color: s.color, align: i ? 'left' : 'right', alpha: num ? 1 : fill, maxW: 400 });
-      });
-      R(W / 2 - 88, 40, 176, 104, C.ink); R(W / 2 - 80, 48, 160, 88, C.gold); PX(String(n), W / 2, 94, { size: 48, color: C.ink });
-      const b = clamp(Math.min(prog(t, 0, .2), 1 - prog(t, .8, .95)));
-      if (b > 0) { R(0, 330, W, 260 * b, 'rgba(16,8,31,.8)'); shadowed(PX, 'ROUND ' + n, W / 2, 420, { size: 96, color: C.gold, alpha: b }, 8); any(r.title, W / 2, 510, { size: 40, alpha: b, maxW: 1700 }); if (r.sub) KO(r.sub, W / 2, 570, { size: 33, color: C.soft, alpha: b, maxW: 1700 }); }
-      if (t > .95 && t < 1.35) shadowed(PX, 'FIGHT!', W / 2, 460, { size: 120, color: C.hot }, 10);
-      if (t > 2.4) {
-        R(0, 330, W, 280, 'rgba(16,8,31,.72)');
-        const label = r.win === 'draw' ? 'DRAW' : sides[r.win].name + ' WINS';
-        shadowed(any, label, W / 2, 400, { size: 80, color: r.win === 'draw' ? '#fff' : sides[r.win].color, maxW: 1700 }, 8);
-        any(`${r.a}  :  ${r.b}`, W / 2, 500, { size: 48, maxW: 1700 });
-        any(r.title, W / 2, 570, { size: 32, color: C.soft, maxW: 1700 });
-      }
-      crt(); out(t, d);
     },
   };
 })();

@@ -1,5 +1,5 @@
 'use strict';
-// Signature pieces of the beat-synced footage format, after @twoclipping's "hooklab" promo (docs/styles/beat.jpg):
+// Signature pieces of the beat-synced footage style, after @twoclipping's "hooklab" promo (docs/styles/beat.jpg):
 // high-end minimal, one accent, real clips on a dark stage, a wall -> carousel -> phone + panel run, stats on push cuts.
 // Load after kit.js. Clips come from boot({ clips }) and draw with clip(). Motion blur: window.VIDEO = { fps: 60, blur: 3 }.
 const BT = { light: '#f7f3ef', glow: '#ffd9c4', dark: '#0b0b0c', floor: '#ff6a1a', ink: '#151515', inkLight: '#f4f4f4', dim: '#8a8a8a', accent: '#ff5a1f', ok: '#22c55e', font: 'BSANS', mono: 'BMONO' };

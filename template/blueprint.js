@@ -1,5 +1,5 @@
 'use strict';
-// Look: cyanotype blueprint. Same scene API as every look module (see references/looks.md).
+// Look: cyanotype blueprint. Same scene API as every scene-API module (see references/scene-api.md).
 const LOOK = (() => {
   const C = { blue: '#17508c', line: 'rgba(240,248,255,.95)', faint: 'rgba(240,248,255,.35)', hi: '#ffd166', dwg: 'PROMO-01' };
   const T_ = (s, x, y, o = {}) => text(s, x, y, { font: 'MONO', size: 30, color: C.line, jit: false, ...o });
@@ -86,24 +86,6 @@ const LOOK = (() => {
         const p = prog(t, 1.6, 2.1);
         if (p > 0) { ctx.save(); ctx.translate(360, 820); ctx.rotate(-.12); ctx.globalAlpha = p; ctx.strokeStyle = C.hi; ctx.lineWidth = 5; ctx.beginPath(); ctx.roundRect(-230, -60, 460, 120, 16); ctx.stroke(); ctx.restore(); T_(e.note, 360, 820, { font: 'MONOB', size: 32, color: C.hi, alpha: p, maxW: 420, rot: -.12 }); }
       }
-    },
-    // signature format: an assembly drawing. parts = [{ name, spec, w }] joined left to right (w = relative width);
-    // each part gets a numbered balloon and a dimension line carrying its spec. title fills the title block.
-    spec(t, d, parts, title = 'ASSEMBLY', heading = '') {
-      sheet(t, title);
-      if (heading) T_(heading, 90, 110, { font: 'MONOB', size: 44, align: 'left', reveal: prog(t, .1, .8) });
-      const total = parts.reduce((a, p) => a + (p.w || 1), 0), span = W - 360, y = 470, h = 150;
-      let x = 180; const per = (d - 1.2) / parts.length;
-      parts.forEach((pt, i) => {
-        const w = span * (pt.w || 1) / total, p = prog(t, .3 + i * per, .3 + i * per + per * .8);
-        rect(x + 6, y - h / 2, w - 12, h, p, 3);
-        ln([[x + 20, y - h / 2 + 22], [x + w - 20, y - h / 2 + 22]], p, 1.2, C.faint);
-        T_(pt.name, x + w / 2, y + 6, { font: 'MONOB', size: 30, alpha: clamp(p * 2 - 1), maxW: w - 40 });
-        balloon(x + w / 2, y - h / 2 - 90, i + 1, p); ln([[x + w / 2, y - h / 2 - 60], [x + w / 2, y - h / 2]], p, 1.5, C.hi);
-        dimH(x + 6, x + w - 6, y + h / 2 + 90 + (i % 2) * 70, pt.spec, prog(t, .3 + i * per + per * .5, .3 + (i + 1) * per + .3));
-        x += w;
-      });
-      out(t, d);
     },
   };
 })();

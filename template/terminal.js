@@ -1,5 +1,5 @@
 'use strict';
-// Look: green phosphor CRT terminal. Same scene API as every look module (see references/looks.md).
+// Look: green phosphor CRT terminal. Same scene API as every scene-API module (see references/scene-api.md).
 const LOOK = (() => {
   const C = { bg: '#031208', text: '#46ff8a', dim: 'rgba(70,255,138,.45)', accent: '#ffc24a', prompt: 'user@studio' };
   let FS = 38, LH = 56;
@@ -104,25 +104,6 @@ const LOOK = (() => {
       if (e.note && t > end + .8) glow(e.note, X0, y + LH * 1.5, C.dim, 32);
       if (t > end + 1.4) { const x = prompt(y + LH * 3.5); glow(typed('exit', (t - end - 1.4) * 8), x, y + LH * 3.5); }
       crt(t);
-    },
-    // signature format: a terminal session. entries = [[kind, text], ...]
-    // kinds: cmd (typed at a prompt), out, ok (OK tag), wait (dim, with a spinner), note (amber), blank
-    session(t, d, entries) {
-      bg();
-      const keep = [FS, LH]; [FS, LH] = [46, 68];
-      const rows = Math.floor((H - Y0 - 120) / LH);
-      let at = .2; const timed = entries.map(([k, s]) => { const a = at; at += k === 'cmd' ? [...s].length / 26 + .35 : k === 'blank' ? .1 : .45; return [a, k, s]; });
-      const vis = timed.filter(([a]) => t >= a), start = Math.max(0, vis.length - rows);
-      vis.slice(start).forEach(([a, k, s], i) => {
-        const y = Y0 + i * LH;
-        if (k === 'cmd') { const x = prompt(y), shown = typed(s, (t - a) * 26 / Math.max(1, [...s].length)); glow(shown, x, y); if (i === vis.length - 1 - start) cursor(x + mw(shown), y); }
-        else if (k === 'ok') { glow('OK', X0, y, C.accent, FS, 'MONOB'); glow(s, X0 + 80, y); }
-        else if (k === 'wait') { const done = vis.length - 1 - start > i; glow(done ? '·' : '|/-\\'[Math.floor(T * 12) % 4], X0, y, C.dim); glow(s, X0 + 80, y, C.dim); }
-        else if (k === 'note') glow(s, X0, y, C.accent, FS, 'MONOB');
-        else if (k === 'out') glow(s, X0, y);
-      });
-      [FS, LH] = keep;
-      crt(t); out(t, d);
     },
   };
 })();

@@ -70,6 +70,12 @@ def noise(n):
     return rng.standard_normal(n)
 
 
+def tear():
+    n = int(.45 * SR)
+    crackle = np.convolve((rng.random(n) < .02) * rng.random(n), np.hanning(64), "same")
+    return filt(noise(n), "bandpass", [700, 7000]) * (crackle * 3 + .15) * np.sin(np.linspace(0, np.pi, n)) ** .5 * .45
+
+
 SFX = {
     "whoosh": lambda: filt(noise(int(.6 * SR)), "bandpass", [400, 4000]) * np.sin(np.linspace(0, np.pi, int(.6 * SR))) ** 2 * .5,
     "pop": lambda: tone(hz(84) * np.exp(-np.arange(int(.12 * SR)) / SR * 18), int(.12 * SR), (1,)) * env(int(.12 * SR), .002, .08),
@@ -79,6 +85,8 @@ SFX = {
     "thud": lambda: tone(55 * np.exp(-np.arange(int(.35 * SR)) / SR * 6), int(.35 * SR), (1, .3)) * env(int(.35 * SR), .002, .25),
     "sand": lambda: filt(noise(int(1.5 * SR)), "lowpass", 1800) * np.sin(np.linspace(0, np.pi, int(1.5 * SR))) * .25,
     "wave": lambda: filt(noise(int(3 * SR)), "lowpass", 900) * np.sin(np.linspace(0, np.pi, int(3 * SR))) ** 2 * .3,
+    "tear": tear,
+    "paper": lambda: filt(noise(int(.08 * SR)), "bandpass", [300, 3000]) * env(int(.08 * SR), .002, .05) * .4,
     "type": lambda: filt(noise(int(.02 * SR)), "bandpass", [1500, 6000]) * env(int(.02 * SR), .001, .006) * .5,
 }
 

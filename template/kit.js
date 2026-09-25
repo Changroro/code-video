@@ -396,9 +396,9 @@ async function renderFrame(f) {
   }
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.drawImage(ACC, 0, 0);
 }
-// load font files without @font-face in index.html: [[family, 'assets/fonts/file.ttf'], ...]
+// load font files without @font-face in index.html: [[family, 'assets/fonts/file.ttf', { unicodeRange, weight }], ...]
 async function useFonts(defs) {
-  await Promise.all(defs.map(async ([family, url]) => { const f = new FontFace(family, `url(${url})`); await f.load(); document.fonts.add(f); }));
+  await Promise.all(defs.map(async ([family, url, desc]) => { const f = new FontFace(family, `url(${url})`, desc); await f.load(); document.fonts.add(f); }));
 }
 // fonts: [[family, sampleText]]; images: {key: path}; clips: {id: {n: frameCount, fps}}
 async function boot({ scenes, images = {}, fonts = [], clips = {}, noise = 6, setup = null }) {

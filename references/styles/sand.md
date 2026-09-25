@@ -1,4 +1,4 @@
-# Look: sand art chronicle
+# Style: sand art chronicle
 
 Scenes poured in dark sand on a glowing light table, lit by sunbursts and night skies, that break into grains and blow away between eras. Music and sound effects. Suits stories told through time.
 

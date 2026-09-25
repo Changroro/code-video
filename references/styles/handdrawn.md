@@ -1,4 +1,4 @@
-# Look: hand-drawn + 8-bit minis (default)
+# Style: hand-drawn + 8-bit minis (default)
 
 Warm empty paper, a thin ink horizon, and an 8-bit mascot that acts out the story, cut against dark title cards and arcade screens.
 
@@ -10,7 +10,7 @@ Open `<skill>/docs/styles/handdrawn.jpg` (four frames from the original) before 
 ## Signature (every item must be on screen)
 | # | Item | How |
 |---|---|---|
-| 1 | Plain warm off-white paper with no grid; one thin ink horizon with grass tufts; outline clouds | `hdPaper()`, `horizon(y)`, `cloud(x, y, s, id)`. Never `grid()` in this look |
+| 1 | Plain warm off-white paper with no grid; one thin ink horizon with grass tufts; outline clouds | `hdPaper()`, `horizon(y)`, `cloud(x, y, s, id)`. Never `grid()` in this style |
 | 2 | The logo mascot as an 8-bit sprite that acts: sleeps (`zzz`), powers up (`burst`), pushes, smashes, stands on top of the winning bar | `drawMini` / `drawPixels` on the horizon |
 | 3 | A dark title card: small serif "Introducing", the name typing in a large serif, the accent part (version, product word) in the brand colour with a hand underline, a script subline | `introCard(t, { name, accent, sub })` |
 | 4 | Level structure: a small mono `WORLD 1-1` tag in the top-left of each beat and one pixel-font "WORLD 2" interstitial card | `worldTag('WORLD 1-2')`, `worldCard('WORLD 2', 'TITLE', p)` |
@@ -35,7 +35,7 @@ Open `<skill>/docs/styles/handdrawn.jpg` (four frames from the original) before 
 | 27–30 | Ending card, mascot on the horizon |
 
 ## Extras (optional, not from the original)
-Topic minis with name tags, map + counter, fast card cuts, and the other patterns in [storyboard.md](../storyboard.md) fit this look, but only after every signature item is in. Keep paper plain (no grid) even then.
+Topic minis with name tags, map + counter, fast card cuts, fit this style, but only after every signature item is in. Keep paper plain (no grid) even then.
 
 ## Sound
 None by default, like the original. If the user wants sound, a quiet `audio.py` bed at energy .3–.5 with `pop` on count-ups and `thud` on the HI-SCORE.
