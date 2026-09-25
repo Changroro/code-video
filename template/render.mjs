@@ -40,7 +40,7 @@ if (mode === 'stills') {
 } else {
   const out = rest[0] ?? 'video.mp4';
   const audio = fs.existsSync(path.join(root, 'audio.wav'));
-  const silent = audio ? `.silent-${out}` : out;
+  const silent = audio ? path.join(path.dirname(out), `.silent-${path.basename(out)}`) : out;   // keep the temp file beside the output, whatever folder it is in
   const png = process.env.CAPTURE === 'png';
   const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', png ? 'png' : 'mjpeg', '-i', '-',
     '-c:v', 'libx264', '-preset', 'slow', '-crf', process.env.CRF ?? '20', '-tune', 'animation', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', silent],

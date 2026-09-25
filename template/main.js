@@ -1,6 +1,6 @@
 'use strict';
 // Scene skeleton. Every scene gets local time t (seconds since the scene started).
-// Replace the scenes and keep the boot() contract. Patterns: references/storyboard.md.
+// Replace the scenes and keep the boot() contract.
 Object.assign(THEME, { ink: '#2f2f2f', paper: '#f5f3ee', dark: '#191919', light: '#f3f3ef' });
 
 function sHook(t) {

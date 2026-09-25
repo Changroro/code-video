@@ -1,4 +1,4 @@
-# Format: beat-synced footage promo
+# Style: beat-synced footage
 
 A high-end, minimal promo cut to a song: a hook that lands word by word on a light stage, the product UI, then real clips on a dark stage as a scanned wall, a 3D carousel, and a phone next to a campaign panel, with stats on push cuts and every cut on a beat.
 
@@ -7,10 +7,8 @@ Credit: adapted from the beat-synced promo template shared by [@twoclipping](htt
 ## Reference
 Open `<skill>/docs/styles/beat.jpg` (four frames from the original) before planning, and compare your stills with it during QA. The original is a 20 s promo for hooklab, an ad tool ("ads that make themselves"), at 60 fps with motion blur: "your next ad is one ■ away" → drop a product link → a wall of UGC clips being analysed → ranked hooks → a carousel of generated ads → a phone and a "launch campaign" panel → 3.5x / 4.2x / 24 → "hooks, ads, launched" → logo.
 
-This format has its own look (below). Use another look only when the user asks for one.
-
 ## When to use
-Only when the user has real footage: their own clips, product screen recordings, or event video. Without it, suggest another format. Stock footage makes the result generic and says nothing true about the subject.
+Only when the user has real footage: their own clips, product screen recordings, or event video. Without it, suggest another style. Stock footage makes the result generic and says nothing true about the subject.
 
 ## Inputs to ask for
 - 8 to 20 clips the user owns (vertical works best), plus 3 to 5 product or UI moments to show

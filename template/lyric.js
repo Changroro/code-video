@@ -1,5 +1,5 @@
 'use strict';
-// Signature pieces of the lyric music video format, after @goodside's "Jev · System One" video (docs/styles/lyric.jpg):
+// Signature pieces of the lyric music video style, after @goodside's "Jev · System One" video (docs/styles/lyric.jpg):
 // a dark technical explainer. Section label top left, title top right, a progress hairline, one diagram per lyric line,
 // the sung line at the bottom. Load after kit.js. Fonts: LY.sans and LY.mono, declared in index.html.
 const LY = { bg: '#0b0f1e', grid: 'rgba(120,150,230,.055)', ink: '#e9edf6', dim: '#5e6886', faint: '#262d4a', card: '#121832',

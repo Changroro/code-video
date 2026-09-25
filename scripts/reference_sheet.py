@@ -2,7 +2,7 @@
 
     uv run --with pillow python reference_sheet.py <key> <video.mp4> <out.jpg>
 
-<key> is the file name in docs/styles/ (handdrawn, motion, sand, lyric, beat).
+<key> is the file name in docs/styles/ (handdrawn, motion, sand, lyric, beat, uimorph).
 """
 import pathlib
 import subprocess

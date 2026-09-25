@@ -1,6 +1,6 @@
 'use strict';
 // Look: thermal receipt printer. Each scene prints a fresh slip that rises out of a printer and is torn off at the end.
-// Same scene API as every look module (see references/looks.md). Works in 16:9 and 9:16.
+// Same scene API as every scene-API module (see references/scene-api.md). Works in 16:9 and 9:16.
 const LOOK = (() => {
   const C = { table: '#2e5b5f', table2: '#3c7277', paper: '#f6f3ea', ink: '#2c3038', stamp: '#d23a3a', shop: 'PROMO PRINT' };
   // landscape frames get a bigger slip so the paper fills the screen
@@ -58,17 +58,20 @@ const LOOK = (() => {
   }
   function stamp(s, p, y) {
     if (p <= 0) return;
-    const sc = 1.8 - .8 * E.out(clamp(p * 1.4)), w = Math.max(360, measure(s, 'STAMP', 58) + 90);
+    const sc = 1.8 - .8 * E.out(clamp(p * 1.4)), w = clamp(measure(s, 'STAMP', 58) + 90, 360, 620);
     // landscape: stamp beside the slip; portrait: over its lower part
     ctx.save(); ctx.translate(W > H ? W / 2 + PW() / 2 + 60 : W / 2, W > H ? y - 160 : y); ctx.rotate(-.12); ctx.scale(sc, sc); ctx.globalAlpha = clamp(p * 2) * .85;
     ctx.strokeStyle = C.stamp; ctx.lineWidth = 9; ctx.beginPath(); ctx.roundRect(-w / 2, -60, w, 120, 22); ctx.stroke();
-    text(s, 0, 4, { font: 'STAMP', size: 58, color: C.stamp, jit: false });
+    text(s, 0, 4, { font: 'STAMP', size: 58, color: C.stamp, jit: false, maxW: w - 70 });
     ctx.restore();
   }
   // wrap long commands onto several receipt lines at spaces
   const wrap = (s, n = 26) => { const out = []; let cur = ''; for (const w of s.split(' ')) { if ((cur + ' ' + w).trim().length > n && cur) { out.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); } if (cur) out.push(cur); return out; };
 
+  // fixed words printed by the look; set them in the on-screen language: Object.assign(LOOK.labels, { thanks: '감사합니다' })
+  const L = { thanks: 'THANK YOU' };
   return {
+    labels: L,
     colors: C,
     date: null, // set a date string for the header, e.g. '2026.09.24'
     fonts: [['MONO', 'assets/fonts/NanumGothicCoding-Regular.ttf'], ['MONOB', 'assets/fonts/NanumGothicCoding-Bold.ttf'], ['STAMP', 'assets/fonts/BlackHanSans-Regular.ttf']],
@@ -86,16 +89,11 @@ const LOOK = (() => {
       slip([['center', 'TOTAL'], ['dsep'], ['big', value], ['center', label], ...(note ? [['small', note]] : []), ['dsep']], t, d);
     },
     ending(t, d, e) {
-      const lines = [['center', '감사합니다'], ['sep']];
+      const lines = [['center', L.thanks], ['sep']];
       if (e.cmd) wrap(e.cmd).forEach(s => lines.push(['small', s]));
       if (e.url) lines.push(['sep'], ['small', e.url]);
       lines.push(['barcode']);
       slip(lines, t, d + 10, e.note);
-    },
-    // signature format: a whole receipt. lines = [[kind, left, right], ...] with the kinds listed on slip();
-    // pass keep = true to leave it on the table instead of tearing it off at the end.
-    receipt(t, d, lines, stampText, keep = false) {
-      slip(lines, t, keep ? d + 10 : d, stampText);
     },
   };
 })();

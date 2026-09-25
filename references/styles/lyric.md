@@ -1,4 +1,4 @@
-# Format: lyric music video
+# Style: lyric music video
 
 An educational music video that reads like a technical explainer set to a song: a dark grid, a section label in the corner, one diagram per lyric line, and the sung line at the bottom. The engine makes the instrumental; the lyrics are on screen, not sung.
 
@@ -6,8 +6,6 @@ Credit: adapted from the educational music video shared by [@goodside](https://x
 
 ## Reference
 Open `<skill>/docs/styles/lyric.jpg` (four frames from the original) before planning, and compare your stills with it during QA. The original is a 2 min 20 s song about Jev, TypeSafe AI's "System One" decision model: an intro title in a glowing ring, verses that explain how Jev differs from a chat model with node diagrams and JSON, a chorus built on "Jev, Jev, System One" that returns in a new colour each time, a pricing pre-chorus, a bridge on calibration, and an outro.
-
-This format has its own look (below). Use another look only when the user asks for one.
 
 ## Signature (every item must be on screen)
 | # | Item | How (`lyric.js`) |

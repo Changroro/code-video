@@ -1,4 +1,4 @@
-# Look: brand motion graphics
+# Style: brand motion graphics
 
 A clean explainer that looks like an official brand asset: one dark field, thin white hand-drawn line art, bold type with a single accent, scribbled emphasis, and a persuasion arc from pain to call to action. Silent.
 
