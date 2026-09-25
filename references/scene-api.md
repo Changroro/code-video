@@ -47,13 +47,13 @@ How each style draws them:
 | hook | INSERT COIN, lines drop in with a shake | boot line, lines typed | NOTICE slip | station sign board | NOTE lines with dashed underlines |
 | title | game title, hero sprite, PRESS START | `./intro` and a block-letter banner | slip with the name printed large | logo, name, a line drawn across | name with a dimension line carrying the tagline |
 | steps | STAGE SELECT map, hero hops node to node | `make` log with OK tags and a progress bar | ORDER slip with checkboxes | a line with numbered stations and a train | process boxes with numbered balloons |
-| stat | HIGH SCORE, digits roll then settle | `stats` and a block-letter value | TOTAL slip | value in a line-colour badge | huge value dimensioned by its label |
+| stat | HIGH SCORE, the value counts up under its label | `stats` and a block-letter value | TOTAL slip | value in a line-colour badge | huge value dimensioned by its label |
 | ending | GAME CLEAR, dialog box with the command | typed command, URL, `exit` | thank-you slip with a stamp | terminus sign and a ticket | release sheet with a stamp |
 
 ## Pitfalls
 - Arcade, terminal, transit, and blueprint are laid out for 16:9. Thermal works in 16:9 and 9:16. For other frames, check stills early and adjust positions.
 - Arcade text is crisp only at multiples of 8 px (Press Start 2P) and 11 px (Galmuri11). Korean falls back to Galmuri automatically.
-- The terminal banner font covers Latin letters, digits, and `- . / × +`. Other scripts fall back to large glowing text.
+- The terminal banner font covers Latin letters, digits, and `- . , / × + % $`. Other scripts fall back to large glowing text.
 - The thermal slip grows up from the printer, so long receipts run off the top. In 9:16, keep a receipt under about 18 lines.
 - Labels over busy backgrounds need a plate behind them (the arcade look already draws one for stage labels).
 - Do not declare globals named like the kit's (`BG`, `IMG`, `LOOK`, `T`) in `main.js`; the page stops with a redeclaration error.

@@ -93,11 +93,11 @@ const LOOK = (() => {
     stat(t, d, value, label, note) {
       space(t, 20);
       shadowed(PX, 'HIGH SCORE', W / 2, 220, { size: 64, color: C.hot }, 8);
-      const settle = prog(t, .3, 1.4);
-      const shown = [...value].map((ch, i) => (/[0-9]/.test(ch) && settle < 1 - i * .05 ? String(hash(Math.floor(T * 20), i) % 10) : ch)).join('');
+      const k = E.out(prog(t, .2, 1.1));
+      const shown = value.replace(/\d[\d,]*(\.\d+)?/g, m => { const s = (+m.replace(/,/g, '') * k).toFixed((m.split('.')[1] || '').length); return m.includes(',') ? s.replace(/\B(?=(\d{3})+(?!\d))/g, ',') : s; });
       shadowed(any, shown, W / 2, 500, { size: 176, color: C.gold, maxW: 1700 }, 12);
-      KO(label, W / 2, 700, { size: 44, alpha: prog(t, 1.2, 1.6), maxW: 1700 });
-      if (note) KO(note, W / 2, 780, { size: 33, color: C.soft, alpha: prog(t, 1.6, 2), maxW: 1700 });
+      KO(label, W / 2, 700, { size: 44, alpha: prog(t, .1, .4), maxW: 1700 });
+      if (note) KO(note, W / 2, 780, { size: 33, color: C.soft, alpha: prog(t, .3, .6), maxW: 1700 });
       crt(); out(t, d);
     },
     ending(t, d, e) {

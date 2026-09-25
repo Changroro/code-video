@@ -60,7 +60,7 @@ const LOOK = (() => {
     if (p <= 0) return;
     const sc = 1.8 - .8 * E.out(clamp(p * 1.4)), w = clamp(measure(s, 'STAMP', 58) + 90, 360, 620);
     // landscape: stamp beside the slip; portrait: over its lower part
-    ctx.save(); ctx.translate(W > H ? W / 2 + PW() / 2 + 60 : W / 2, W > H ? y - 160 : y); ctx.rotate(-.12); ctx.scale(sc, sc); ctx.globalAlpha = clamp(p * 2) * .85;
+    ctx.save(); ctx.translate(W > H ? W / 2 + PW() / 2 + 30 + w / 2 : W / 2, W > H ? y - 160 : y); ctx.rotate(-.12); ctx.scale(sc, sc); ctx.globalAlpha = clamp(p * 2) * .85;
     ctx.strokeStyle = C.stamp; ctx.lineWidth = 9; ctx.beginPath(); ctx.roundRect(-w / 2, -60, w, 120, 22); ctx.stroke();
     text(s, 0, 4, { font: 'STAMP', size: 58, color: C.stamp, jit: false, maxW: w - 70 });
     ctx.restore();

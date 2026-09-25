@@ -1,6 +1,6 @@
 {
   "name": "code-video",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Research a topic (company, service, website, product) and render a short promo video as an MP4, drawn entirely in code. Give it a design (hand-drawn with 8-bit minis, motion graphics, sand art, lyric music video, beat-synced footage, UI morph, hero comic, toon, scrapbook, torn-paper collage, particles, split-flap, neon, arcade, terminal, thermal receipt, transit map, blueprint, the design language of Apple, Samsung, Ferrari, Nike, or Spotify, any site's DESIGN.md, or any free style you describe), the topic, and the format; the story is written from the research, with code-generated music.",
   "author": {
     "name": "ChangRoro",

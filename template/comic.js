@@ -31,6 +31,7 @@ function panel(q, draw, { fill = CM.white, border = 9, p = 1 } = {}) {
   ctx.save(); ctx.translate(cx, cy); ctx.scale(k, k); ctx.translate(-cx, -cy);
   ctx.beginPath(); q.forEach(([a, b], i) => i ? ctx.lineTo(a, b) : ctx.moveTo(a, b)); ctx.closePath();
   ctx.save(); ctx.clip(); ctx.fillStyle = fill; ctx.fillRect(0, 0, W, H); draw?.(); ctx.restore();
+  ctx.beginPath(); q.forEach(([a, b], i) => i ? ctx.lineTo(a, b) : ctx.moveTo(a, b)); ctx.closePath();
   ctx.lineJoin = 'round'; ctx.lineWidth = border; ctx.strokeStyle = CM.ink; ctx.stroke();
   ctx.restore();
 }

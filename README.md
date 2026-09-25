@@ -2,9 +2,9 @@
 
 English | [한국어](README.ko.md)
 
-![One script, five styles: arcade, terminal, thermal receipt, transit map, blueprint](docs/hero.gif)
+![A hand-drawn launch video for Claude Opus 5.5, made with this skill](docs/hero.gif)
 
-*One script, five styles. Every frame above is drawn in code.* [Watch the 45-second intro](https://github.com/Changroro/code-video/releases/download/v1.2.0/CodeVideo_intro_en.mp4), made with this skill.
+*This skill started from [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)'s hand-drawn launch video for Claude Opus 5.5. Above is a video on the same topic made by a fresh agent with only this skill, every frame drawn in code.* [Watch the 30-second MP4](https://github.com/Changroro/code-video/releases/download/v1.3.1/CodeVideo_opus55.mp4).
 
 An agent skill that researches a topic and turns it into a short video drawn entirely in code. Give it a topic and a style (one of the presets below, any site's DESIGN.md, or a look described in your own words) and get an MP4. No video-generation model and no stock footage: the agent writes the scenes, renders them frame by frame, and hands you the file.
 
