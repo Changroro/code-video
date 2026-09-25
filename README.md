@@ -54,22 +54,22 @@ Versus, session, receipt (9:16), route map, and spec sheet, each made with this 
 
 Credited looks and formats adapt ideas their creators shared publicly after the Claude Opus 5.5 release; the links are in the tables above. This repository does not contain their prompts. The guides in `references/` are our own write-ups, and the skill wraps every look and format in the same research, approval, and QA steps. The looks and formats marked original were designed for this skill. The default look comes from [@nahiddotai](https://www.threads.com/@nahiddotai)'s ["Introducing Opus 5.5" launch video](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) and [the prompt they shared](https://www.threads.com/@nahiddotai/post/Ddm0OgZkuQx).
 
-Each credited look and format is checked against its original on the original's own topic. In every pair below, the top row is four frames from the creator's video, and the bottom row is code-video on the same topic: one run by a fresh agent that had only this skill, no retouching.
+Four highlight frames from each credited creator's original video:
 
-**Hand-drawn + 8-bit minis**, from [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) (topic: the Claude Opus 5.5 launch)
-![Hand-drawn: @nahiddotai's original above, code-video's reproduction below](docs/repro/handdrawn.jpg)
+**Hand-drawn + 8-bit minis**, from [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)
+![Hand-drawn + 8-bit minis: frames from @nahiddotai's original video](docs/styles/handdrawn.jpg)
 
-**Brand motion graphics**, from [@digitalstrategyai](https://www.threads.com/@digitalstrategyai/post/DdpAYbcgAj0) (topic: the aifixly website)
-![Motion graphics: @digitalstrategyai's original above, code-video's reproduction below](docs/repro/motion.jpg)
+**Brand motion graphics**, from [@digitalstrategyai](https://www.threads.com/@digitalstrategyai/post/DdpAYbcgAj0)
+![Brand motion graphics: frames from @digitalstrategyai's original video](docs/styles/motion.jpg)
 
-**Sand art**, from [@Michaelzsguo](https://x.com/Michaelzsguo/status/2102592355165782312) (topic: 250 years of U.S. history)
-![Sand art: @Michaelzsguo's original above, code-video's reproduction below](docs/repro/sand.jpg)
+**Sand art**, from [@Michaelzsguo](https://x.com/Michaelzsguo/status/2102592355165782312)
+![Sand art: frames from @Michaelzsguo's original video](docs/styles/sand.jpg)
 
-**Lyric music video**, from [@goodside](https://x.com/goodside/status/2102852546620744010) (topic: the AI model Jev)
-![Lyric music video: @goodside's original above, code-video's reproduction below](docs/repro/lyric.jpg)
+**Lyric music video**, from [@goodside](https://x.com/goodside/status/2102852546620744010)
+![Lyric music video: frames from @goodside's original video](docs/styles/lyric.jpg)
 
-**Beat-synced footage**, from [@twoclipping](https://x.com/twoclipping/status/2102554209166000267) (topic: the hooklab ad tool; our own clips stand in for the original footage)
-![Beat-synced footage: @twoclipping's original above, code-video's reproduction below](docs/repro/beat.jpg)
+**Beat-synced footage**, from [@twoclipping](https://x.com/twoclipping/status/2102554209166000267)
+![Beat-synced footage: frames from @twoclipping's original video](docs/styles/beat.jpg)
 
 ## Install
 
