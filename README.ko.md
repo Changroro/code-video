@@ -2,9 +2,9 @@
 
 [English](README.md) | 한국어
 
-![이 스킬로 만든 손그림 화풍의 Claude Opus 5.5 출시 영상](docs/hero.gif)
+![code-video가 만들어진 과정을 이 스킬로 만든 영상](docs/hero.ko.gif)
 
-*이 스킬은 [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)의 손그림 Claude Opus 5.5 출시 영상에서 시작했습니다. 위 영상은 이 스킬만 가진 새 에이전트가 같은 주제로 만든 것이고, 모든 프레임을 코드로 그렸습니다.* [30초 MP4 보기](https://github.com/Changroro/code-video/releases/download/v1.3.1/CodeVideo_opus55.mp4).
+*Claude Opus 5.5가 나오고 피드가 코드로 그린 영상으로 가득 차서, 그걸 스킬로 벼려 냈습니다. 이 소개 영상도 이 스킬로 만들었고, 모든 프레임을 코드로 그렸습니다.* [45초 MP4 보기](https://github.com/Changroro/code-video/releases/download/v1.3.1/CodeVideo_intro_ko.mp4).
 
 주제를 조사해 짧은 영상을 전부 코드로 그려 주는 에이전트 스킬입니다. 주제와 화풍(아래 프리셋, 아무 사이트의 DESIGN.md, 또는 말로 설명한 어떤 느낌이든)을 주면 MP4가 나옵니다. 영상 생성 모델도, 스톡 영상도 쓰지 않습니다. 에이전트가 장면을 코드로 짜고, 한 프레임씩 렌더해서 MP4로 건네줍니다.
 
