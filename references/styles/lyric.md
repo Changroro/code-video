@@ -7,7 +7,7 @@ Credit: adapted from the educational music video shared by [@goodside](https://x
 ## Reference
 Open `<skill>/docs/styles/lyric.jpg` (four frames from the original) before planning, and compare your stills with it during QA. The original is a 2 min 20 s song about Jev, TypeSafe AI's "System One" decision model: an intro title in a glowing ring, verses that explain how Jev differs from a chat model with node diagrams and JSON, a chorus built on "Jev, Jev, System One" that returns in a new colour each time, a pricing pre-chorus, a bridge on calibration, and an outro.
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How (`lyric.js`) |
 |---|---|---|
 | 1 | A dark navy field with a faint grid and vignette in every scene | `lyFrame({...})` |

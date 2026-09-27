@@ -30,7 +30,6 @@ Show a short plan (the story in a few lines, the palette, the facts) and get app
 
 ## Rules
 - Every number on screen has a source. No invented stats or UI readouts.
-- Brand styles borrow only the design language: no logos, slogans, or proprietary fonts, and say the video is not affiliated.
 - Keep the credit for a credited style.
 - Wait for your own work: run renders in the foreground with a long Bash timeout (up to 600000 ms). In a non-interactive run nothing wakes you up again.
 
@@ -42,7 +41,7 @@ bash <skill>/scripts/fetch_fonts.sh assets/fonts
 ```
 Set size, fps, and length in `window.VIDEO` in `index.html`, declare the fonts (for Korean, pair each Latin face with a Hangul face through `unicode-range`), load the style's module, and write the scenes in `main.js`. For both languages, branch on one URL parameter and render each with `QUERY=lang=ko node render.mjs video …`. For sound, write `audio.json` and run `uv run --with numpy --with scipy python <skill>/scripts/audio.py audio.json audio.wav`; the render muxes it.
 
-Look at a few stills (`node render.mjs stills <times>`, then `uv run --with pillow python <skill>/scripts/contact_sheet.py stills <dir>`), fix what looks wrong, and render with `CRF=25 node render.mjs video <Name>.mp4`. Keep it under about 10 MB per 30 s; if it is larger, render again with `CRF=27`.
+Look at a few stills (`node render.mjs stills <times>`, where a range such as `12-14` gives six frames across a moving shot, then `uv run --with pillow python <skill>/scripts/contact_sheet.py stills <dir>`), fix what looks wrong, and render with `CRF=25 node render.mjs video <Name>.mp4`. Keep it under about 10 MB per 30 s; if it is larger, render again with `CRF=27`.
 
 ## Deliver
 Send the MP4 and list the facts used with their sources.

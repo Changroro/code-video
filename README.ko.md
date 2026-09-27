@@ -131,6 +131,8 @@ git clone https://github.com/Changroro/code-video ~/.codex/skills/code-video    
 - "요금제 두 개를 아케이드 화풍으로 비교해줘"
 - "우리 앱 출시 영상을 코믹스 화풍으로 만들어줘"
 
+에이전트의 추론 강도를 높이면 움직임이 더 섬세해지는 편입니다.
+
 ## 구성
 
 | 경로 | 역할 |

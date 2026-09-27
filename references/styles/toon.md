@@ -2,7 +2,7 @@
 
 A bright modern cartoon: flat saturated colour with one cel-shade tone, thick even ink outlines, squash-and-stretch bounces, letters that pop, sparkles, and iris transitions. Original to this skill.
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How (`toon.js`) |
 |---|---|---|
 | 1 | Flat colour fields: a sky with rolling hills, radiating stripes, or polka dots | `toonBG('sky' | 'burst' | 'dots', t, { a, b })` |

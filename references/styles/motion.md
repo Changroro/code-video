@@ -7,7 +7,7 @@ Credit: adapted from the website-to-explainer approach shared by [@digitalstrate
 ## Reference
 Open `<skill>/docs/styles/motion.jpg` (four frames from the original) before planning, and compare your stills with it during QA. The original is a 30 s "Introducing aifixly" explainer made from the aifixly.com website: pain (searching, manuals, waiting) → the product (a phone that sees what you see) → proof (answers in seconds, 14 experts) → price pain → CTA.
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How (`motion.js`) |
 |---|---|---|
 | 1 | One dark field for the whole video (no light scenes), one accent colour, pain words in red | `moBG()`, `MO.accent` = the brand colour, `MO.pain` |
@@ -25,18 +25,5 @@ Open `<skill>/docs/styles/motion.jpg` (four frames from the original) before pla
 - **Lines**: white, 2.5–3 px, `roughness` .6–.8: a steady hand, not a sketch.
 - **Motion**: every element draws or pops on; hold each finished frame at least .6 s. Beats are 1–2.5 s. Transitions are hard cuts or one element turning into the next (the phone becomes the chart, a word becomes the logo). No flashes, no shake.
 
-## Structure (30 s; scale for other lengths)
-| Time | Beat | Principle |
-|---|---|---|
-| 0–3 | Hook: an everyday object + "How do you … this?" | curiosity gap |
-| 3–8 | Pain: search bar, manual, clock; the gauge climbs; red words | agitation |
-| 8–10 | "What if …?" (an eye icon) → the wordmark types in with the one-line promise | reveal |
-| 10–15 | The product working: phone + question + answer + three feature pills | one core message |
-| 15–19 | The stat: line bar chart, then one huge accent number with a scribbled oval | Von Restorff |
-| 19–23 | Proof: the count with the tag cloud (real categories, clients, or ratings only) | social proof |
-| 23–26 | Loss: "Still paying for …?" with wallet and cash icons, then the saving | loss aversion (only if the site says it) |
-| 26–30 | Three icons + three words ("Point. Ask. Get answers."), then wordmark and CTA | peak–end, single CTA |
-
 ## Rules
 - Persuasion framing (questions, loss framing) is copy, not a statistic. Never invent urgency, scarcity, user counts, times, or ratings; every number comes from the site or a source. A bar chart without sourced values shows no numbers, only relative bars labelled as an illustration.
-- In the plan, name the principle each beat serves.

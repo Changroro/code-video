@@ -131,6 +131,8 @@ Ask your agent for a video. Name a style if you already know it, or let it sugge
 - "Compare our two plans in the arcade style"
 - "Make a comic-style launch video for our app"
 
+A higher reasoning effort for the agent tends to give more detailed motion.
+
 ## Contents
 
 | Path | Purpose |

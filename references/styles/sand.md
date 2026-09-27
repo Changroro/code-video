@@ -7,7 +7,7 @@ Credit: adapted from the sand animation shared by [@Michaelzsguo](https://x.com/
 ## Reference
 Open `<skill>/docs/styles/sand.jpg` (four frames from the original) before planning, and compare your stills with it during QA. The original is a 2-minute story of 250 years of U.S. history: a ring of stars around "250", then one era per scene (1776 bell and declaration, 1787 "We the People", westward wagons at sunrise, 1863, the 1869 railroad, 1903 first flight, 1945, 1963, the 1969 moon landing at night), ending on fireworks over the Capitol.
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How (`sand.js`) |
 |---|---|---|
 | 1 | A parchment light table with visible grain everywhere, dark brown sand with grainy soft edges | `sandSetup()`; keep `SAND.grainSize` 2 and `edgeGrain` ≥ .5 |
@@ -22,11 +22,6 @@ Open `<skill>/docs/styles/sand.jpg` (four frames from the original) before plann
 - **Palette**: table `SAND.lit` `#f3dcae` → `SAND.edge` `#9b7648`, sand `SAND.ink` `#2e2014`. Sand is one colour; the brand shows only in the final logo card and, at most, one accent.
 - **Fonts**: `SERIF` Cormorant (medium) for years and titles, `SERIF_I` Cormorant Italic for captions. Korean: Nanum Myeongjo for both. Captions stay small (22–30 px) and elegant; the picture carries the scene.
 - **Scene length**: 8–12 s per era in a 2-minute film, 5–6 s in a 45 s one. Pour in over .6–1 s, move something inside the scene, then scatter or sweep for .6–.9 s, overlapping the next pour.
-
-## Structure
-- Title: the emblem (a ring of stars, the logo's silhouette) around one number or the name, with the dates.
-- One scene per era in order: year and caption in the corner, one visual metaphor as silhouettes, one moving element, a lighting choice that differs from the previous scene.
-- Ending: the emblem again, then the name and URL on a clean card with the real logo.
 
 ## Sound
 Music and effects from `scripts/audio.py`: a warm pluck or pad bed, energy rising through the middle eras and settling at the end. Cue `sand` on each pour and `whoosh` on each scatter, plus topic sounds where they fit (`wave`, `ping`, `chime` on the logo).
@@ -45,4 +40,3 @@ function sEra(t) {
 
 ## Pitfalls
 - `sandFrame` works per pixel, about 20–40 ms per 1080p frame. Keep `WORKERS` at 4.
-- Company sites sometimes credit work done before the founding date. Ask the user how to present it.

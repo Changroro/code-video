@@ -1,5 +1,5 @@
 // node render.mjs video [out.mp4]      -> full MP4 (H.264 at window.VIDEO size and fps; muxes audio.wav when present)
-// node render.mjs stills 1.2 3.4 ...   -> stills/t<sec>.png for review
+// node render.mjs stills 1.2 30-31.5   -> stills/t<sec>.png for review; a range gives six evenly spaced frames
 // env: CRF (20), WORKERS (4), QUERY (appended to the page URL, e.g. QUERY=lang=ko), CAPTURE=png (lossless frames, ~2x slower)
 import { chromium } from 'playwright-core';
 import http from 'node:http';
@@ -36,7 +36,9 @@ const run = (cmd, args) => new Promise((ok, fail) => spawn(cmd, args, { cwd: roo
 
 if (mode === 'stills') {
   fs.mkdirSync(path.join(root, 'stills'), { recursive: true });
-  for (const s of rest) fs.writeFileSync(path.join(root, 'stills', `t${s}.png`), await grab(page, Math.round(+s * fps)));
+  // six per range because contact_sheet.py tiles six stills per sheet
+  const times = rest.flatMap(s => { const [a, b] = s.split('-').map(Number); return b === undefined ? [a] : Array.from({ length: 6 }, (_, i) => +(a + (b - a) * i / 5).toFixed(2)); });
+  for (const s of times) fs.writeFileSync(path.join(root, 'stills', `t${s}.png`), await grab(page, Math.round(s * fps)));
 } else {
   const out = rest[0] ?? 'video.mp4';
   const audio = fs.existsSync(path.join(root, 'audio.wav'));

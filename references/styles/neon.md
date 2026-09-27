@@ -2,7 +2,7 @@
 
 Glass tubes on a dark brick wall that buzz and flicker on, glow onto the wall, and reflect on a wet floor. Original to this skill.
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How (`neon.js`) |
 |---|---|---|
 | 1 | A dark brick wall with a wet floor | `neWall(t, { floor })` |

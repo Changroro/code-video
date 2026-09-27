@@ -2,7 +2,7 @@
 
 A launch film that feels like a famous brand's site and keynotes, applied to the user's own topic: the brand's palette, type, spacing, buttons, and staging, drawn from design tokens. Five presets ship ready; any other site works through its DESIGN.md.
 
-Tokens come from public design references: the brands' DESIGN.md files in [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) (MIT), [Refero](https://refero.design) styles, and each site's live CSS. This skill is not affiliated with these companies. Never use their logos, product names, slogans, or proprietary fonts; the presets use free substitutes. The brand name only says whose design language the video borrows.
+Tokens come from public design references: the brands' DESIGN.md files in [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) (MIT), [Refero](https://refero.design) styles, and each site's live CSS. This skill is not affiliated with these companies; the presets use free font substitutes.
 
 ## Pick the source of the tokens
 1. **A preset** (`brandUse('apple')` and `useFonts(brandFonts('apple'))`): apple, samsung, ferrari, nike, spotify. See the table below.
@@ -25,8 +25,6 @@ If none of these works (no file, no MCP, the site's CSS is rendered by JavaScrip
 | a signature line or indicator colour | `line` |
 | Do's and Don'ts, imagery, motion prose | the plan's signature table and pacing |
 
-Show the tokens you chose, with the DESIGN.md lines they came from, in the plan.
-
 ## Presets
 | Preset | Stages | Type | Signature moves | Pacing |
 |---|---|---|---|---|
@@ -36,7 +34,7 @@ Show the tokens you chose, with the DESIGN.md lines they came from, in the plan.
 | `nike` | white, `#111111` black | Anton for slammed uppercase headlines, Inter body | type that slams in; motion blur; speed streaks; black or white pill buttons; dense grids | fast: hard cuts on the beat, slam-ins (use `VIDEO.blur`) |
 | `spotify` | black `#000` / `#121212` everywhere | DM Sans bold, tight | colour enters only through artwork (`brArt`) in snapping carousels; a green `#1ed760` pill; purple-to-blue promo gradient | rhythmic: carousels snap on the beat, colour pulses |
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How (`brand.js`) |
 |---|---|---|
 | 1 | The brand's stages and their alternation (light bands, dark voids, or all dark) | `brStage('light' | 'alt' | 'dark' | 'accent')` |
@@ -48,6 +46,5 @@ Show the tokens you chose, with the DESIGN.md lines they came from, in the plan.
 | 7 | The brand's pacing | the table above |
 
 ## Rules
-- The user's content, logo, and product stay theirs; only the design language is borrowed.
 - Numbers still need sources. A spec board with invented numbers is worse than none.
 - Korean text uses Pretendard through `brandFonts`, which pairs it with every preset.
