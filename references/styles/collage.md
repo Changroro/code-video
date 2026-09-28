@@ -1,6 +1,6 @@
 # Style: torn-paper collage
 
-Pictures built from torn scraps of watercolour-tinted paper, laid one by one on a sheet of cold-press paper: skies and seas in long strips, rocks and crowds in small shards, a sun as a torn disc. Calm, handmade, and warm. Original to this skill, after the traditional torn-paper technique.
+Pictures built from torn scraps of watercolour-tinted paper, laid one by one on a sheet of cold-press paper: skies and seas in long strips, rocks and crowds in small shards, a sun as a torn disc. Calm, handmade, and warm.
 
 ## Signature
 | # | Item | How (`collage.js`) |

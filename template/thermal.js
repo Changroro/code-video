@@ -1,6 +1,6 @@
 'use strict';
 // Look: thermal receipt printer. Each scene prints a fresh slip that rises out of a printer and is torn off at the end.
-// Same scene API as every scene-API module (see references/scene-api.md). Works in 16:9 and 9:16.
+// Same scene API as every scene-API module (see references/styles/scene.md). Works in 16:9 and 9:16.
 const LOOK = (() => {
   const C = { table: '#2e5b5f', table2: '#3c7277', paper: '#f6f3ea', ink: '#2c3038', stamp: '#d23a3a', shop: 'PROMO PRINT' };
   // landscape frames get a bigger slip so the paper fills the screen

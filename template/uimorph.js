@@ -2,7 +2,7 @@
 // UI morph: one shape that never cuts, morphing through UI states (button, loader, player, slider, toggle, tabs, chart,
 // command palette, toast) on a beat grid while a cursor drives every change. Every animated value is a sum of
 // closed-form spring step responses, so a frame is a pure function of time. Load after kit.js.
-// After @twoclipping's UI motion study (docs/styles/uimorph.jpg). Fonts: UM.font (Geist / Pretendard), UM.mono (Geist Mono).
+// Reference frames: docs/styles/uimorph.jpg. Fonts: UM.font (Geist / Pretendard), UM.mono (Geist Mono).
 const UM = { bg: '#ecebe7', ink: '#0b0b0b', card: '#ffffff', dim: '#8d8c88', line: '#e6e5e1', font: 'UI', mono: 'UIMONO',
   bpm: 120, t0: 0, k: 170, c: 22 };
 const beat = n => UM.t0 + n * 60 / UM.bpm;

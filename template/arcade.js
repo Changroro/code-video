@@ -1,5 +1,5 @@
 'use strict';
-// Look: 16-bit arcade. Load after kit.js. Every scene-API module exposes the same scene API (see references/scene-api.md):
+// Look: 16-bit arcade. Load after kit.js. Every scene-API module exposes the same scene API (see references/styles/scene.md):
 // LOOK.hook(t, d, lines) · title(t, d, name, tagline) · steps(t, d, items) · stat(t, d, value, label, note) · ending(t, d, {cmd, url, note})
 // t = seconds since the scene started, d = scene length. Set brand colours with Object.assign(LOOK.colors, {...}).
 const LOOK = (() => {

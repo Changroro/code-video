@@ -1,6 +1,6 @@
 # Style: scrapbook
 
-A making-of journal on a kraft desk: lined notebook pages, polaroids held by washi tape, torn paper labels, die-cut stickers, rubber stamps, and marker doodles. Original to this skill.
+A making-of journal on a kraft desk: lined notebook pages, polaroids held by washi tape, torn paper labels, die-cut stickers, rubber stamps, and marker doodles.
 
 ## Signature
 | # | Item | How (`scrapbook.js`) |

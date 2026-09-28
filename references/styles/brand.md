@@ -1,4 +1,4 @@
-# Style: brand design language (presets and any DESIGN.md)
+# Style: brand design language (Apple, Samsung, Ferrari, Nike, Spotify presets, or any site's DESIGN.md)
 
 A launch film that feels like a famous brand's site and keynotes, applied to the user's own topic: the brand's palette, type, spacing, buttons, and staging, drawn from design tokens. Five presets ship ready; any other site works through its DESIGN.md.
 

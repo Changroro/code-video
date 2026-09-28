@@ -1,5 +1,5 @@
 'use strict';
-// Signature pieces of the brand motion graphics look, after @digitalstrategyai's "aifixly" explainer
+// Signature pieces of the brand motion graphics look
 // (docs/styles/motion.jpg): one dark field, thin white hand-drawn line art, a single accent, scribbled emphasis.
 // Load after kit.js. Set MO.accent (and MO.bg if the brand is light) from the research.
 const MO = { bg: '#0c0b1d', ink: '#f2f1f7', dim: '#8f8da8', accent: '#7c5cff', pain: '#ff5d5d', cyan: '#38d6e6', font: 'MSANS', mono: 'MMONO' };

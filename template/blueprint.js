@@ -1,5 +1,5 @@
 'use strict';
-// Look: cyanotype blueprint. Same scene API as every scene-API module (see references/scene-api.md).
+// Look: cyanotype blueprint. Same scene API as every scene-API module (see references/styles/scene.md).
 const LOOK = (() => {
   const C = { blue: '#17508c', line: 'rgba(240,248,255,.95)', faint: 'rgba(240,248,255,.35)', hi: '#ffd166', dwg: 'PROMO-01' };
   const T_ = (s, x, y, o = {}) => text(s, x, y, { font: 'MONO', size: 30, color: C.line, jit: false, ...o });

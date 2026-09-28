@@ -1,6 +1,6 @@
 # Style: neon sign
 
-Glass tubes on a dark brick wall that buzz and flicker on, glow onto the wall, and reflect on a wet floor. Original to this skill.
+Glass tubes on a dark brick wall that buzz and flicker on, glow onto the wall, and reflect on a wet floor.
 
 ## Signature
 | # | Item | How (`neon.js`) |

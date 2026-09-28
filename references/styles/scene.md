@@ -1,4 +1,4 @@
-# Scene-API styles
+# Style: 16-bit arcade, CRT terminal, thermal receipt, transit map, blueprint
 
 Five styles ship as ready-made scene sets that share one scene API, so the same script renders in any of them by swapping one `<script>` tag. The story still comes from the research: pick the scenes and their copy to fit it.
 
@@ -9,8 +9,6 @@ Five styles ship as ready-made scene sets that share one scene API, so the same 
 | `thermal.js` | thermal receipt printer: slips print, get stamped, are torn off |
 | `transit.js` | transit map and station signage: lines, stations, trains |
 | `blueprint.js` | cyanotype blueprint: dimension lines, balloons, title block |
-
-All five are original to this skill. The other styles have helper modules and a guide each in [styles/](styles/).
 
 ## Using a module
 ```html

@@ -1,5 +1,5 @@
 'use strict';
-// Look: transit map and station signage. Same scene API as every scene-API module (see references/scene-api.md).
+// Look: transit map and station signage. Same scene API as every scene-API module (see references/styles/scene.md).
 const LOOK = (() => {
   const C = { paper: '#f4f0e6', ink: '#1d1d22', muted: '#6f6a60', line: '#d9774f', line2: '#23408e', sign: '#1f2a44', signText: '#ffffff' };
   const T_ = (s, x, y, o = {}) => text(s, x, y, { font: 'PREB', size: 32, color: C.ink, jit: false, ...o });
