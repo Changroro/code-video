@@ -130,14 +130,11 @@ A higher reasoning effort for the agent tends to give more detailed motion.
 | `.claude-plugin/plugin.json` | Claude Code plugin manifest (the skill stays at the repo root) |
 | `template/kit.js` | Canvas kit: hand-drawn primitives, text and kinetic type, camera, transitions, sprites, minis, video clips, motion blur |
 | `template/render.mjs` | Deterministic frame capture with parallel pages, piped to ffmpeg, with the audio track muxed in |
-| `template/minis-ai.js` | Ready-made mini characters for AI-related topics |
 | `references/` | Kit API |
 | `references/styles/` | One guide per style, each with a Signature table |
 | `scripts/` | Font download, logo background cleanup, contact sheets, reference sheets against the original, music and sound synthesis, beat detection |
 
 Fonts are downloaded at build time from Google Fonts and jsDelivr (SIL Open Font License and Apache 2.0) and are not bundled.
-
-The characters in `template/minis-ai.js` are unofficial fan art. Product names and trademarks belong to their owners.
 
 ## Contributing
 

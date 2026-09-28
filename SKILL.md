@@ -7,7 +7,7 @@ description: Research a topic (a company, service, website, or product) and rend
 
 Make a short video drawn entirely in code from three inputs: a **design** (the style), the **research** on the topic, and the **format**. The story, scenes, pacing, and extras are yours.
 
-`<skill>` is the folder that contains this SKILL.md. The engine is in `<skill>/template/` (`kit.js`, `minis-ai.js` with ready-made minis for AI topics, `render.mjs`, a `main.js` skeleton); its API is [references/kit-api.md](references/kit-api.md). Helpers are in `<skill>/scripts/`: `fetch_fonts.sh`, `clean_logo.py`, `audio.py` (music and effects from `audio.json`), `beats.py`, `contact_sheet.py`, `site_tokens.py`.
+`<skill>` is the folder that contains this SKILL.md. The engine is in `<skill>/template/` (`kit.js`, `render.mjs`, a `main.js` skeleton); its API is [references/kit-api.md](references/kit-api.md). Helpers are in `<skill>/scripts/`: `fetch_fonts.sh`, `clean_logo.py`, `audio.py` (music and effects from `audio.json`), `beats.py`, `contact_sheet.py`, `site_tokens.py`.
 
 Required tools: `node`/`npm`, `ffmpeg` with libx264, Google Chrome, and `uv`. If one is missing, stop and say which.
 

@@ -130,14 +130,11 @@ git clone https://github.com/Changroro/code-video ~/.codex/skills/code-video    
 | `.claude-plugin/plugin.json` | Claude Code 플러그인 매니페스트(스킬은 저장소 최상위에 있음) |
 | `template/kit.js` | 캔버스 키트: 손그림 도형, 텍스트와 키네틱 타이포, 카메라, 전환, 스프라이트, 미니미, 영상 클립, 모션 블러 |
 | `template/render.mjs` | 병렬 페이지로 프레임을 결정적으로 캡처해 ffmpeg로 인코딩하고 오디오 트랙을 합침 |
-| `template/minis-ai.js` | AI 관련 주제용 미니미 캐릭터 세트 |
 | `references/` | 키트 API |
 | `references/styles/` | 화풍별 가이드(시그니처 표 포함) |
 | `scripts/` | 폰트 다운로드, 로고 배경 정리, 검수용 시트, 원작 비교 시트, 음악·효과음 합성, 박자 분석 |
 
 폰트는 제작할 때 Google Fonts와 jsDelivr에서 내려받으며(SIL Open Font License, Apache 2.0), 저장소에 포함하지 않았습니다.
-
-`template/minis-ai.js`의 캐릭터는 비공식 팬아트입니다. 제품명과 상표는 각 소유자에게 있습니다.
 
 ## 기여하기
 

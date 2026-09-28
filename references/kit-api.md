@@ -1,6 +1,6 @@
 # kit.js API
 
-Global scripts. `index.html` loads rough.js → kit.js → (a mini set when the topic calls for it) → main.js in that order. `window.VIDEO = { w, h, fps, dur, blur, shutter }` sets the canvas size, length, and optional motion blur.
+Global scripts. `index.html` loads rough.js → kit.js → main.js in that order. `window.VIDEO = { w, h, fps, dur, blur, shutter }` sets the canvas size, length, and optional motion blur.
 
 ## Globals
 - `W, H, FPS, DUR`, `ctx` (2D context), `rc` (rough canvas), `T` (current second), `IMG` (images from boot), `BG`.
@@ -45,7 +45,7 @@ Global scripts. `index.html` loads rough.js → kit.js → (a mini set when the 
 
 ## Sprites
 - `drawPixels(rows, pal, x, y, s, { flip, sx, sy, rot, outline, alpha, swap })`: anchored at the bottom center. rows is an array of strings where '.' is empty; pal maps a character to a color or to (x, y) => color.
-- `MINIS`, `drawMini(key, x, y, s, { blink, outline, flip, sx, sy, rot, alpha })`: the mini cast. Register with `Object.assign(MINIS, { key: { name, color, body, pal, rows } })`. `E` pixels switch to the `body` color while blinking, and `C` pixels blink by themselves. `minis-ai.js` is a ready-made AI set.
+- `MINIS`, `drawMini(key, x, y, s, { blink, outline, flip, sx, sy, rot, alpha })`: the mini cast. Register with `Object.assign(MINIS, { key: { name, color, body, pal, rows } })`. `E` pixels switch to the `body` color while blinking, and `C` pixels blink by themselves.
 - `pixelImage(img, cx, cy, w, h, px)`: draw an image (such as a logo) as px-sized blocks. Raising px from 1 turns the logo into 8-bit step by step.
 
 ## UI props and motion blur
