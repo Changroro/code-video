@@ -2,7 +2,7 @@
 
 A making-of journal on a kraft desk: lined notebook pages, polaroids held by washi tape, torn paper labels, die-cut stickers, rubber stamps, and marker doodles. Original to this skill.
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How (`scrapbook.js`) |
 |---|---|---|
 | 1 | A kraft paper desk and lined notebook pages at slight angles | `sbDesk()`, `notePage(x, y, w, h, rot)` |

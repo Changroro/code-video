@@ -7,7 +7,7 @@ Credit: adapted from [@nahiddotai](https://www.threads.com/@nahiddotai)'s ["Intr
 ## Reference
 Open `<skill>/docs/styles/handdrawn.jpg` (four frames from the original) before planning, and compare your stills with it during QA for the look. The original is a 30 s model launch: the mascot wakes up, powers up, and walks through "worlds" of benchmark results.
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How |
 |---|---|---|
 | 1 | Plain warm off-white paper with no grid; one thin ink horizon with grass tufts; outline clouds | `hdPaper()`, `horizon(y)`, `cloud(x, y, s, id)`. Never `grid()` in this style |
@@ -28,7 +28,7 @@ Open `<skill>/docs/styles/handdrawn.jpg` (four frames from the original) before 
 The signature is the look; the story is yours, built from your research.
 
 ## Extras (optional, not from the original)
-Topic minis with name tags, map + counter, fast card cuts, fit this style, but only after every signature item is in. Keep paper plain (no grid) even then.
+Topic minis with name tags, map + counter, and fast card cuts also fit this style.
 
 ## Sound
 None by default, like the original. If the user wants sound, a quiet `audio.py` bed at energy .3–.5 with `pop` on count-ups and `thud` on the HI-SCORE.

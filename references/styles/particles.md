@@ -2,7 +2,7 @@
 
 Thousands of glowing particles drift on a flow field, gather into words, logos, and numbers, then scatter and re-form. The purest "drawn in code" look. Original to this skill.
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How (`particles.js`) |
 |---|---|---|
 | 1 | A near-black field with thousands of short glowing streaks drifting on a smooth flow | `ptBG()`, `ptField(t)` |

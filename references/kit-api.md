@@ -177,11 +177,11 @@ boot({
 `?t=12.3` previews one frame, and `?play` plays in real time.
 
 ## Render
-- `node render.mjs stills 1.2 3.4 ...` → `stills/t<seconds>.png`
+- `node render.mjs stills 1.2 3.4 30-31.5 ...` → `stills/t<seconds>.png`; a range gives six evenly spaced frames across it, which shows motion a single still misses (something leaving the frame, a card that never appears).
 - `CRF=25 WORKERS=4 node render.mjs video out.mp4` → H.264, yuv420p, faststart, at the size and fps in `window.VIDEO`. Frames are captured as JPEG (2–3× faster than PNG, visually identical after H.264); `CAPTURE=png` forces lossless capture. About 1–2 minutes and about 8 MB for 30 s at 1080p; more workers than 4 usually slows Chrome down.
 - `QUERY=lang=ko node render.mjs …` appends `?lang=ko` to the page URL, for rendering two versions from one `main.js`.
 - If `audio.wav` exists in the work folder, the video gets an AAC track normalised to -14 LUFS.
 
 ## Sound
-- `uv run --with numpy --with scipy python <skill>/scripts/audio.py audio.json audio.wav`: synthesized music (pad, bass, arpeggio, drums by section energy) and effects (`whoosh`, `pop`, `click`, `chime`, `ping`, `thud`, `sand`, `wave`, `type`, `tear`, `paper`) at cue times. The schema is in the script's docstring. With `"song"` set, a licensed track replaces the synthesized music.
+- `uv run --with numpy --with scipy python <skill>/scripts/audio.py audio.json audio.wav`: synthesized music (pad, bass, arpeggio, drums by section energy) and effects (`whoosh`, `pop`, `click`, `chime`, `ping`, `thud`, `sand`, `wave`, `type`, `tear`, `paper`), each peaking at its cue time. The schema is in the script's docstring. With `"song"` set, a licensed track replaces the synthesized music.
 - `uv run --with librosa python <skill>/scripts/beats.py song.mp3 [offset] > beats.json`: BPM, beats, downbeats, and the drop, for cutting on the beat.

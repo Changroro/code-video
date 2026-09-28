@@ -8,7 +8,7 @@ audio.json (times in seconds, same clock as the video):
   "chords": ["I", "V", "vi", "IV"],               # one chord per bar, looped
   "sections": [[0, 8, 0.3], [8, 26, 0.9], [26, 30, 0.5]],   # [start, end, energy 0..1]
   "song": {"path": "assets/song.mp3", "offset": 0},          # optional: a licensed track replaces the synthesized music
-  "cues": [[1.0, "whoosh"], [3.5, "pop", 0.8], [4.0, "chime"]]   # [time, sfx, gain]
+  "cues": [[1.0, "whoosh"], [3.5, "pop", 0.8], [4.0, "chime"]]   # [time, sfx, gain]; each effect peaks at its time
 }
 Energy < 0.35 plays pad only, < 0.7 adds bass and arpeggio, and higher adds drums.
 render.mjs muxes audio.wav into the video and normalizes loudness.
@@ -57,7 +57,9 @@ def tone(f, n, harm=(1, .5, .25), detune=0.0):
 
 def add(buf, x, t, gain=1.0):
     i = int(t * SR)
-    if i >= len(buf) or i < 0:
+    if i < 0:
+        x, i = x[-i:], 0
+    if i >= len(buf):
         return
     x = x[: len(buf) - i]
     buf[i:i + len(x)] += x * gain
@@ -146,7 +148,8 @@ def main(spec_path, out_path):
         t, name, gain = (cue + [1.0])[:3]
         if name not in SFX:
             raise SystemExit(f"unknown sfx '{name}'. Available: {', '.join(SFX)}")
-        add(fx, SFX[name](), t, gain)
+        x = SFX[name]()
+        add(fx, x, t - np.abs(x).argmax() / SR, gain)
     mix = mix + fx[:, None] * .8
     mix = np.tanh(mix * 1.2)
     mix *= 0.89 / max(1e-6, np.abs(mix).max())

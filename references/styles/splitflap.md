@@ -2,7 +2,7 @@
 
 A railway departures board: tiles clatter through the alphabet onto each message, amber lamps blink, and a station clock ticks. Original to this skill.
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How (`splitflap.js`) |
 |---|---|---|
 | 1 | A dark board of individual flap tiles with a hinge line and a split between halves | `sfBoard()`, `sfTile` |

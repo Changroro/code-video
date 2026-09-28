@@ -2,7 +2,7 @@
 
 Pictures built from torn scraps of watercolour-tinted paper, laid one by one on a sheet of cold-press paper: skies and seas in long strips, rocks and crowds in small shards, a sun as a torn disc. Calm, handmade, and warm. Original to this skill, after the traditional torn-paper technique.
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How (`collage.js`) |
 |---|---|---|
 | 1 | A cold-press paper sheet as the ground, never a flat fill | `clSheet()` |

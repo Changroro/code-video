@@ -2,7 +2,7 @@
 
 One interface element that never cuts: a button becomes a loader, a player, a slider, tabs, a chart, a command palette, a toast, and finally the button again, so the video loops. A cursor clicks and drags to cause every change, on the beat. After [@twoclipping](https://x.com/twoclipping/status/2103273003555402193)'s UI motion study; reference frames in `docs/styles/uimorph.jpg`.
 
-## Signature (every item must be on screen)
+## Signature
 | # | Item | How (`uimorph.js`) |
 |---|---|---|
 | 1 | A single shape, never cut: every state is the same element changing size, corner radius, and fill | `umShape(t, SHAPE)` with one key per state |
