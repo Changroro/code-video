@@ -15,12 +15,5 @@ A superhero comic book come to life: newsprint pages, thick ink panels, Ben-Day 
 
 ## Look
 - **Palette**: newsprint `#f4ecd6`, ink `#141414`, comic red `#e23b2e`, yellow `#ffd43b`, blue `#2a6fdb`, cyan `#59c3e8`; put the brand colour on the hero's costume or the title slab.
-- **Fonts**: `COMIC` Bangers for Latin; pair it with Do Hyeon (or Black Han Sans) for Hangul through `unicode-range`.
-- **Characters**: flat bold shapes with 7–9 px ink outlines and halftone shading (`inked`). A logo mascot can be the hero; a pixel mini drawn large with an ink outline also works.
-- **Pacing**: a page holds 2–4 s while panels pop in one by one; hits land on a sound-effect burst.
-
-## Story shapes that fit
-An origin story (the problem, the power, the first win), a team-up (features as heroes), a villain (the pain) defeated by the product.
-
-## Sound
-`audio.py` with an energetic bed; `thud` or `whoosh` under each sound-effect burst, `pop` as panels appear, a page-flip `whoosh` on each page turn.
+- **Fonts**: Bangers for Latin; pair it with Do Hyeon (or Black Han Sans) for Hangul through `unicode-range`.
+- **Characters**: flat bold shapes with 7–9 px ink outlines and halftone shading. A logo mascot can be the hero; a pixel mini drawn large with an ink outline also works.

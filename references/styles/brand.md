@@ -54,6 +54,8 @@ If none of these works (no file, no MCP, the site's CSS is rendered by JavaScrip
 | display font | Inter | Manrope | Archivo | Anton | DM Sans |
 | body font | Inter | Inter | Archivo | Inter | DM Sans |
 
+Pair Pretendard with every preset for Korean text.
+
 ## Signature
 | # | Item |
 |---|---|
@@ -64,7 +66,3 @@ If none of these works (no file, no MCP, the site's CSS is rendered by JavaScrip
 | 5 | The brand's component shapes: tiles, rules, buttons |
 | 6 | The brand's accent rationed the way its DESIGN.md says (one CTA colour, a thin red rule, green only for the action) |
 | 7 | The brand's pacing |
-
-## Rules
-- Numbers still need sources. A spec board with invented numbers is worse than none.
-- Pair Pretendard with every preset for Korean text.

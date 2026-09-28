@@ -15,17 +15,5 @@ One interface element that never cuts: a button becomes a loader, a player, a sl
 
 ## Look
 - **Palette**: canvas `#ecebe7`, ink `#0b0b0b`, cards `#ffffff`, secondary text `#8d8c88`. Colour appears only in content such as album art or the subject's own accent; no gradients or glows on the UI itself.
-- **Fonts**: `UI` Geist (Pretendard for Hangul), `UIMONO` Geist Mono for times and shortcuts.
-- **Frame**: square 1440×1440 suits it; other frames work with the same camera.
-- **Motion**: springs everywhere (`UM.k`, `UM.c`); no bouncy easing, particles, or dead time. Render with `VIDEO = { fps: 60, blur: 4 }` for motion blur.
-
-## Building it
-- Write each track as keys on the beat grid: `SHAPE` for the container, `CAM` for the zoom, `PATH`, `clicks`, and `holds` for the cursor. A value that changes several times is one `spring` over all its keys, so it stays a pure function of time.
-- Plan the state list on the beat grid first and show it in the plan.
-- Draw the cursor inside the camera with `s: 1.2 / zoom` so it keeps its size.
-
-## Story shapes that fit
-A product's UI tour, a feature list where each feature is a state, a before-and-after of a workflow.
-
-## Sound
-A 120 BPM track (`audio.py` at energy .6–.8, or a licensed song with `beats.py`); `click` on every click, `type` under typing, `pop` for toggles, placed on the measured beat.
+- **Fonts**: Geist (Pretendard for Hangul), Geist Mono for times and shortcuts.
+- **Motion**: springs everywhere; no bouncy easing, particles, or dead time.

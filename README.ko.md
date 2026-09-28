@@ -128,7 +128,7 @@ git clone https://github.com/Changroro/code-video ~/.codex/skills/code-video    
 |---|---|
 | `SKILL.md` | 작업 흐름: 디자인·조사·형식 → 짧은 계획 → 제작 → 렌더 |
 | `.claude-plugin/plugin.json` | Claude Code 플러그인 매니페스트(스킬은 저장소 최상위에 있음) |
-| `template/kit.js` | 캔버스 키트: 손그림 도형, 텍스트와 키네틱 타이포, 카메라, 전환, 스프라이트, 미니미, 영상 클립, 모션 블러 |
+| `template/kit.js` | 렌더 뼈대: 캔버스 준비, 장면 시간, 프레임 렌더, 폰트 로딩, 모션 블러 |
 | `template/render.mjs` | 병렬 페이지로 프레임을 결정적으로 캡처해 ffmpeg로 인코딩하고 오디오 트랙을 합침 |
 | `references/` | 키트 API |
 | `references/styles/` | 화풍별 가이드(시그니처 표 포함) |

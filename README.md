@@ -128,7 +128,7 @@ A higher reasoning effort for the agent tends to give more detailed motion.
 |---|---|
 | `SKILL.md` | Workflow: design, research, and format → a short plan → build → render |
 | `.claude-plugin/plugin.json` | Claude Code plugin manifest (the skill stays at the repo root) |
-| `template/kit.js` | Canvas kit: hand-drawn primitives, text and kinetic type, camera, transitions, sprites, minis, video clips, motion blur |
+| `template/kit.js` | Render contract: canvas setup, scene timing, frame rendering, font loading, motion blur |
 | `template/render.mjs` | Deterministic frame capture with parallel pages, piped to ffmpeg, with the audio track muxed in |
 | `references/` | Kit API |
 | `references/styles/` | One guide per style, each with a Signature table |

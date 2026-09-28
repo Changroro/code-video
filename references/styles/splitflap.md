@@ -14,11 +14,5 @@ A railway departures board: tiles clatter through the alphabet onto each message
 
 ## Look
 - **Palette**: board `#0f0f10`, tiles `#232326`, characters `#f1ede2`, amber `#ffb000`, green `#39d353`, red `#ff5a4f`. The brand shows in one status colour and the final message.
-- **Fonts**: `FLAP` Roboto Mono (bold) for Latin; Pretendard Bold for Hangul (Hangul tiles flip through a few letters, then land).
+- **Fonts**: Roboto Mono (bold) for Latin; Pretendard Bold for Hangul (Hangul tiles flip through a few letters, then land).
 - **Messages**: uppercase, short (tiles are wide); one idea per board change.
-
-## Story shapes that fit
-Departures or arrivals as a list (features, steps, releases, cities), a countdown, a "now boarding" launch announcement.
-
-## Sound
-Flap clicks, one per flip, over a quiet bed (energy .3–.5); a soft `chime` when a board settles.

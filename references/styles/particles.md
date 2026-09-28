@@ -14,13 +14,8 @@ Thousands of glowing particles drift on a flow field, gather into words, logos, 
 | 7 | A crisp caption under each formed shape |
 
 ## Look
-- **Palette**: background `#05060b`; particle colours in `PT.colors` (cyan, violet, white, pink by default). Put the brand colours there.
+- **Palette**: background `#05060b`; particles in cyan, violet, white, and pink, with the brand colours among them.
 - **Fonts**: Geist (heavy weights sample best) for particle text; Pretendard Black for Hangul.
-- **Density**: `PT.n` 6000 at 1080p; keep a shape's text at 150–260 px so the particles read as letters.
-- **Pacing**: drift 0.5–1 s → form 1–1.5 s → hold with caption 1.5 s → morph or burst.
 
-## Story shapes that fit
-A teaser or reveal (name, promise, one number, URL), a manifesto of short lines, a title sequence.
-
-## Sound
-`audio.py` with a pad-heavy bed that swells as shapes form (energy .35 → .8); `chime` when a shape locks in, `whoosh` on bursts.
+## Rules
+- Keep particle text at 150–260 px so the particles read as letters.

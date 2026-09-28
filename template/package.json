@@ -2,7 +2,6 @@
   "name": "promo-video",
   "private": true,
   "dependencies": {
-    "playwright-core": "^1.63.0",
-    "roughjs": "^4.6.6"
+    "playwright-core": "^1.63.0"
   }
 }

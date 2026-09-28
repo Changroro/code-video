@@ -14,11 +14,5 @@ Glass tubes on a dark brick wall that buzz and flicker on, glow onto the wall, a
 
 ## Look
 - **Palette**: wall `#1b1417`; tubes pink `#ff4fa3`, cyan `#3ff0ff`, yellow `#ffe45c`, green `#6bff8a`, orange `#ff8a3d`, violet `#b56bff`. Make the brand colour the main tube.
-- **Fonts**: `NEON` Tilt Neon for Latin; Pretendard (light weights) for Hangul, drawn as strokes.
+- **Fonts**: Tilt Neon for Latin; Pretendard (light weights) for Hangul, drawn as strokes.
 - **Composition**: one sign per scene, centred or offset like a shop sign; at most three tube colours at once.
-
-## Story shapes that fit
-A night-open shop sign (name, hours → what it does), a menu board of features, a slogan that lights word by word.
-
-## Sound
-A low hum bed (energy .3–.5) with `click` buzz cues on each flicker; `ping` when a sign locks on.

@@ -1,62 +1,9 @@
-# kit.js API
+# kit.js
 
-Global scripts. `index.html` loads rough.js → kit.js → main.js in that order. `window.VIDEO = { w, h, fps, dur, blur, shutter }` sets the canvas size, length, and optional motion blur.
+Global scripts. `index.html` loads kit.js → main.js in that order. `window.VIDEO = { w, h, fps, dur, blur, shutter }` sets the canvas size, length, and optional motion blur.
 
 ## Globals
-- `W, H, FPS, DUR`, `ctx` (2D context), `rc` (rough canvas), `T` (current second), `IMG` (images from boot), `BG`.
-- `THEME = { ink, paper, dark, light, grid, gridDark }`: change it in main.js with `Object.assign(THEME, {...})`.
-
-## Time and math
-- `prog(t, a, b)`: progress through an interval, 0..1. `E.out / E.in / E.inOut / E.back`: easing.
-- `lerp`, `clamp`, `mixHex(a, b, t)` (color interpolation), `hash(a, b)`, `rnd(seed)` (deterministic random), `typed(s, p)` (substring for a typing effect).
-- `bez(a, c, b, n)` / `bezAt(a, c, b, t)`: quadratic Bézier.
-- `camKeys(t, [[time, cx, cy, z], ...])`: keyframed camera.
-
-## Hand-drawn
-- `ro(id, opts, rate = 10)`: rough options. Each id gets its own shape, and the wobble changes `rate` times per second. Use rate 4–5 for background grids.
-- `rc.line / rectangle / circle (diameter) / ellipse / polygon / linearPath / curve / arc`: rough.js itself.
-- `sketch(pts, p, id, opts)`: draw a line up to p (a drawing-on animation). `arrow(pts, p, id, opts)`.
-- `circlePts(cx, cy, rx, ry)`: points for a hand-drawn circle.
-- `highlight(x, y, w, h, p, id, color)`: highlighter. Over printed text, set `ctx.globalCompositeOperation = 'multiply'`.
-- `wave`, `radioWaves`, `shadow(x, y, w, dark)`.
-
-## Text
-- `text(s, x, y, { font, weight, size, color, align, base, rot, alpha, reveal, outline, ow, jit, maxW })`.
-  - `reveal`: reveal from the left (0..1).
-  - `outline`: an outline in the background color for readability over busy backgrounds.
-  - `maxW`: shrink when the text is wider.
-  - `jit`: hand-drawn wobble (false for numbers and HUD).
-- `measure(s, font, size, weight)`.
-- `useFonts([[family, 'assets/fonts/file.ttf'], ...])`: load font files at boot without `@font-face`.
-- `kwords(s, x, y, p, { font, weight, size, color, colors, align })`: words pop in one after another over p = 0..1. `colors` maps a word index to a colour.
-- `typeOn(s, x, y, p, o)`: typewriter with a blinking cursor. Same options as `text`.
-- `karaoke(syl, x, y, t, { font, weight, size, off, on, outline, align })`: one lyric line. `syl` is `[[text, start], ...]` and `t` uses the same clock as the start times; sung syllables turn `on`.
-- `withCtx(g, fn)`: run the kit's 2D helpers (`text`, `drawPixels`, paths on `ctx`) against another context, such as an offscreen layer. rough.js (`rc`) always draws on the main canvas.
-
-## Camera and transitions
-- `cam(z, cx, cy, rot, sx, sy)`: call after `ctx.save()` and close with `ctx.restore()`. World point (cx, cy) goes to the screen center at zoom z. The visible range is cx ± W/2/z.
-- `shake(amp, id)` → [sx, sy]. `flash(a, color)`, `speedLines(amt, color)`, `zoomLines(amt, color, cx, cy)`, `inkBand(x0, x1, color)`.
-- `circleWipe(p, color, cx, cy)`: a circle grows from (cx, cy) until it covers the screen. `wipe(p, color, dir)`: a flat panel slides in from `'right' | 'left' | 'down' | 'up'`.
-- `pin(x, y, p, color, s)`: a map pin drops in and sends out a ripple.
-
-## Backgrounds
-- `paperBG()`, `darkBG()`: textured backgrounds built from THEME at boot (fixed to the screen, which compresses well).
-- `grid(dark, step)`: hand-drawn grid like a chart or graph paper (world coordinates, call inside the camera).
-
-## Sprites
-- `drawPixels(rows, pal, x, y, s, { flip, sx, sy, rot, outline, alpha, swap })`: anchored at the bottom center. rows is an array of strings where '.' is empty; pal maps a character to a color or to (x, y) => color.
-- `MINIS`, `drawMini(key, x, y, s, { blink, outline, flip, sx, sy, rot, alpha })`: the mini cast. Register with `Object.assign(MINIS, { key: { name, color, body, pal, rows } })`. `E` pixels switch to the `body` color while blinking, and `C` pixels blink by themselves.
-- `pixelImage(img, cx, cy, w, h, px)`: draw an image (such as a logo) as px-sized blocks. Raising px from 1 turns the logo into 8-bit step by step.
-
-## UI props and motion blur
-- `rr(x, y, w, h, r)`: begins a rounded-rectangle path (then `ctx.fill()` / `ctx.stroke()`).
-- `phone(x, y, h, draw, { body, rim, screen, shadow })`: a phone of height h centred at (x, y); `draw(sx, sy, sw, sh)` paints the screen, clipped. Returns the screen box.
-- `cursor(x, y, press, color, s)`: a pointer with its tip at (x, y); `press` 0..1 squeezes it for a click.
-- `window.VIDEO.blur = n`: each frame averages n subframes spread over `VIDEO.shutter` (default .5) of a frame, for real motion blur on whips and push cuts. It costs n times the render time; the beat-synced style uses `{ fps: 60, blur: 3 }`.
-
-## Video clips (beat-synced style)
-- Put footage in `assets/clips/<id>/0001.jpg ...` (see `references/styles/beat.md`) and register it with `boot({ clips: { id: { n: frameCount, fps: 30 } } })`.
-- `clip(id, t, x, y, w, h, { alpha })`: draws the clip's frame at t seconds, cover-fit into the box. Frames load on demand; `renderFrame` redraws once they arrive, and a missing file stops the render.
+`W`, `H`, `FPS`, `DUR` from `window.VIDEO`, `ctx` (the 2D context of the `#c` canvas), `T` (video time in seconds), `IMG` (loaded images). `render.mjs` calls `renderFrame(f)` and captures the `#c` canvas, so frame `f` must look the same however many times it is drawn.
 
 ## Boot
 ```js
@@ -64,8 +11,6 @@ boot({
   scenes: [[start, end, fn], ...],        // fn(t) - t is seconds since the scene started
   images: { logo: 'assets/logo.png' },    // → IMG.logo
   fonts: [['PRE', 'Aa'], ['PIX', 'A']],   // @font-face name and sample characters
-  clips: { c1: { n: 240 } },              // optional footage frame sequences
-  noise: 6,                               // background noise (higher means larger files)
   setup: () => { /* pre-render offscreen canvases after fonts load */ },
 });
 ```

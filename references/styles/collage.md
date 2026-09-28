@@ -15,12 +15,5 @@ Pictures built from torn scraps of watercolour-tinted paper, laid one by one on 
 
 ## Look
 - **Palette**: paper `#f1ece1`, ink `#3a3833`, and muted tints (sky `#b8c9da`, sea `#6f8dab`, sand `#e2cfa8`, sun `#efc25c`, stone `#8e8b85`, slate `#5f6570`, moss `#8b8d5c`, rust `#c7684e`). Bring the brand in as one or two washed tints and the rebuilt logo; keep everything a little desaturated.
-- **Fonts**: `SERIF` Source Serif 4 / Nanum Myeongjo for words on strips, `SCRIPT` Caveat / Gaegu for a pencil note.
+- **Fonts**: Source Serif 4 / Nanum Myeongjo for words on strips, Caveat / Gaegu for a pencil note.
 - **Composition**: one picture per scene, filling about two-thirds of the frame with a margin of bare paper around it. Pictures are simple and flat, like a children's book, with pieces that overlap and overshoot their outlines a little. Use scraps a hand could tear: strips 40–90 px tall, shards 60–140 px.
-- **Pacing**: unhurried; each scrap lands with a short slide and settles. Keep a beat of stillness after a picture completes.
-
-## Story shapes that fit
-A place or a journey, a story of how something was made, a before-and-after, a quiet brand film.
-
-## Sound
-`audio.py` with a soft bed (energy .3–.5); `paper` under landing scraps (a few, not every one), `tear` for a new sheet or a peel, `chime` when a picture completes.
