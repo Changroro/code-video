@@ -2,7 +2,7 @@
 
 English | [한국어](README.ko.md)
 
-![How code-video was made, in a video made with it](docs/hero.gif)
+<img src="docs/hero.gif" width="100%" alt="How code-video was made, in a video made with it">
 
 *Claude Opus 5.5 filled my feed with videos drawn in code, so I forged a skill for it. This intro was made with that skill, every frame drawn in code.* [Watch the 45-second MP4](https://github.com/Changroro/code-video/releases/download/v1.3.1/CodeVideo_intro_en.mp4).
 
@@ -52,25 +52,53 @@ New styles are added over time, and pull requests for new ones are welcome (see 
 
 A few seconds from an example in each style. Every example is a video about this skill, made by a fresh agent with only this skill; the full MP4s are in the [latest release](https://github.com/Changroro/code-video/releases/latest).
 
-| **Hand-drawn** | **Brand motion graphics** | **Sand art** |
-|---|---|---|
-| ![Hand-drawn](docs/gallery/handdrawn.gif) | ![Brand motion graphics](docs/gallery/motion.gif) | ![Sand art](docs/gallery/sand.gif) |
-| **Lyric music video** | **Beat-synced footage** | **UI morph** |
-| ![Lyric music video](docs/gallery/lyric.gif) | ![Beat-synced footage](docs/gallery/beat.gif) | ![UI morph](docs/gallery/uimorph.gif) |
-| **Hero comic** | **Toon** | **Scrapbook** |
-| ![Hero comic](docs/gallery/comic.gif) | ![Toon](docs/gallery/toon.gif) | ![Scrapbook](docs/gallery/scrapbook.gif) |
-| **Torn-paper collage** | **Particles** | **Split-flap board** |
-| ![Torn-paper collage](docs/gallery/collage.gif) | ![Particles](docs/gallery/particles.gif) | ![Split-flap board](docs/gallery/splitflap.gif) |
-| **Neon sign** | **16-bit arcade** | **CRT terminal** |
-| ![Neon sign](docs/gallery/neon.gif) | ![16-bit arcade](docs/gallery/arcade.gif) | ![CRT terminal](docs/gallery/terminal.gif) |
-| **Thermal receipt** | **Transit map** | **Blueprint** |
-| ![Thermal receipt](docs/gallery/thermal.gif) | ![Transit map](docs/gallery/transit.gif) | ![Blueprint](docs/gallery/blueprint.gif) |
-| **Apple-style showroom** | **Samsung-style tech launch** | **Ferrari-style racing luxury** |
-| ![Apple-style showroom](docs/gallery/brand-apple.gif) | ![Samsung-style tech launch](docs/gallery/brand-samsung.gif) | ![Ferrari-style racing luxury](docs/gallery/brand-ferrari.gif) |
-| **Nike-style athletic** | **Spotify-style dark media** | **From a DESIGN.md (Stripe)** |
-| ![Nike-style athletic](docs/gallery/brand-nike.gif) | ![Spotify-style dark media](docs/gallery/brand-spotify.gif) | ![From a DESIGN.md (Stripe)](docs/gallery/designmd-stripe.gif) |
-| **Free style (left to the agent)** |   |   |
-| ![Free style (left to the agent)](docs/gallery/free.gif) |   |   |
+<table>
+<tr>
+<td width="33%" align="center"><b>Hand-drawn</b><br><img src="docs/gallery/handdrawn.gif" width="100%" alt="Hand-drawn"></td>
+<td width="33%" align="center"><b>Brand motion graphics</b><br><img src="docs/gallery/motion.gif" width="100%" alt="Brand motion graphics"></td>
+<td width="33%" align="center"><b>Sand art</b><br><img src="docs/gallery/sand.gif" width="100%" alt="Sand art"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>Lyric music video</b><br><img src="docs/gallery/lyric.gif" width="100%" alt="Lyric music video"></td>
+<td width="33%" align="center"><b>Beat-synced footage</b><br><img src="docs/gallery/beat.gif" width="100%" alt="Beat-synced footage"></td>
+<td width="33%" align="center"><b>UI morph</b><br><img src="docs/gallery/uimorph.gif" width="100%" alt="UI morph"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>Hero comic</b><br><img src="docs/gallery/comic.gif" width="100%" alt="Hero comic"></td>
+<td width="33%" align="center"><b>Toon</b><br><img src="docs/gallery/toon.gif" width="100%" alt="Toon"></td>
+<td width="33%" align="center"><b>Scrapbook</b><br><img src="docs/gallery/scrapbook.gif" width="100%" alt="Scrapbook"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>Torn-paper collage</b><br><img src="docs/gallery/collage.gif" width="100%" alt="Torn-paper collage"></td>
+<td width="33%" align="center"><b>Particles</b><br><img src="docs/gallery/particles.gif" width="100%" alt="Particles"></td>
+<td width="33%" align="center"><b>Split-flap board</b><br><img src="docs/gallery/splitflap.gif" width="100%" alt="Split-flap board"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>Neon sign</b><br><img src="docs/gallery/neon.gif" width="100%" alt="Neon sign"></td>
+<td width="33%" align="center"><b>16-bit arcade</b><br><img src="docs/gallery/arcade.gif" width="100%" alt="16-bit arcade"></td>
+<td width="33%" align="center"><b>CRT terminal</b><br><img src="docs/gallery/terminal.gif" width="100%" alt="CRT terminal"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>Thermal receipt</b><br><img src="docs/gallery/thermal.gif" width="100%" alt="Thermal receipt"></td>
+<td width="33%" align="center"><b>Transit map</b><br><img src="docs/gallery/transit.gif" width="100%" alt="Transit map"></td>
+<td width="33%" align="center"><b>Blueprint</b><br><img src="docs/gallery/blueprint.gif" width="100%" alt="Blueprint"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>Apple-style showroom</b><br><img src="docs/gallery/brand-apple.gif" width="100%" alt="Apple-style showroom"></td>
+<td width="33%" align="center"><b>Samsung-style tech launch</b><br><img src="docs/gallery/brand-samsung.gif" width="100%" alt="Samsung-style tech launch"></td>
+<td width="33%" align="center"><b>Ferrari-style racing luxury</b><br><img src="docs/gallery/brand-ferrari.gif" width="100%" alt="Ferrari-style racing luxury"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>Nike-style athletic</b><br><img src="docs/gallery/brand-nike.gif" width="100%" alt="Nike-style athletic"></td>
+<td width="33%" align="center"><b>Spotify-style dark media</b><br><img src="docs/gallery/brand-spotify.gif" width="100%" alt="Spotify-style dark media"></td>
+<td width="33%" align="center"><b>From a DESIGN.md (Stripe)</b><br><img src="docs/gallery/designmd-stripe.gif" width="100%" alt="From a DESIGN.md (Stripe)"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>Free style (left to the agent)</b><br><img src="docs/gallery/free.gif" width="100%" alt="Free style (left to the agent)"></td>
+<td width="33%"></td>
+<td width="33%"></td>
+</tr>
+</table>
 
 ## Credit
 
