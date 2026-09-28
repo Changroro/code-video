@@ -2,12 +2,17 @@
 # and optionally re-ink every remaining pixel in one colour.
 # uv run --with pillow python clean_logo.py in.png out.png [--ink '#0F223F'] [--threshold 200]
 import argparse
+import os
 from PIL import Image
 
 p = argparse.ArgumentParser()
 p.add_argument('src'); p.add_argument('dst')
 p.add_argument('--ink'); p.add_argument('--threshold', type=int, default=200)
 a = p.parse_args()
+cwd = os.path.realpath(os.getcwd())
+dst = os.path.realpath(a.dst)
+if os.path.commonpath([dst, cwd]) != cwd:
+    raise SystemExit(f'refusing to write outside the working directory: {a.dst}')
 im = Image.open(a.src).convert('RGBA')
 px = im.load()
 ink = tuple(int(a.ink[i:i + 2], 16) for i in (1, 3, 5)) if a.ink else None
