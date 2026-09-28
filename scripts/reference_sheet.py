@@ -1,4 +1,4 @@
-"""Put the credited original's frames above frames from your video, to check the signature items side by side.
+"""Put the original's frames above frames from your video, to check the signature items side by side.
 
     uv run --with pillow python reference_sheet.py <key> <video.mp4> <out.jpg>
 

@@ -1,6 +1,6 @@
 # kit.js API
 
-Global scripts. `index.html` loads rough.js → kit.js → (a mini set and one style module) → main.js in that order. The scene-API styles are in [scene-api.md](scene-api.md). `window.VIDEO = { w, h, fps, dur, blur, shutter }` sets the canvas size, length, and optional motion blur.
+Global scripts. `index.html` loads rough.js → kit.js → (a mini set and one style module) → main.js in that order. The scene-API styles are in [styles/scene.md](styles/scene.md). `window.VIDEO = { w, h, fps, dur, blur, shutter }` sets the canvas size, length, and optional motion blur.
 
 ## Globals
 - `W, H, FPS, DUR`, `ctx` (2D context), `rc` (rough canvas), `T` (current second), `IMG` (images from boot), `BG`.
@@ -178,7 +178,7 @@ boot({
 
 ## Render
 - `node render.mjs stills 1.2 3.4 30-31.5 ...` → `stills/t<seconds>.png`; a range gives six evenly spaced frames across it, which shows motion a single still misses (something leaving the frame, a card that never appears).
-- `CRF=25 WORKERS=4 node render.mjs video out.mp4` → H.264, yuv420p, faststart, at the size and fps in `window.VIDEO`. Frames are captured as JPEG (2–3× faster than PNG, visually identical after H.264); `CAPTURE=png` forces lossless capture. About 1–2 minutes and about 8 MB for 30 s at 1080p; more workers than 4 usually slows Chrome down.
+- `CRF=25 WORKERS=4 node render.mjs video out.mp4` → H.264, yuv420p, faststart, at the size and fps in `window.VIDEO`. Frames are captured as JPEG (2–3× faster than PNG, visually identical after H.264); `CAPTURE=png` forces lossless capture. About 1–2 minutes for 30 s at 1080p; more workers than 4 usually slows Chrome down.
 - `QUERY=lang=ko node render.mjs …` appends `?lang=ko` to the page URL, for rendering two versions from one `main.js`.
 - If `audio.wav` exists in the work folder, the video gets an AAC track normalised to -14 LUFS.
 

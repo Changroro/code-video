@@ -1,6 +1,6 @@
 # Style: toon
 
-A bright modern cartoon: flat saturated colour with one cel-shade tone, thick even ink outlines, squash-and-stretch bounces, letters that pop, sparkles, and iris transitions. Original to this skill.
+A bright modern cartoon: flat saturated colour with one cel-shade tone, thick even ink outlines, squash-and-stretch bounces, letters that pop, sparkles, and iris transitions.
 
 ## Signature
 | # | Item | How (`toon.js`) |

@@ -1,5 +1,5 @@
 'use strict';
-// Signature pieces of the default hand-drawn look, after @nahiddotai's "Introducing Opus 5.5" video
+// Signature pieces of the default hand-drawn look
 // (docs/styles/handdrawn.jpg). Load after kit.js. Fonts: HD.serif / HD.script / HD.pix / HD.mono, declared in index.html.
 const HD = { ink: '#2b2a28', paper: '#f4f2ee', dark: '#1c1b1a', light: '#f3f1ec', accent: '#D97757', muted: '#8d8a84', tag: '#eadfc8',
   serif: 'SERIF', script: 'SCRIPT', pix: 'PIX', mono: 'MONO', sans: 'SANS' };

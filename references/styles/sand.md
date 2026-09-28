@@ -2,8 +2,6 @@
 
 Scenes poured in dark sand on a glowing light table, lit by sunbursts and night skies, that break into grains and blow away between eras. Music and sound effects. Suits stories told through time.
 
-Credit: adapted from the sand animation shared by [@Michaelzsguo](https://x.com/Michaelzsguo/status/2102592355165782312). The original prompt is not included; this guide is our own write-up.
-
 ## Reference
 Open `<skill>/docs/styles/sand.jpg` (four frames from the original) before planning, and compare your stills with it during QA. The original is a 2-minute story of 250 years of U.S. history: a ring of stars around "250", then one era per scene (1776 bell and declaration, 1787 "We the People", westward wagons at sunrise, 1863, the 1869 railroad, 1903 first flight, 1945, 1963, the 1969 moon landing at night), ending on fireworks over the Capitol.
 

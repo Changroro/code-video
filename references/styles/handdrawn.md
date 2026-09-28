@@ -2,8 +2,6 @@
 
 Warm empty paper, a thin ink horizon, and an 8-bit mascot that acts out the story, cut against dark title cards and arcade screens.
 
-Credit: adapted from [@nahiddotai](https://www.threads.com/@nahiddotai)'s ["Introducing Opus 5.5" launch video](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB) and [the prompt they shared](https://www.threads.com/@nahiddotai/post/Ddm0OgZkuQx). The original prompt is not included; this guide is our own write-up.
-
 ## Reference
 Open `<skill>/docs/styles/handdrawn.jpg` (four frames from the original) before planning, and compare your stills with it during QA for the look. The original is a 30 s model launch: the mascot wakes up, powers up, and walks through "worlds" of benchmark results.
 

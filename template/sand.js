@@ -1,5 +1,5 @@
 'use strict';
-// Sand art on a backlit light table, after @Michaelzsguo's sand animation (docs/styles/sand.jpg).
+// Sand art on a backlit light table (docs/styles/sand.jpg).
 // Load after kit.js and call sandSetup() from boot({ setup }).
 // Per frame: draw the scene's silhouettes and captions into the layer returned by sandClear()
 // (any colour; alpha = how much sand), then sandFrame(reveal, sweep, dir, o) pours, sweeps, or scatters it onto the table.

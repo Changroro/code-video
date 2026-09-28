@@ -2,8 +2,6 @@
 
 A clean explainer that looks like an official brand asset: one dark field, thin white hand-drawn line art, bold type with a single accent, scribbled emphasis, and a persuasion arc from pain to call to action. Silent.
 
-Credit: adapted from the website-to-explainer approach shared by [@digitalstrategyai](https://www.threads.com/@digitalstrategyai/post/DdpAYbcgAj0), which builds on [@nahiddotai](https://www.threads.com/@nahiddotai/post/DdmtD3zDtkB)'s launch video. The original prompt is not included; this guide is our own write-up.
-
 ## Reference
 Open `<skill>/docs/styles/motion.jpg` (four frames from the original) before planning, and compare your stills with it during QA. The original is a 30 s "Introducing aifixly" explainer made from the aifixly.com website: pain (searching, manuals, waiting) → the product (a phone that sees what you see) → proof (answers in seconds, 14 experts) → price pain → CTA.
 

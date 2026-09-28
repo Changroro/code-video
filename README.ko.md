@@ -2,7 +2,7 @@
 
 [English](README.md) | 한국어
 
-![code-video가 만들어진 과정을 이 스킬로 만든 영상](docs/hero.ko.gif)
+<img src="docs/hero.ko.gif" width="100%" alt="code-video가 만들어진 과정을 이 스킬로 만든 영상">
 
 *Claude Opus 5.5가 나오고 피드가 코드로 그린 영상으로 가득 차서, 그걸 스킬로 벼려 냈습니다. 이 소개 영상도 이 스킬로 만들었고, 모든 프레임을 코드로 그렸습니다.* [45초 MP4 보기](https://github.com/Changroro/code-video/releases/download/v1.3.1/CodeVideo_intro_ko.mp4).
 
@@ -52,25 +52,53 @@
 
 화풍마다 예시 영상에서 몇 초씩 잘랐습니다. 모든 예시는 이 스킬만 가진 새 에이전트가 이 스킬을 주제로 만든 영상이며, 전체 MP4는 [최신 릴리즈](https://github.com/Changroro/code-video/releases/latest)에 있습니다. 예시 영상의 화면 언어는 영어입니다.
 
-| **손그림** | **브랜드 모션그래픽** | **모래 그림** |
-|---|---|---|
-| ![손그림](docs/gallery/handdrawn.gif) | ![브랜드 모션그래픽](docs/gallery/motion.gif) | ![모래 그림](docs/gallery/sand.gif) |
-| **가사형 뮤직비디오** | **비트 싱크 실사** | **UI 모프** |
-| ![가사형 뮤직비디오](docs/gallery/lyric.gif) | ![비트 싱크 실사](docs/gallery/beat.gif) | ![UI 모프](docs/gallery/uimorph.gif) |
-| **히어로 코믹스** | **툰** | **스크랩북** |
-| ![히어로 코믹스](docs/gallery/comic.gif) | ![툰](docs/gallery/toon.gif) | ![스크랩북](docs/gallery/scrapbook.gif) |
-| **찢은 종이 콜라주** | **파티클** | **스플릿플랩 전광판** |
-| ![찢은 종이 콜라주](docs/gallery/collage.gif) | ![파티클](docs/gallery/particles.gif) | ![스플릿플랩 전광판](docs/gallery/splitflap.gif) |
-| **네온사인** | **16비트 아케이드** | **CRT 터미널** |
-| ![네온사인](docs/gallery/neon.gif) | ![16비트 아케이드](docs/gallery/arcade.gif) | ![CRT 터미널](docs/gallery/terminal.gif) |
-| **감열지 영수증** | **노선도** | **청사진** |
-| ![감열지 영수증](docs/gallery/thermal.gif) | ![노선도](docs/gallery/transit.gif) | ![청사진](docs/gallery/blueprint.gif) |
-| **애플풍 쇼룸** | **삼성풍 테크 런칭** | **페라리풍 레이싱 럭셔리** |
-| ![애플풍 쇼룸](docs/gallery/brand-apple.gif) | ![삼성풍 테크 런칭](docs/gallery/brand-samsung.gif) | ![페라리풍 레이싱 럭셔리](docs/gallery/brand-ferrari.gif) |
-| **나이키풍 애슬레틱** | **스포티파이풍 다크 미디어** | **DESIGN.md로 만든 예(Stripe)** |
-| ![나이키풍 애슬레틱](docs/gallery/brand-nike.gif) | ![스포티파이풍 다크 미디어](docs/gallery/brand-spotify.gif) | ![DESIGN.md로 만든 예(Stripe)](docs/gallery/designmd-stripe.gif) |
-| **자유 화풍(에이전트에게 맡김)** |   |   |
-| ![자유 화풍(에이전트에게 맡김)](docs/gallery/free.gif) |   |   |
+<table>
+<tr>
+<td width="33%" align="center"><b>손그림</b><br><img src="docs/gallery/handdrawn.gif" width="100%" alt="손그림"></td>
+<td width="33%" align="center"><b>브랜드 모션그래픽</b><br><img src="docs/gallery/motion.gif" width="100%" alt="브랜드 모션그래픽"></td>
+<td width="33%" align="center"><b>모래 그림</b><br><img src="docs/gallery/sand.gif" width="100%" alt="모래 그림"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>가사형 뮤직비디오</b><br><img src="docs/gallery/lyric.gif" width="100%" alt="가사형 뮤직비디오"></td>
+<td width="33%" align="center"><b>비트 싱크 실사</b><br><img src="docs/gallery/beat.gif" width="100%" alt="비트 싱크 실사"></td>
+<td width="33%" align="center"><b>UI 모프</b><br><img src="docs/gallery/uimorph.gif" width="100%" alt="UI 모프"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>히어로 코믹스</b><br><img src="docs/gallery/comic.gif" width="100%" alt="히어로 코믹스"></td>
+<td width="33%" align="center"><b>툰</b><br><img src="docs/gallery/toon.gif" width="100%" alt="툰"></td>
+<td width="33%" align="center"><b>스크랩북</b><br><img src="docs/gallery/scrapbook.gif" width="100%" alt="스크랩북"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>찢은 종이 콜라주</b><br><img src="docs/gallery/collage.gif" width="100%" alt="찢은 종이 콜라주"></td>
+<td width="33%" align="center"><b>파티클</b><br><img src="docs/gallery/particles.gif" width="100%" alt="파티클"></td>
+<td width="33%" align="center"><b>스플릿플랩 전광판</b><br><img src="docs/gallery/splitflap.gif" width="100%" alt="스플릿플랩 전광판"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>네온사인</b><br><img src="docs/gallery/neon.gif" width="100%" alt="네온사인"></td>
+<td width="33%" align="center"><b>16비트 아케이드</b><br><img src="docs/gallery/arcade.gif" width="100%" alt="16비트 아케이드"></td>
+<td width="33%" align="center"><b>CRT 터미널</b><br><img src="docs/gallery/terminal.gif" width="100%" alt="CRT 터미널"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>감열지 영수증</b><br><img src="docs/gallery/thermal.gif" width="100%" alt="감열지 영수증"></td>
+<td width="33%" align="center"><b>노선도</b><br><img src="docs/gallery/transit.gif" width="100%" alt="노선도"></td>
+<td width="33%" align="center"><b>청사진</b><br><img src="docs/gallery/blueprint.gif" width="100%" alt="청사진"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>애플풍 쇼룸</b><br><img src="docs/gallery/brand-apple.gif" width="100%" alt="애플풍 쇼룸"></td>
+<td width="33%" align="center"><b>삼성풍 테크 런칭</b><br><img src="docs/gallery/brand-samsung.gif" width="100%" alt="삼성풍 테크 런칭"></td>
+<td width="33%" align="center"><b>페라리풍 레이싱 럭셔리</b><br><img src="docs/gallery/brand-ferrari.gif" width="100%" alt="페라리풍 레이싱 럭셔리"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>나이키풍 애슬레틱</b><br><img src="docs/gallery/brand-nike.gif" width="100%" alt="나이키풍 애슬레틱"></td>
+<td width="33%" align="center"><b>스포티파이풍 다크 미디어</b><br><img src="docs/gallery/brand-spotify.gif" width="100%" alt="스포티파이풍 다크 미디어"></td>
+<td width="33%" align="center"><b>DESIGN.md로 만든 예(Stripe)</b><br><img src="docs/gallery/designmd-stripe.gif" width="100%" alt="DESIGN.md로 만든 예(Stripe)"></td>
+</tr>
+<tr>
+<td width="33%" align="center"><b>자유 화풍(에이전트에게 맡김)</b><br><img src="docs/gallery/free.gif" width="100%" alt="자유 화풍(에이전트에게 맡김)"></td>
+<td width="33%"></td>
+<td width="33%"></td>
+</tr>
+</table>
 
 ## 크레딧
 

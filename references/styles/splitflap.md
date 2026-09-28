@@ -1,6 +1,6 @@
 # Style: split-flap board
 
-A railway departures board: tiles clatter through the alphabet onto each message, amber lamps blink, and a station clock ticks. Original to this skill.
+A railway departures board: tiles clatter through the alphabet onto each message, amber lamps blink, and a station clock ticks.
 
 ## Signature
 | # | Item | How (`splitflap.js`) |

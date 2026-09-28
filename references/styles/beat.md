@@ -2,8 +2,6 @@
 
 A high-end, minimal promo cut to a song: a hook that lands word by word on a light stage, the product UI, then real clips on a dark stage as a scanned wall, a 3D carousel, and a phone next to a campaign panel, with stats on push cuts and every cut on a beat.
 
-Credit: adapted from the beat-synced promo template shared by [@twoclipping](https://x.com/twoclipping/status/2102554209166000267). The original prompt is not included; this guide is our own write-up.
-
 ## Reference
 Open `<skill>/docs/styles/beat.jpg` (four frames from the original) before planning, and compare your stills with it during QA. The original is a 20 s promo for hooklab, an ad tool ("ads that make themselves"), at 60 fps with motion blur: "your next ad is one ■ away" → drop a product link → a wall of UGC clips being analysed → ranked hooks → a carousel of generated ads → a phone and a "launch campaign" panel → 3.5x / 4.2x / 24 → "hooks, ads, launched" → logo.
 

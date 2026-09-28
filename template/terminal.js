@@ -1,5 +1,5 @@
 'use strict';
-// Look: green phosphor CRT terminal. Same scene API as every scene-API module (see references/scene-api.md).
+// Look: green phosphor CRT terminal. Same scene API as every scene-API module (see references/styles/scene.md).
 const LOOK = (() => {
   const C = { bg: '#031208', text: '#46ff8a', dim: 'rgba(70,255,138,.45)', accent: '#ffc24a', prompt: 'user@studio' };
   let FS = 38, LH = 56;

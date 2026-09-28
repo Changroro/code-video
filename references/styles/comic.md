@@ -1,6 +1,6 @@
 # Style: hero comic
 
-A superhero comic book come to life: newsprint pages, thick ink panels, Ben-Day halftone, yellow narration boxes, speech balloons, burst lettering, and a red title slab over flipping pages. Original to this skill.
+A superhero comic book come to life: newsprint pages, thick ink panels, Ben-Day halftone, yellow narration boxes, speech balloons, burst lettering, and a red title slab over flipping pages.
 
 ## Signature
 | # | Item | How (`comic.js`) |

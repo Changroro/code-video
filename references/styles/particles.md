@@ -1,6 +1,6 @@
 # Style: particles
 
-Thousands of glowing particles drift on a flow field, gather into words, logos, and numbers, then scatter and re-form. The purest "drawn in code" look. Original to this skill.
+Thousands of glowing particles drift on a flow field, gather into words, logos, and numbers, then scatter and re-form. The purest "drawn in code" look.
 
 ## Signature
 | # | Item | How (`particles.js`) |
