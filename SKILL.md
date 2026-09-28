@@ -11,12 +11,13 @@ Make a short video drawn entirely in code from three inputs: a **design** (the s
 
 Required tools: `node`/`npm`, `ffmpeg` with libx264, Google Chrome, and `uv`. If one is missing, stop and say which.
 
-## Inputs
-1. **Design.** Read the style headers with `grep '^# Style' <skill>/references/styles/*.md` and open the guide for the style the user asked for. For a style not listed there, use `free.md`.
-2. **Research.** About 10 facts with sources, and the brand's real colours, fonts, and logo.
-3. **Format.** Length, frame, on-screen language, and characters. Ask once for what the user did not say; the defaults are 30 s, 16:9 1920×1080, 30 fps, and the conversation's language.
+## Ask first
+Ask each with AskUserQuestion, skipping anything the user already gave.
+1. **Topic.** What the video is about: a company, service, website, or product, with a link if there is one.
+2. **Design.** A style, a look described in words or shown in a reference, or a path or link to a DESIGN.md. Match it against the style headers (`grep '^# Style' <skill>/references/styles/*.md`) and open that guide; a DESIGN.md uses `brand.md`, and anything else not listed uses `free.md`. If the user skips it, pick one of the listed styles at random.
+3. **Video.** Length, frame, on-screen language, and characters, with the recommended option first. Defaults: 30 s, 16:9 1920×1080, 30 fps, the conversation's language.
 
-Show a short plan (the story in a few lines, the palette, the facts) and get approval before building.
+Then research about 10 facts with sources and the brand's real colours, fonts, and logo, show a short plan (story, palette, facts), and get approval before building.
 
 ## Rules
 - Every number on screen has a source. No invented stats or UI readouts.
