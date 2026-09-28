@@ -31,7 +31,7 @@ bash <skill>/scripts/fetch_fonts.sh assets/fonts
 ```
 Set size, fps, and length in `window.VIDEO` in `index.html`, declare the fonts (for Korean, pair each Latin face with a Hangul face through `unicode-range`), load the style's module, and write the scenes in `main.js`. For both languages, branch on one URL parameter and render each with `QUERY=lang=ko node render.mjs video …`. For sound, write `audio.json` and run `uv run --with numpy --with scipy python <skill>/scripts/audio.py audio.json audio.wav`; the render muxes it.
 
-Look at a few stills (`node render.mjs stills <times>`, where a range such as `12-14` gives six frames across a moving shot, then `uv run --with pillow python <skill>/scripts/contact_sheet.py stills <dir>`), fix what looks wrong, and render with `CRF=25 node render.mjs video <Name>.mp4`. Keep it under about 10 MB per 30 s; if it is larger, render again with `CRF=27`.
+Look at a few stills (`node render.mjs stills <times>`, where a range such as `12-14` gives six frames across a moving shot, then `uv run --with pillow python <skill>/scripts/contact_sheet.py stills <dir>`), fix what looks wrong, and render with `CRF=25 node render.mjs video <Name>.mp4`.
 
 ## Deliver
 Send the MP4 and list the facts used with their sources.
