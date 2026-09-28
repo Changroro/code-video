@@ -3,15 +3,15 @@
 One interface element that never cuts: a button becomes a loader, a player, a slider, tabs, a chart, a command palette, a toast, and finally the button again, so the video loops. A cursor clicks and drags to cause every change, on the beat. Reference frames are in `docs/styles/uimorph.jpg`.
 
 ## Signature
-| # | Item | How (`uimorph.js`) |
-|---|---|---|
-| 1 | A single shape, never cut: every state is the same element changing size, corner radius, and fill | `umShape(t, SHAPE)` with one key per state |
-| 2 | Content swaps inside it with a short blur, entering and leaving on its own timing | `umSwap(t, t0, t1, draw)` inside `umClip` |
-| 3 | A cursor causes every change with real clicks and drags; dragged values follow it and spring back on release | `umCursor`, `umDrag` |
-| 4 | Spring motion with at most a tiny overshoot; tab indicators and knobs stretch because their edges ride different springs | `spring`, `stretch` |
-| 5 | Real UI states the subject would have (its buttons, player, sliders, tabs, chart, command palette, toast), in black and white on a light warm grey, one clean UI font | `UM` tokens, `umPlayPause`, `umCheck`, `umSpinner`, `umIcon`, `umChart`, `umBG` |
-| 6 | Something happens on every beat; the camera zooms so each state fills the frame | `beat(n)`, `spring(t, CAM)` with `umFit` |
-| 7 | The last frame is the first frame, cursor included, so it loops | the first and last keys of every track match |
+| # | Item |
+|---|---|
+| 1 | A single shape, never cut: every state is the same element changing size, corner radius, and fill |
+| 2 | Content swaps inside it with a short blur, entering and leaving on its own timing |
+| 3 | A cursor causes every change with real clicks and drags; dragged values follow it and spring back on release |
+| 4 | Spring motion with at most a tiny overshoot; tab indicators and knobs stretch because their edges ride different springs |
+| 5 | Real UI states the subject would have (its buttons, player, sliders, tabs, chart, command palette, toast), in black and white on a light warm grey, one clean UI font |
+| 6 | Something happens on every beat; the camera zooms so each state fills the frame |
+| 7 | The last frame is the first frame, cursor included, so it loops |
 
 ## Look
 - **Palette**: canvas `#ecebe7`, ink `#0b0b0b`, cards `#ffffff`, secondary text `#8d8c88`. Colour appears only in content such as album art or the subject's own accent; no gradients or glows on the UI itself.

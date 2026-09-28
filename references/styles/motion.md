@@ -6,16 +6,16 @@ A clean explainer that looks like an official brand asset: one dark field, thin 
 Open `<skill>/docs/styles/motion.jpg` (four frames from the original) before planning, and compare your stills with it during QA. The original is a 30 s "Introducing aifixly" explainer made from the aifixly.com website: pain (searching, manuals, waiting) → the product (a phone that sees what you see) → proof (answers in seconds, 14 experts) → price pain → CTA.
 
 ## Signature
-| # | Item | How (`motion.js`) |
-|---|---|---|
-| 1 | One dark field for the whole video (no light scenes), one accent colour, pain words in red | `moBG()`, `MO.accent` = the brand colour, `MO.pain` |
-| 2 | Thin white hand-drawn line illustrations of everyday objects that draw themselves on (faucet, manual, clock, eye, wallet, camera, mic) | `icon(name, x, y, s, p, id)`; add objects the topic needs to `MO_ICONS` as polylines |
-| 3 | Bold geometric sans headlines that pop in word by word, the key word in the accent | `kwords(s, x, y, p, { font: MO.font, weight: 700, colors: { i: MO.accent } })` |
-| 4 | Hand-drawn emphasis on type: a scribbled oval around a key word, a swoosh under a phrase | `scribble`, `swoosh` |
-| 5 | A thin "frustration" gauge that climbs across the pain beats | `meter(label, v)` |
-| 6 | Proof drawn as line art: a bar chart with hatched pain bars and one tiny accent bar; a big accent number; a cloud of outline pill tags with one filled | `lineBars`, `pills`, `text` at 150–180 px |
-| 7 | The product shown working: a line-art phone with camera corners, the question in an outline bubble with a mic and a live waveform, the answer in a filled accent bubble | `linePhone`, `askBubble`, `replyBubble` |
-| 8 | Ending: the wordmark with an accent full stop and swoosh, a glowing pill CTA that the cursor clicks, the free-to-try line and URL | `wordmark`, `ctaButton` |
+| # | Item |
+|---|---|
+| 1 | One dark field for the whole video (no light scenes), one accent colour, pain words in red |
+| 2 | Thin white hand-drawn line illustrations of everyday objects that draw themselves on (faucet, manual, clock, eye, wallet, camera, mic) |
+| 3 | Bold geometric sans headlines that pop in word by word, the key word in the accent |
+| 4 | Hand-drawn emphasis on type: a scribbled oval around a key word, a swoosh under a phrase |
+| 5 | A thin "frustration" gauge that climbs across the pain beats |
+| 6 | Proof drawn as line art: a bar chart with hatched pain bars and one tiny accent bar; a big accent number; a cloud of outline pill tags with one filled |
+| 7 | The product shown working: a line-art phone with camera corners, the question in an outline bubble with a mic and a live waveform, the answer in a filled accent bubble |
+| 8 | Ending: the wordmark with an accent full stop and swoosh, a glowing pill CTA that the cursor clicks, the free-to-try line and URL |
 
 ## Look
 - **Palette**: background `#0c0b1d`, ink `#f2f1f7`, dim `#8f8da8`, pain `#ff5d5d`, camera cyan `#38d6e6`, and the brand's accent (read it from the site CSS or logo pixels; the original used its purple `#7c5cff`). If the brand is light-themed, still keep the dark field and carry the brand in the accent and logo.

@@ -1,6 +1,6 @@
 # kit.js API
 
-Global scripts. `index.html` loads rough.js → kit.js → (a mini set and one style module) → main.js in that order. The scene-API styles are in [styles/scene.md](styles/scene.md). `window.VIDEO = { w, h, fps, dur, blur, shutter }` sets the canvas size, length, and optional motion blur.
+Global scripts. `index.html` loads rough.js → kit.js → (a mini set when the topic calls for it) → main.js in that order. `window.VIDEO = { w, h, fps, dur, blur, shutter }` sets the canvas size, length, and optional motion blur.
 
 ## Globals
 - `W, H, FPS, DUR`, `ctx` (2D context), `rc` (rough canvas), `T` (current second), `IMG` (images from boot), `BG`.
@@ -27,7 +27,7 @@ Global scripts. `index.html` loads rough.js → kit.js → (a mini set and one s
   - `maxW`: shrink when the text is wider.
   - `jit`: hand-drawn wobble (false for numbers and HUD).
 - `measure(s, font, size, weight)`.
-- `useFonts([[family, 'assets/fonts/file.ttf'], ...])`: load font files at boot without `@font-face` (scene-API modules pass `LOOK.fonts`).
+- `useFonts([[family, 'assets/fonts/file.ttf'], ...])`: load font files at boot without `@font-face`.
 - `kwords(s, x, y, p, { font, weight, size, color, colors, align })`: words pop in one after another over p = 0..1. `colors` maps a word index to a colour.
 - `typeOn(s, x, y, p, o)`: typewriter with a blinking cursor. Same options as `text`.
 - `karaoke(syl, x, y, t, { font, weight, size, off, on, outline, align })`: one lyric line. `syl` is `[[text, start], ...]` and `t` uses the same clock as the start times; sung syllables turn `on`.
@@ -57,111 +57,6 @@ Global scripts. `index.html` loads rough.js → kit.js → (a mini set and one s
 ## Video clips (beat-synced style)
 - Put footage in `assets/clips/<id>/0001.jpg ...` (see `references/styles/beat.md`) and register it with `boot({ clips: { id: { n: frameCount, fps: 30 } } })`.
 - `clip(id, t, x, y, w, h, { alpha })`: draws the clip's frame at t seconds, cover-fit into the box. Frames load on demand; `renderFrame` redraws once they arrive, and a missing file stops the render.
-
-## Style modules
-Load one after `kit.js`. Each exposes a colour/font object you can set from the research before boot, and draws the original's signature pieces. The guides say which piece fulfils which signature item.
-
-### `handdrawn.js` (default style, [styles/handdrawn.md](styles/handdrawn.md))
-`HD = { ink, paper, dark, light, accent, muted, tag, serif, script, pix, mono, sans }`.
-- `hdPaper()`, `hdDark()`: plain paper and the dark card background. `horizon(y, id, { x0, x1, p, tufts })`, `tuft(x, y, id)`, `cloud(x, y, s, id)`.
-- `worldTag('WORLD 1-2')`, `worldCard(world, title, p, { bg, accent })`.
-- `introCard(t, { pre, name, accent, sub }, { size, y })`: the dark serif title card; the name types in and the accent part gets a hand underline.
-- `countUp(to, p, { from, decimals, prefix, suffix })` → string. `serifStat(value, label, note, x, y, p, o)`.
-- `hatchBars(items, { x, y, w, h, p, max, id })` with items `{ label, v, text, hi }`; returns the bar tops (to stand a mascot on).
-- `hiScore(title, sub, rows, p, { hi, mini, record })`, `priceTag(x, y, oldV, newV, p, id)`, `docGrid(n, cols, done, p, { x, y, miss })`, `strikeList(lines, x, y, p)`.
-- `paperTear(p, color, dir)`: torn-paper transition. `zzz(x, y, t)`, `burst(x, y, r, p, color, id)`.
-
-### `motion.js` (brand motion graphics, [styles/motion.md](styles/motion.md))
-`MO = { bg, ink, dim, accent, pain, cyan, font, mono }`.
-- `moBG()`: the flat dark field.
-- `icon(name, x, y, s, p, id, color, width)`: line icons from `MO_ICONS` (clock, book, eye, wallet, cash, camera, mic, check, faucet, bulb, chat, search, lock, chart, user, gear, star); add more as polylines in a 100-unit box.
-- `scribble(x, y, w, h, p, id)`, `swoosh(x, y, w, p, id)`: hand-drawn emphasis on type.
-- `meter(label, v, x, y, w, color)`: the frustration gauge.
-- `lineBars(title, items, { x, y, w, h, p })`: hatched pain bars and one accent bar.
-- `linePhone(x, y, h, p, id, draw)`, `askBubble(s, x, y, w, p, id)`, `replyBubble(s, x, y, w, p)`.
-- `pills(items, cx, y, maxW, p, active, size)`, `ctaButton(label, x, y, t, clickAt, { note, url })`, `wordmark(name, x, y, size, p)`.
-
-### `sand.js` (sand art, [styles/sand.md](styles/sand.md))
-Pass `setup: sandSetup` to `boot`. `SAND = { lit, edge, ink, serif, serifItalic, grainSize, tableGrain, edgeGrain }`; set colours before `sandSetup` runs.
-- `sandClear()` → an empty offscreen layer. Draw silhouettes and text into it (with `withCtx`); alpha is the sand density.
-- `sandFrame(reveal, sweep, dir, { scatter, wind, light })`: composites the layer onto the table. `reveal` 0..1 pours the sand in patchily; `sweep` 0..1 pushes it off along `dir = [dx, dy]`; `scatter` 0..1 breaks the picture into grains that blow away; `light` scales the table.
-- `sandRays(g, cx, cy, p, { n, haze, sun })`: a sunburst carved into a haze of sand. `sandCut(g, fn)`: carve light out (moon, stars, windows). `sandYear(g, year, sub, { corner, size })`: the serif year and italic caption.
-
-### `lyric.js` (lyric music video, [styles/lyric.md](styles/lyric.md))
-`LY = { bg, grid, ink, dim, faint, card, accents, sans, mono }`.
-- `lyFrame({ section, detail, title, progress, accent })`: the dark grid frame with the section label, title, progress line, and lyric hairline.
-- `lyLine(syl, t)`, `lyWords(line, start, step)` → syllables on a beat grid.
-- `lyNode(x, y, w, h, label, sub, p, { color, size, glow })`, `lyLink(pts, p, color)`, `probBars(x, y, w, rows, p, { color, title, sub })`, `codeBox(x, y, w, lines, p, { color, label })`, `bigValue(s, x, y, p, { color, size, label, boxed })`.
-- `lyTitle(name, sub, about, song, p, { color, kind })`, `chorusColor(n)`.
-
-### `beat.js` (beat-synced footage, [styles/beat.md](styles/beat.md))
-`BT = { light, glow, dark, floor, ink, inkLight, dim, accent, ok, font, mono }`.
-- `stageLight(t)`, `stageDark(glow)`.
-- `beatWords([[word, time], …], x, y, t, o)`: words land on their beats; `'■'` is the masked accent block, and its box is returned.
-- `appWindow(x, y, w, h, { title })` → content box, `field(x, y, w, s, p)`, `pillButton(label, x, y, { press })`.
-- `clipWall(ids, t, { cols, rows, scan, winners, tags, caption })`, `carousel(ids, t, spin, { R, cardH, n })`, `phoneClip(id, t, x, y, h, { caption })`, `campaignPanel(x, y, t, { toggles, clickAt, flipAt, result })`.
-- `scoreRows(rows, x, y, t, { label })`, `pushStat(value, label, t, { at })`, `ticker([[word, time], …], t, { sub })`.
-
-### `comic.js` (hero comic, [styles/comic.md](styles/comic.md))
-`CM = { paper, ink, red, yellow, blue, cyan, white, font }`.
-- `comicPaper(color)`, `halftone(x, y, w, h, color, { dot, gap, angle, fade, dir })`.
-- `pageGrid(rows, { x, y, w, h, gutter, heights })` → panel rects; `panel(rect or quad, draw, { fill, border, p })`.
-- `actionLines(cx, cy, p)`, `burstShape(x, y, r, o)`, `comicText(s, x, y, size, o)`, `sfx(word, x, y, p, o)`.
-- `caption(s, x, y, { p })`, `balloon(s, x, y, tailX, tailY, p, { thought })`.
-- `titleSlab(title, t, pages, { flipEnd, sub })`, `pageTurn(p, drawNext)`, `inked(path, fill, o)`.
-
-### `toon.js` (toon, [styles/toon.md](styles/toon.md))
-`TN = { ink, sky, sky2, grass, grass2, sun, pink, orange, purple, white, font, line }`.
-- `toonBG('sky' | 'burst' | 'dots', t, { a, b })`, `toonShape(path, fill, { shade, off })`.
-- `bounce(t, t0, { h, period, decay })` → `[sx, sy, dy]`, `pop(t, a)`.
-- `toonText(s, x, y, t, { size, a, fill })`, `toonSign(s, x, y, t, a)`, `buddy(x, y, s, t, { color, mood, look, sq })`.
-- `sparkles(x, y, r, t)`, `smear(x0, x1, y, h, p)`, `iris(p, cx, cy)`.
-
-### `scrapbook.js` (scrapbook, [styles/scrapbook.md](styles/scrapbook.md))
-`SB = { desk, note, ink, line, margin, tape, tape2, red, blue, yellow, hand, marker, type }`.
-- `sbDesk()`, `notePage(x, y, w, h, rot)`, `tape(x, y, w, rot, color)`.
-- `polaroid(img or painter, x, y, w, rot, p, caption)`, `tornLabel(s, x, y, rot, { p })`.
-- `sticker(draw, x, y, r, p)`, `stickerText(s, x, y, r, p, fill)`, `rubberStamp(s, x, y, p)`.
-- `doodleArrow(pts, p, id)`, `doodleStar(x, y, r, p, id)`, `doodleCircle(x, y, rx, ry, p, id)`, `doodleUnderline(x, y, w, p, id)`, `paperSlide(p, drawNext)`.
-
-### `collage.js` (torn-paper collage, [styles/collage.md](styles/collage.md))
-`CL = { paper, ink, rim, shadow, strip, sky, sea, sand, sun, stone, slate, moss, rust, serif, hand }`. Tints are `#rrggbb`.
-- `clSheet()`: the cold-press paper ground.
-- `scrap(key, pts, color, t, at, { dur, rot, from, out, paint })`: one torn scrap with corners `pts`, landing at `at` and peeling off at `out`; `paint(p)` draws on it in its own frame. `scrapRect(key, x, y, w, h, color, t, at, o)`, `scrapCircle(key, cx, cy, r, color, t, at, o)`.
-- `clStrips(key, x, y, w, h, colors, t, at, { n, stagger, order, out })`, `clMosaic(key, poly, colors, t, at, { size, spread, order, out })`, `clImage(key, img, x, y, w, h, t, at, { cols, spread, wash, out })`.
-- `clWords(s, x, y, t, at, { size, stagger, align, out })`, `clPeel(p, drawNext)`.
-
-### `uimorph.js` (UI morph, [styles/uimorph.md](styles/uimorph.md))
-`UM = { bg, ink, card, dim, line, font, mono, bpm, t0, k, c }`; `beat(n)` is the time of beat n.
-- `spring(t, [[t, v], ...], { k, c })`: a value (number, array, or `#rrggbb`) that springs to each new target; `springStep(tau, k, c)`; `stretch(t, [[t, x0, x1], ...])` for edges that lead and trail.
-- `umShape(t, [[t, { x, y, w, h, r, fill }], ...])` → live box; `umClip(box, draw)`; `umFit(w, h, fill, max)` → camera zoom.
-- `umSwap(t, t0, t1, draw, { enter, exit, blur })`: content that swaps with a short blur.
-- `umCursor(t, path, { clicks, holds, s })` → `{ x, y, down }`; `umDrag(t, t0, t1, valueAt, from, to)`.
-- `umPlayPause(x, y, s, p)`, `umCheck`, `umSpinner`, `umIcon('search' | 'prev' | 'next' | 'volume' | 'chevron', x, y, s)`, `umChart(values, x, y, w, h, p, { hover, label })`, `umBG()`.
-
-### `particles.js` (particles, [styles/particles.md](styles/particles.md))
-`PT = { bg, colors, n, size, font }`.
-- `ptBG()`, `ptShape(key, g => draw)` → target points, `ptText(s, x, y, size)`.
-- `ptField(t, { shape, form, from, morph, burst: [x, y, p], trail, glow })`, `ptGlow()`, `ptCaption(s, y, p)`.
-
-### `splitflap.js` (split-flap board, [styles/splitflap.md](styles/splitflap.md))
-`SF = { bg, tile, ink, amber, green, red, font, chars, flip, stagger }`.
-- `sfBoard()`, `sfRow(s, x, y, t, t0, { cols, w, h, from })` → width.
-- `sfDepartures(t, rows, { title, start, rowGap })` with rows `{ time, dest, gate, status, statusColor, blink }`.
-- `sfCues(t0, s)` → `audio.json` cues for the flap clatter.
-
-### `neon.js` (neon sign, [styles/neon.md](styles/neon.md))
-`NE = { wall, pink, cyan, yellow, green, orange, violet, font }`.
-- `neWall(t, { floor })`, `neOn(t, t0, seed)` → 0..1.
-- `neText(s, x, y, size, color, on)`, `neTube(pts, color, on, width)`, `neFrame(x, y, w, h, color, on)`, `neReflect(floor)`.
-- `neCues(t0, seed)` → buzz cues for `audio.json`.
-
-### `brand.js` (brand design language, [styles/brand.md](styles/brand.md))
-`brandUse('apple' | 'samsung' | 'ferrari' | 'nike' | 'spotify' | tokens)` fills `BR = { bg, bgAlt, dark, ink, inkDark, muted, mutedDark, accent, accentInk, ctaLight, ctaInk, ctaDark, ctaInkDark, surface, divider, line, gradient, font, fontDisplay, weight, tracking, upper, radius, cta }` from `BRANDS` or your own tokens (the comment at the top of `brand.js` explains each). `boot({ setup: () => useFonts(brandFonts(name)) })` declares the preset's free substitute faces plus Pretendard for Hangul.
-- `brStage('light' | 'alt' | 'dark' | 'accent')`, `brFade(p, color)`, `brWipe(p, color)`.
-- `brText(s, x, y, o)`, `brMeasure(s, size, o)`, `brHeadline(lines, x, y, t, { a, stagger, dark })`, `brEyebrow(s, x, y, t, a)`, `brSlam(s, x, y, t, a, { size })`.
-- `brCTA(label, x, y, t, a, { dark, press })`, `brRule(x, y, w, p)`, `brBento(cells, t, { a })`, `brSpecs(items, x, y, w, t, { a, dark })`.
-- `brProduct(draw, x, y, w, h, t, { reflect, sweep, dark })`, `brLaptop(x, y, w, draw)`, `brStreaks(t, o)`, `brArt(x, y, s, hue, t, { label })`, `brCarousel(cards, t, { step })`.
 
 ## Boot
 ```js

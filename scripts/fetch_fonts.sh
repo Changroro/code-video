@@ -11,7 +11,7 @@ get NanumMyeongjo-ExtraBold.ttf "$GF/nanummyeongjo/NanumMyeongjo-ExtraBold.ttf"
 get PressStart2P-Regular.ttf "$GF/pressstart2p/PressStart2P-Regular.ttf"
 get Geist.ttf "$GF/geist/Geist%5Bwght%5D.ttf"
 get PlayfairDisplay.ttf "$GF/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf"
-# used by the scene-API styles (arcade, terminal, thermal, transit, blueprint)
+# used by the arcade, terminal, thermal, transit, and blueprint guides
 PJ=https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/public/static
 get Pretendard-Regular.otf "$PJ/Pretendard-Regular.otf"
 get Pretendard-Bold.otf "$PJ/Pretendard-Bold.otf"
@@ -20,7 +20,7 @@ get Galmuri11-Bold.ttf https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/Galmuri1
 get NanumGothicCoding-Regular.ttf "$GF/nanumgothiccoding/NanumGothicCoding-Regular.ttf"
 get NanumGothicCoding-Bold.ttf "$GF/nanumgothiccoding/NanumGothicCoding-Bold.ttf"
 get IBMPlexMono-Regular.ttf "$GF/ibmplexmono/IBMPlexMono-Regular.ttf"
-# used by the style modules (handdrawn.js, motion.js, lyric.js, sand.js, comic.js, toon.js, scrapbook.js, particles.js, splitflap.js, neon.js)
+# used by the style guides (hand-drawn, motion, lyric, sand, comic, scrapbook, particles, split-flap, neon)
 get SourceSerif4.ttf "$GF/sourceserif4/SourceSerif4%5Bopsz,wght%5D.ttf"
 get Caveat.ttf "$GF/caveat/Caveat%5Bwght%5D.ttf"
 get Cormorant.ttf "$GF/cormorant/Cormorant%5Bwght%5D.ttf"
@@ -32,8 +32,6 @@ get IBMPlexMono-Medium.ttf "$GF/ibmplexmono/IBMPlexMono-Medium.ttf"
 get NanumMyeongjo-Regular.ttf "$GF/nanummyeongjo/NanumMyeongjo-Regular.ttf"
 get Bangers-Regular.ttf "$GF/bangers/Bangers-Regular.ttf"
 get DoHyeon-Regular.ttf "$GF/dohyeon/DoHyeon-Regular.ttf"
-get Fredoka.ttf "$GF/fredoka/Fredoka%5Bwdth,wght%5D.ttf"
-get Jua-Regular.ttf "$GF/jua/Jua-Regular.ttf"
 get PermanentMarker-Regular.ttf "https://github.com/google/fonts/raw/main/apache/permanentmarker/PermanentMarker-Regular.ttf"
 get RobotoMono.ttf "$GF/robotomono/RobotoMono%5Bwght%5D.ttf"
 get TiltNeon.ttf "$GF/tiltneon/TiltNeon%5BXROT,YROT%5D.ttf"

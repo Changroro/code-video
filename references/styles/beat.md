@@ -11,16 +11,16 @@ Open `<skill>/docs/styles/beat.jpg` (four frames from the original) before plann
 - the product name, the one-line promise, one accent colour, and the numbers to show (from the research or the user, never invented)
 
 ## Signature
-| # | Item | How (`beat.js`) |
-|---|---|---|
-| 1 | The hook lands word by word on the beats on a warm light stage, with one word hidden as an accent block | `stageLight(t)`, `beatWords([[w, time], …, ['■', time]], …)` |
-| 2 | The product UI: the masked block grows into a clean window where a cursor types an input and clicks the button | `beatWords` returns the block's box; `appWindow`, `field`, `pillButton`, `cursor` |
-| 3 | The drop into a near-black stage with a warm floor glow | `stageDark()`, `circleWipe` from the button |
-| 4 | A wall of real vertical clips scanned by a light bar, all but three winners dimmed, winners framed with a score tag | `clipWall(ids, t, { scan, winners, tags, caption })` |
-| 5 | The key output as big type or ranked rows with scores | `scoreRows`, `text` |
-| 6 | A 3D carousel of clips with floor reflections that whips onto one hero clip | `carousel(ids, t, spin)` with a fast spin at the end |
-| 7 | The hero clip in a phone next to a settings panel: toggles switch on, the button turns green, the panel flips into results | `phoneClip`, `campaignPanel` |
-| 8 | Big stats on push cuts with motion blur, a three-word ticker with the last word in the accent, then the logo | `pushStat`, `ticker`, `window.VIDEO = { fps: 60, blur: 3 }` |
+| # | Item |
+|---|---|
+| 1 | The hook lands word by word on the beats on a warm light stage, with one word hidden as an accent block |
+| 2 | The product UI: the masked block grows into a clean window where a cursor types an input and clicks the button |
+| 3 | The drop into a near-black stage with a warm floor glow |
+| 4 | A wall of real vertical clips scanned by a light bar, all but three winners dimmed, winners framed with a score tag |
+| 5 | The key output as big type or ranked rows with scores |
+| 6 | A 3D carousel of clips with floor reflections that whips onto one hero clip |
+| 7 | The hero clip in a phone next to a settings panel: toggles switch on, the button turns green, the panel flips into results |
+| 8 | Big stats on push cuts with motion blur, a three-word ticker with the last word in the accent, then the logo |
 
 ## Look
 - **Palette**: light stage `#f7f3ef` with peach glows `#ffd9c4`, dark stage `#0b0b0c` with an orange floor glow, ink `#151515` / `#f4f4f4`, one accent (the brand's; the original used orange `#ff5a1f`), success green `#22c55e` for the button only.

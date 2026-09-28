@@ -3,15 +3,15 @@
 Pictures built from torn scraps of watercolour-tinted paper, laid one by one on a sheet of cold-press paper: skies and seas in long strips, rocks and crowds in small shards, a sun as a torn disc. Calm, handmade, and warm.
 
 ## Signature
-| # | Item | How (`collage.js`) |
-|---|---|---|
-| 1 | A cold-press paper sheet as the ground, never a flat fill | `clSheet()` |
-| 2 | Every shape is torn paper: a jagged edge with a white fibre rim and a soft shadow; no clean vector shapes | `scrap`, `scrapRect`, `scrapCircle` |
-| 3 | Colour as washed, muted tints with visible blotches, like watercolour on paper | the tint you pass; `CL` holds a muted palette |
-| 4 | Pictures assemble scrap by scrap, back to front: strips for sky, water, and fields; shards for textured masses | `clStrips`, `clMosaic` |
-| 5 | The subject's logo or product rebuilt from torn scraps | `clImage(key, img, x, y, w, h, t, at, { cols })` |
-| 6 | Words set in serif ink, each on its own torn strip, landing one after another | `clWords` |
-| 7 | Scene changes as a fresh sheet with a torn edge sliding over, or scraps peeling off | `clPeel(p, drawNext)`, the `out` option |
+| # | Item |
+|---|---|
+| 1 | A cold-press paper sheet as the ground, never a flat fill |
+| 2 | Every shape is torn paper: a jagged edge with a white fibre rim and a soft shadow; no clean vector shapes |
+| 3 | Colour as washed, muted tints with visible blotches, like watercolour on paper |
+| 4 | Pictures assemble scrap by scrap, back to front: strips for sky, water, and fields; shards for textured masses |
+| 5 | The subject's logo or product rebuilt from torn scraps |
+| 6 | Words set in serif ink, each on its own torn strip, landing one after another |
+| 7 | Scene changes as a fresh sheet with a torn edge sliding over, or scraps peeling off |
 
 ## Look
 - **Palette**: paper `#f1ece1`, ink `#3a3833`, and muted tints (sky `#b8c9da`, sea `#6f8dab`, sand `#e2cfa8`, sun `#efc25c`, stone `#8e8b85`, slate `#5f6570`, moss `#8b8d5c`, rust `#c7684e`). Bring the brand in as one or two washed tints and the rebuilt logo; keep everything a little desaturated.

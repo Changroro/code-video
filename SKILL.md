@@ -7,7 +7,7 @@ description: Research a topic (a company, service, website, or product) and rend
 
 Make a short video drawn entirely in code from three inputs: a **design** (the style), the **research** on the topic, and the **format**. The story, scenes, pacing, and extras are yours.
 
-`<skill>` is the folder that contains this SKILL.md. The engine is in `<skill>/template/` (`kit.js`, one module per style, `minis-ai.js` with ready-made minis for AI topics, `render.mjs`, a `main.js` skeleton); its API is [references/kit-api.md](references/kit-api.md). Helpers are in `<skill>/scripts/`: `fetch_fonts.sh`, `clean_logo.py`, `audio.py` (music and effects from `audio.json`), `beats.py`, `contact_sheet.py`, `site_tokens.py`.
+`<skill>` is the folder that contains this SKILL.md. The engine is in `<skill>/template/` (`kit.js`, `minis-ai.js` with ready-made minis for AI topics, `render.mjs`, a `main.js` skeleton); its API is [references/kit-api.md](references/kit-api.md). Helpers are in `<skill>/scripts/`: `fetch_fonts.sh`, `clean_logo.py`, `audio.py` (music and effects from `audio.json`), `beats.py`, `contact_sheet.py`, `site_tokens.py`.
 
 Required tools: `node`/`npm`, `ffmpeg` with libx264, Google Chrome, and `uv`. If one is missing, stop and say which.
 
@@ -29,7 +29,7 @@ cp -R <skill>/template <work-folder>/<name>-video && cd <work-folder>/<name>-vid
 chmod -R u+w . && npm i
 bash <skill>/scripts/fetch_fonts.sh assets/fonts
 ```
-Set size, fps, and length in `window.VIDEO` in `index.html`, declare the fonts (for Korean, pair each Latin face with a Hangul face through `unicode-range`), load the style's module, and write the scenes in `main.js`. For both languages, branch on one URL parameter and render each with `QUERY=lang=ko node render.mjs video …`. For sound, write `audio.json` and run `uv run --with numpy --with scipy python <skill>/scripts/audio.py audio.json audio.wav`; the render muxes it.
+Set size, fps, and length in `window.VIDEO` in `index.html`, declare the fonts (for Korean, pair each Latin face with a Hangul face through `unicode-range`), and write the scenes in `main.js`. For both languages, branch on one URL parameter and render each with `QUERY=lang=ko node render.mjs video …`. For sound, write `audio.json` and run `uv run --with numpy --with scipy python <skill>/scripts/audio.py audio.json audio.wav`; the render muxes it.
 
 Look at a few stills (`node render.mjs stills <times>`, where a range such as `12-14` gives six frames across a moving shot, then `uv run --with pillow python <skill>/scripts/contact_sheet.py stills <dir>`), fix what looks wrong, and render with `CRF=25 node render.mjs video <Name>.mp4`.
 
