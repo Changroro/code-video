@@ -2,9 +2,13 @@
 
 English | [한국어](README.ko.md)
 
-<img src="docs/hero.gif" width="100%" alt="How code-video was made, in a video made with it">
+<a href="docs/hero-45s.mp4"><img src="docs/hero-45s.gif" width="100%" alt="code-video hand-drawn promo: Opus 5.5, Sonnet 5.5, and the skill forged in a blacksmith's shop"></a>
 
-*Claude Opus 5.5 filled my feed with videos drawn in code, so I forged a skill for it. This intro was made with that skill, every frame drawn in code.* [Watch the 45-second MP4](https://github.com/Changroro/code-video/releases/download/v1.3.1/CodeVideo_intro_en.mp4).
+*Claude Opus 5.5 and Claude Sonnet 5.5 filled my feed with videos drawn in code, so I forged a skill for both. This intro was made with that skill: every frame is drawn in code.* [Watch the 45-second MP4](docs/hero-45s.mp4).
+
+## Forged for both models
+
+code-video turns a topic, a design, and a format into an MP4 drawn entirely in code. It is designed to work with both Claude Opus 5.5 and Claude Sonnet 5.5.
 
 An agent skill that researches a topic and turns it into a short video drawn entirely in code. Give it a topic and a style (one of the presets below, any site's DESIGN.md, or a look described in your own words) and get an MP4. No video-generation model and no stock footage: the agent writes the scenes, renders them frame by frame, and hands you the file.
 
@@ -140,7 +144,7 @@ Fonts are downloaded at build time from Google Fonts and jsDelivr (SIL Open Font
 
 Pull requests are welcome, especially new styles.
 
-- **A new style**: add a guide in `references/styles/` that starts with `# Style: <name>` and a short description, with a Signature table of what makes the look, and add its GIF to the gallery in both READMEs.
+- **A new style**: add a guide in `references/styles/` that starts with `# Style: <name>` and a short description, with a Signature table of what makes the look, and add its GIF to the gallery in both READMEs. Keep only what defines the look (palette, fonts, defining traits) and rules that must never be broken; leave the story, sound, and how to draw it to the agent, and add no helper code.
 - **Adapting someone's public work**: credit the creator with a link, write the guide in your own words (do not paste their prompt), and add four frames from the original to `docs/styles/` so everyone can compare.
 - **Check it**: render stills with `node render.mjs stills ...` and, for a credited style, build `scripts/reference_sheet.py <key> <video> <out.jpg>` to put your frames under the original's.
 - Bug reports and fixes to the engine, fonts, or guides are just as welcome. Open an issue first for large changes.

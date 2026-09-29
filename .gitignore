@@ -1,5 +1,6 @@
 node_modules/
 stills/
 *.mp4
+!docs/hero-45s.mp4
 .DS_Store
 HANDOFF.md

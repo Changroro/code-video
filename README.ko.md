@@ -2,9 +2,13 @@
 
 [English](README.md) | 한국어
 
-<img src="docs/hero.ko.gif" width="100%" alt="code-video가 만들어진 과정을 이 스킬로 만든 영상">
+<a href="docs/hero-45s.mp4"><img src="docs/hero-45s.gif" width="100%" alt="Opus 5.5와 Sonnet 5.5, 대장간에서 스킬을 만드는 장면을 담은 code-video 소개 영상"></a>
 
-*Claude Opus 5.5가 나오고 피드가 코드로 그린 영상으로 가득 차서, 그걸 스킬로 벼려 냈습니다. 이 소개 영상도 이 스킬로 만들었고, 모든 프레임을 코드로 그렸습니다.* [45초 MP4 보기](https://github.com/Changroro/code-video/releases/download/v1.3.1/CodeVideo_intro_ko.mp4).
+*Claude Opus 5.5와 Claude Sonnet 5.5가 피드를 코드로 그린 영상으로 채워서, 두 모델을 위한 스킬을 대장간처럼 벼려 냈습니다. 이 소개 영상도 그 스킬로 만들었고, 모든 프레임을 코드로 그렸습니다.* [45초 MP4 보기](docs/hero-45s.mp4).
+
+## 두 모델을 위해 벼린 스킬
+
+code-video는 주제, 디자인, 형식을 받아 전부 코드로 그린 MP4로 만들어 줍니다. Claude Opus 5.5와 Claude Sonnet 5.5 두 모델에서 모두 사용할 수 있습니다.
 
 주제를 조사해 짧은 영상을 전부 코드로 그려 주는 에이전트 스킬입니다. 주제와 화풍(아래 프리셋, 아무 사이트의 DESIGN.md, 또는 말로 설명한 어떤 느낌이든)을 주면 MP4가 나옵니다. 영상 생성 모델도, 스톡 영상도 쓰지 않습니다. 에이전트가 장면을 코드로 짜고, 한 프레임씩 렌더해서 MP4로 건네줍니다.
 
@@ -140,7 +144,7 @@ git clone https://github.com/Changroro/code-video ~/.codex/skills/code-video    
 
 PR을 환영합니다. 새 화풍이면 더 좋습니다.
 
-- **새 화풍**: `references/styles/`에 `# Style: <이름>`과 짧은 설명으로 시작하고, 그 화풍을 만드는 요소를 시그니처 표로 정리한 가이드를 넣은 뒤, README 두 곳의 갤러리에 GIF를 추가해 주세요.
+- **새 화풍**: `references/styles/`에 `# Style: <이름>`과 짧은 설명으로 시작하고, 그 화풍을 만드는 요소를 시그니처 표로 정리한 가이드를 넣은 뒤, README 두 곳의 갤러리에 GIF를 추가해 주세요. 가이드에는 그 화풍을 정의하는 것(팔레트, 폰트, 핵심 특징)과 절대 어기면 안 되는 규칙만 적고, 이야기·소리·그리는 방법은 에이전트에게 맡기며 헬퍼 코드는 넣지 않습니다.
 - **다른 사람의 공개 작업을 참고할 때**: 원작자를 링크와 함께 표기하고, 가이드는 직접 쓴 문장으로 작성하며(프롬프트 원문은 넣지 않음), 원본 영상 4컷을 `docs/styles/`에 넣어 누구나 비교할 수 있게 해 주세요.
 - **확인 방법**: `node render.mjs stills ...`로 스틸을 뽑고, 원작자가 있는 화풍이면 `scripts/reference_sheet.py <key> <영상> <out.jpg>`로 원본 아래에 결과 프레임을 붙여 비교해 주세요.
 - 엔진, 폰트, 가이드의 버그 제보와 수정도 똑같이 환영합니다. 큰 변경은 이슈를 먼저 열어 주세요.
